@@ -1,214 +1,239 @@
-﻿{% extends 'base.html' %}
-{% load static %}
-{% load thumbnail %}
-{% load person_tags %}
-{% get_persons as personstg %}
-{% load cache %}
-
+﻿{% extends 'base.html' %} {% load static %} {% load thumbnail %} {% load person_tags %} {% get_persons as personstg %} {% load cache %}
 {% block content %}
-
-{#    Главные новости #}
-<div class="container-fluid">
-    <div class="row">
-        {#        Новости Казахстана #}
-        <div class="news_section col-12 col-md-6">
-            <h2 class="news_section_title news_section_title_link h3">
-                <span class="news_section_title_link">Топ 5: новости Казахстана</span>
-            </h2>
-            {% include 'news/includes/main_news_slider.html' %}
-            <div class="row">
-                {% for i in kz_main_news|slice:'3:5' %}
-                    {% include 'news/includes/home_main_two_news.html' %}
-                {% endfor %}
-            </div>
-            <hr>
-            <div class="news_section_last mt-5">
-                <h4 class="mt-4">Свежие новости: Казахстан</h4>
-                <div class="list_scroll_news mt-4 shadow-inset pl-2 pt-2 rounded">
-                    {% for i in kz_news %}
-                        {% include 'news/includes/home_news_list.html' %}
-                    {% endfor %}
-                </div>
-                <p class="news_section_last_all text-center">
-                    <a class="btn btn-outline-dark mt-3 shadow serif" href="{% url 'kz_news' %}">
-                        Все новости Казахстана <i class="fas fa-angle-double-right"></i>
-                    </a>
-                </p>
-            </div>
-        </div>
-        {#     #}
-
-        {#        Международные новости #}
-        <div class="news_section col-12 col-md-6">
-            <h2 class="news_section_title h3">
-                <span class="news_section_title_link">Топ 5: международные новости</span>
-            </h2>
-            {% include 'news/includes/main_world_news_slider.html' %}
-
-            <div class="row">
-                {% for i in world_main_news|slice:'3:5' %}
-                    {% include 'news/includes/home_main_two_news.html' %}
-                {% endfor %}
-            </div>
-            <hr>
-            <div class="news_section_last mt-5">
-                <h4 class="mt-4">Свежие новости: мир</h4>
-                <div class="list_scroll_news mt-4 shadow-inset pl-3 pt-2 rounded">
-                    {% for i in world_news %}
-                        {% include 'news/includes/home_news_list.html' %}
-                    {% endfor %}
-                </div>
-                <p class="news_section_last_all text-center">
-                    <a class="btn btn-outline-dark mt-3 shadow serif" href="{% url 'world_news' %}">
-                        Все международные новости <i class="fas fa-angle-double-right"></i>
-                    </a>
-                </p>
-            </div>
-        </div>
-        {#             #}
-    </div>
-</div>
-
-{#    Актуальная новость 1 #}
-<div class="container mt-5 pt-5">
-    <div class="section_action row">
-        <div class="section_action_bg col-12 col-md-12">
-            <article>
-                <div class="row justify-content-between">
-                    {% for i in actual_news|slice:':1' %}
-
-                    <div class="section_action_info col-12 col-md-6">
-                        <span class="section_action_info_pin">Актуальное</span>
-                        <h2 class="mt-4">
-                            <a class="section_action_info_title_link" href="{{ i.get_absolute_url }}"
-                               title="Читать далее...">
-                                {{ i.title }}
-                            </a>
-                        </h2>
-                        <a class="section_action_info_read btn btn-outline-light px-4 mt-5"
-                           href="{{ i.get_absolute_url }}">Читать далее <i
-                                class="fas fa-angle-double-right"></i></a>
-                    </div>
-                    <div class="section_action_img col-12 col-md-6">
-                        {% if i.image %}
-                        {% thumbnail i.image "600x350" crop="center" as img %}
-                        <img class="lazy rounded shadow-lg" data-src="{{ img.url }}"
-                             src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ i.title }}"
-                             title="Фото: {{ i.title }}"
-                             style="max-height: 350px; object-fit: cover; width: 100%;">
-                        {% endthumbnail %}
-                        {% elif i.image_url %}
-                        {% thumbnail i.image_url "600x350" crop="center" as img %}
-                            <img class="lazy rounded shadow-lg" data-src="{{ img.url }}"
-                                 src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ i.title }}"
-                                 title="Фото: {{ i.title }}"
-                                 style="max-height: 350px; object-fit: cover; width: 100%;">
-                        {% endthumbnail %}
-                        {% else %}
-                        <img class="rounded shadow-lg" src="{% static 'assets/img/empty' %}"
-                             alt="{{ i.title }}" title="Фото: {{ i.title }}"
-                             style="max-height: 350px; object-fit: cover; width: 100%;">
-                        {% endif %}
-                    </div>
-
-                    {% endfor %}
-                </div>
-            </article>
-        </div>
-    </div>
-</div>
-
-{#    Актуальные новости #}
-<div class="container-fluid">
-    <div class="new_section_blocks row">
-        {% for i in actual_news|slice:'1:' %}
-
-            <div class="new_section_block col-12 col-md-6 col-lg-3">
-                {% include 'news/includes/actual_card.html' %}
-                {#                    <article>#}
-                {#                        {% if i.image %}#}
-                {#                            <img class="new_section_block_img lazy" data-src="{{ i.image.url }}"#}
-                {#                                 src="{% static 'assets/img/preloader.svg' %}" alt="{{ i.title }}"#}
-                {#                                 style="height: 200px; object-fit: cover; width: 100%;">#}
-                {#                        {% elif i.image_url %}#}
-                {#                            <img class="new_section_block_img lazy" data-src="{{ i.image_url }}"#}
-                {#                                 src="{% static 'assets/img/preloader.svg' %}" alt="{{ i.title }}"#}
-                {#                                 style="height: 200px; object-fit: cover; width: 100%;">#}
-                {#                        {% else %}#}
-                {#                            <img class="new_section_block_img" src="{% static 'assets/img/preloader.svg' %}"#}
-                {#                                 alt="{{ i.title }}" style="height: 200px; object-fit: cover; width: 100%;">#}
-                {#                        {% endif %}#}
-                {##}
-                {#                        <h4 class="section_news_col_block_title"><a href="{{ i.get_absolute_url }}">{{ i.title }}</a>#}
-                {#                        </h4>#}
-                {#                        <span class="section_news_col_block_date mt-n3">{{ i.pub_date|date:'d M G:i' }}</span>#}
-                {#                    </article>#}
-            </div>
-        {% endfor %}
-    </div>
-</div>
-{#         #}
-
-{#    Персоны #}
-{#    {% cache 7200 persons %}#}
-<div class="main_person mt-5">
+    {# Главные новости #}
     <div class="container-fluid">
-        <h2 class="title_border_center">Персоны</h2>
-        <div class="row persons pb-5 pl-4 pr-4">
-            {% for i in persons %}
-                {% include 'persons/includes/person_card.html' %}
+        <div class="row">
+            {# Новости Казахстана #}
+            <div class="news_section col-12 col-md-6">
+                <h2 class="news_section_title news_section_title_link h3">
+                    <span class="news_section_title_link">Топ 5: новости Казахстана</span>
+                </h2>
+                {% include 'news/includes/main_news_slider.html' %}
+
+                <div class="row">
+                    {% for i in kz_main_news|slice:'3:5' %}
+                        {% include 'news/includes/home_main_two_news.html' %} {% endfor %}
+                </div>
+                <hr/>
+                <div class="news_section_last mt-5">
+                    <h4 class="mt-4">Свежие новости: Казахстан</h4>
+                    <div class="list_scroll_news mt-4 shadow-inset pl-2 pt-2 rounded">
+                        {% for i in kz_news %} {% include 'news/includes/home_news_list.html' %} {% endfor %}
+                    </div>
+                    <p class="news_section_last_all text-center">
+                        <a
+                                class="btn btn-outline-dark mt-3 shadow serif"
+                                href="{% url 'kz_news' %}"
+                        >
+                            Все новости Казахстана <i class="fas fa-angle-double-right"></i>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            {# #} {# Международные новости #}
+            <div class="news_section col-12 col-md-6">
+                <h2 class="news_section_title h3">
+        <span class="news_section_title_link"
+        >Топ 5: международные новости</span
+        >
+                </h2>
+                {% include 'news/includes/main_world_news_slider.html' %}
+
+                <div class="row">
+                    {% for i in world_main_news|slice:'3:5' %}
+                        {% include 'news/includes/home_main_two_news.html' %}
+                    {% endfor %}
+                </div>
+                <hr/>
+                <div class="news_section_last mt-5">
+                    <h4 class="mt-4">Свежие новости: мир</h4>
+                    <div class="list_scroll_news mt-4 shadow-inset pl-3 pt-2 rounded">
+                        {% for i in world_news %} {% include 'news/includes/home_news_list.html' %} {% endfor %}
+                    </div>
+                    <p class="news_section_last_all text-center">
+                        <a
+                                class="btn btn-outline-dark mt-3 shadow serif"
+                                href="{% url 'world_news' %}"
+                        >
+                            Все международные новости <i class="fas fa-angle-double-right"></i>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            {# #}
+        </div>
+    </div>
+
+    {# Актуальная новость 1 #}
+    <div class="container mt-5 pt-5">
+        <div class="section_action row">
+            <div class="section_action_bg col-12 col-md-12">
+                <article>
+                    <div class="row justify-content-between">
+                        {% for i in actual_news|slice:':1' %}
+
+                            <div class="section_action_info col-12 col-md-6">
+                                <span class="section_action_info_pin">Актуальное</span>
+                                <h2 class="mt-4">
+                                    <a
+                                            class="section_action_info_title_link"
+                                            href="{{ i.get_absolute_url }}"
+                                            title="Читать далее..."
+                                    >
+                                        {{ i.title }}
+                                    </a>
+                                </h2>
+                                <a
+                                        class="section_action_info_read btn btn-outline-light px-4 mt-5"
+                                        href="{{ i.get_absolute_url }}"
+                                >Читать далее <i class="fas fa-angle-double-right"></i
+                                ></a>
+                            </div>
+                            <div class="section_action_img col-12 col-md-6">
+                                {% if i.image %} {% thumbnail i.image "600x350" crop="center" as img %}
+                                    <img
+                                            class="lazy rounded shadow-lg"
+                                            data-src="{{ img.url }}"
+                                            src="{% static 'assets/img/preloader.svg' %}"
+                                            alt="Фото: {{ i.title }}"
+                                            title="Фото: {{ i.title }}"
+                                            style="max-height: 350px; object-fit: cover; width: 100%"
+                                    />
+                                {% endthumbnail %} {% elif i.image_url %}
+                                    {% thumbnail i.image_url "600x350" crop="center" as img %}
+                                        <img
+                                                class="lazy rounded shadow-lg"
+                                                data-src="{{ img.url }}"
+                                                src="{% static 'assets/img/preloader.svg' %}"
+                                                alt="Фото: {{ i.title }}"
+                                                title="Фото: {{ i.title }}"
+                                                style="max-height: 350px; object-fit: cover; width: 100%"
+                                        />
+                                    {% endthumbnail %} {% else %}
+                                    <img
+                                            class="rounded shadow-lg"
+                                            src="{% static 'assets/img/empty' %}"
+                                            alt="{{ i.title }}"
+                                            title="Фото: {{ i.title }}"
+                                            style="max-height: 350px; object-fit: cover; width: 100%"
+                                    />
+                                {% endif %}
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    {# Актуальные новости #}
+    <div class="container-fluid">
+        <div class="new_section_blocks row">
+            {% for i in actual_news|slice:'1:' %}
+
+                <div class="new_section_block col-12 col-md-6 col-lg-3">
+                    {% include 'news/includes/actual_card.html' %}
+                    {#                    <article>#}
+                    {# {% if i.image %}#} {##}
+                    {#                        <img#}
+                    {#                                class="new_section_block_img lazy"#}
+                    {#                                data-src="{{ i.image.url }}"#}
+                    {##}
+                    {##}
+                    {#                                src="{% static 'assets/img/preloader.svg' %}"#}
+                    {#                                alt="{{ i.title }}"#}
+                    {##}
+                    {##}
+                    {#                                style="height: 200px; object-fit: cover; width: 100%"#}
+                    {#                        /> {# {% elif i.image_url %}#} {##}
+                    {#                        <img#}
+                    {#                                class="new_section_block_img lazy"#}
+                    {#                                data-src="{{ i.image_url }}"#}
+                    {##}
+                    {##}
+                    {#                                src="{% static 'assets/img/preloader.svg' %}"#}
+                    {#                                alt="{{ i.title }}"#}
+                    {##}
+                    {##}
+                    {#                                style="height: 200px; object-fit: cover; width: 100%"#}
+                    {#                        /> {# {% else %}#} {##}
+                    {#                        <img#}
+                    {#                                class="new_section_block_img"#}
+                    {#                                src="{% static 'assets/img/preloader.svg' %}"#}
+                    {##}
+                    {##}
+                    {#                                alt="{{ i.title }}"#}
+                    {#                                style="height: 200px; object-fit: cover; width: 100%"#}
+                    {#                        /> {# {% endif %}#} {##} {##}
+                    {#                        <h4 class="section_news_col_block_title">#}
+                    {#                            <a href="{{ i.get_absolute_url }}">{{ i.title }}</a> {##}
+                    {#                        </h4>#}
+                    {##}
+                    {#                        <span class="section_news_col_block_date mt-n3"#}
+                    {#                        >{{ i.pub_date|date:'d M G:i' }}</span#}
+                    {#                        > {##}
+                    {#                    </article>#}
+
+                </div>
             {% endfor %}
         </div>
-        <div class="text-center">
-            <a class="btn btn-primary px-5 py-3 mt-5" href="{% url 'persons_list' %}">
-                Все персоны
-            </a>
-        </div>
     </div>
-</div>
-{#    {% endcache %}#}
-{#         #}
-
-{#    Публикации#}
-<div class="container-fluid">
-    <div class="row">
-        <div class="best_news col-12 col-lg-9">
-            <h2 class="news_section_title mt-5 mt-sm-1 ">
-                <a class="news_section_title_link" href="{% url 'publications_list' %}">Публикации</a>
-            </h2>
-            <div class="row">
-                {% for i in publications %}
-                    {% include 'publications/includes/public_card.html' %}
+    {# #} {# Персоны #} {# {% cache 7200 persons %}#}
+    <div class="main_person mt-5">
+        <div class="container-fluid">
+            <h2 class="title_border_center">Персоны</h2>
+            <div class="row persons pb-5 pl-4 pr-4">
+                {% for i in persons %} {% include 'persons/includes/person_card.html' %}
                 {% endfor %}
             </div>
-            <p class="news_section_last_all text-center">
-                <a class="btn btn-outline-dark mt-3 shadow serif" href="{% url 'publications_list' %}">
-                    Все публикации <i class="fas fa-angle-double-right"></i>
+            <div class="text-center">
+                <a class="btn btn-primary px-5 py-3 mt-5" href="{% url 'persons_list' %}">
+                    Все персоны
                 </a>
-            </p>
-        </div>
-        <div class="best_news_sidebar col-12 col-lg-3">
-            <h6 class="mt-3 text-uppercase border-bottom pb-3">Обсуждения дня</h6>
-            <ul class="best_news_sidebar_list mt-3">
-                {% for i in comments %}
-                    <li class="mt-3">
-                        <div class="row flex-nowrap">
-                            <div class="col-1">
-                                <span class="h1">{{ forloop.counter }}</span>
-                            </div>
-                            <div class="col-11">
-                                <a class="" href="{{ i.get_absolute_url }}">
-                                    {{ i.title }}
-                                    <span class="d-block small text-muted mt-1"><i
-                                            class="far fa-comment-dots"></i> комментариев: {{ i.reviews.count }}</span>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
+            </div>
         </div>
     </div>
-</div>
-{#     #}
-{% endblock %}
+    {# {% endcache %}#} {# #} {# Публикации#}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="best_news col-12 col-lg-9">
+                <h2 class="news_section_title mt-5 mt-sm-1">
+                    <a class="news_section_title_link" href="{% url 'publications_list' %}"
+                    >Публикации</a
+                    >
+                </h2>
+                <div class="row">
+                    {% for i in publications %} {% include 'publications/includes/public_card.html' %} {% endfor %}
+                </div>
+                <p class="news_section_last_all text-center">
+                    <a class="btn btn-outline-dark mt-3 shadow serif" href="{% url 'publications_list' %}">
+                        Все публикации <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </p>
+            </div>
+            <div class="best_news_sidebar col-12 col-lg-3">
+                <h6 class="mt-3 text-uppercase border-bottom pb-3">Обсуждения дня</h6>
+                <ul class="best_news_sidebar_list mt-3">
+                    {% for i in comments %}
+                        <li class="mt-3">
+                            <div class="row flex-nowrap">
+                                <div class="col-1">
+                                    <span class="h1">{{ forloop.counter }}</span>
+                                </div>
+                                <div class="col-11">
+                                    <a class="" href="{{ i.get_absolute_url }}">
+                                        {{ i.title }}
+                                        <span class="d-block small text-muted mt-1"
+                                        ><i class="far fa-comment-dots"></i> комментариев: {{ i.reviews.count }}</span
+                                        >
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {# #} {% endblock %}
