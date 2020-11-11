@@ -1,0 +1,104 @@
+﻿{% load static %}
+{% load main_tags %}
+{% get_socials as socialstg %}
+{% load cache %}
+
+{#Неделя#}
+{#{% cache 604800 header %}#}
+<header>
+    <div class="container-fluid">
+        <div class="header_container ow p-md-2">
+
+            <div class="header_logo col-md-2">
+                <a class="header_logo_link" href="{% url 'home' %}">
+                    <img class="header_logo_img_anim" src="{% static 'assets/img/logo 2.png' %}" alt="logo">
+                    <img class="header_logo_img" src="{% static 'assets/img/1-logo.png' %}" alt="logo">
+                </a>
+                <a href="{% url 'home' %}" class="logo-text">
+                    <span class="yellow logo-kz text-uppercase">Kazakhstan</span><br>
+                    <h2 class="logo-title text-white">PETRONEWS</h2>
+                    <span class="logo-small-txt text-white">Oil&Gas</span>
+                </a>
+            </div>
+
+            {% include 'includes/mobile_header.html' %}
+
+            <div class="col-md-8 header_submenu d-none d-lg-block">
+                <div class="row header_menu_top justify-content-end">
+                    <div class="">
+                        <div class="header_submenu_top">
+                            <ul class="header_submenu_top_list">
+                                <li class="header_submenu_top_list_item">
+                                    <a class="header_submenu_top_list_item_link border-right letter-space" href="{% url 'about' %}">О проекте</a>
+                                </li>
+                                <li class="header_submenu_top_list_item">
+                                    <a class="header_submenu_top_list_item_link border-right letter-space" href="{% url 'contacts' %}">Контакты</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="">
+                        {% for i in socialstg %}
+                            <a href="{{ i.url }}" target="_blank" class="border-right text-center">
+                                {% autoescape off %}{{ i.icon }}{% endautoescape %}
+                            </a>
+                        {% endfor %}
+                        <a class="social_search social mr-3" href="#">
+                            <i class="fas fa-search" data-toggle="modal" data-target="#exampleModalmob"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="header_menu_bottom mt-n2">
+                    <ul class="header_menu_bottom_list row">
+                        <li class="header_menu_bottom_list_item">
+                            <a class="header_menu_bottom_list_item_link text-uppercase text-warning" href="{% url 'home' %}">
+                                <i class="fas fa-home text-warning"></i> Главная
+                            </a>
+                        </li>
+                        <li class="header_menu_bottom_list_item  header_menu_bottom_list_item_link_down">
+                            <a class="header_menu_bottom_list_item_link text-uppercase text-warning">
+                                <i class="far fa-newspaper text-warning"></i> Новости
+                            </a>
+                            <ul class="header_menu_bottom_list header_menu_bottom_list_sub p-3 shadow rounded">
+                                <li class="header_menu_bottom_list_item mt-1">
+                                    <a class="header_menu_bottom_list_item_link text-uppercase" href="{% url 'news' %}">
+                                        <i class="fas fa-angle-right mr-1"></i> Все новости
+                                    </a>
+                                </li>
+                                <li class="header_menu_bottom_list_item mt-1">
+                                    <a class="header_menu_bottom_list_item_link text-uppercase" href="{% url 'kz_news' %}">
+                                        <i class="fas fa-angle-right mr-1"></i> Казахстан
+                                    </a>
+                                </li>
+                                <li class="header_menu_bottom_list_item mt-1">
+                                    <a class="header_menu_bottom_list_item_link text-uppercase" href="{% url 'world_news' %}">
+                                        <i class="fas fa-angle-right mr-1"></i> Мир
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="header_menu_bottom_list_item">
+                            <a class="header_menu_bottom_list_item_link text-warning text-uppercase" href="{% url 'publications_list' %}">
+                                <i class="fas fa-user-edit text-warning"></i> Публикации
+                            </a>
+                        </li>
+                        <li class="header_menu_bottom_list_item">
+                            <a class="header_menu_bottom_list_item_link text-uppercase text-warning" href="{% url 'persons_list' %}">
+                                <i class="fas fa-user-tie text-warning"></i> Персоны
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-2 hide-on-mobile px-xl-3">
+                <a href="#" class="btn btn-warning btn-block text-uppercase hover-no-color f-size-13">Вход</a>
+                <a href="#" class="btn btn-outline-warning mt-2 btn-block text-uppercase hover-no-color f-size-13">Регистрация</a>
+            </div>
+        </div>
+
+
+    </div>
+
+</header>
+{#{% endcache %}#}

@@ -1,0 +1,27 @@
+﻿{% load static %}
+{% load thumbnail %}
+
+<article>
+    {% if i.image %}
+        {% thumbnail i.image "600x350" crop="center" as img %}
+            <img data-src="{{ img.url }}" src="{% static 'assets/img/preloader.svg' %}"
+                 class="d-block w-100 lazy rounded" alt="{{ i.title }}" title="{{ i.title }}">
+        {% endthumbnail %}
+    {% elif i.image_url %}
+        {% thumbnail i.image_url "600x350" crop="center" as img %}
+            <img data-src="{{ img.url }}" src="{% static 'assets/img/preloader.svg' %}"
+                 class="d-block w-100 lazy rounded" alt="{{ i.title }}" title="{{ i.title }}">
+        {% endthumbnail %}
+    {% else %}
+        <img src="{% static 'assets/img/empty.png' %}" class="d-block w-100 rounded"
+             alt="{{ i.title }}" title="{{ i.title }}">
+    {% endif %}
+    <div class="carousel-caption z-index-10">
+        <h3 class="h5"><a href="{{ i.get_absolute_url }}" class="text-white"
+                          title="Читать далее...">{{ i.title }}</a></h3>
+    </div>
+    {% include 'news/includes/time.html' %}
+    {% if i.category %}
+        {% include 'news/includes/category_img_button.html' %}
+    {% endif %}
+</article>

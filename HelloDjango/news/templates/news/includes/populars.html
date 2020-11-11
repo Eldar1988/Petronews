@@ -1,0 +1,9 @@
+<div class="mt-3 row">
+    {% for i in popular_news %}
+        <div class="col-sm-6 col-xl-12">
+            <div class="news_section_block line-h-0 mt-3 ">
+                {% include 'news/includes/post_card_one.html' %}
+            </div>
+        </div>
+    {% endfor %}
+</div>

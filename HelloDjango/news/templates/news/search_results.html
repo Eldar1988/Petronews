@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ header }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="all_news">
+            <h2 class="news_section_title mt-5">
+                <a class="news_section_title_link ">{{ header }}</a>
+            </h2>
+            <div class="row all_news_main">
+                <div class="all_news_main_section col-12 col-lg-9">
+
+                    {% for i in news %}
+                        <div class="all_news_main_section shadow-sm p-4 mt-4 ">
+                            {% include 'news/includes/news_list_card.html' %}
+                        </div>
+                    {% endfor %}
+                    {% for i in pubs %}
+                        <div class="all_news_main_section shadow-sm p-4 mt-4 ">
+                            {% include 'news/includes/news_list_card.html' %}
+                        </div>
+                    {% endfor %}
+
+                    {% if not news.count and not pubs.count %}
+                        <div class="alert alert-secondary" role="alert">
+                            К сожалению по Вашему запросу ничего не найдено. Попробуйте изменить запрос.
+                        </div>
+                        <form action="{% url 'search' %}" method="get" class="mt-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Введите поисковый запрос:</label>
+                                <input type="text" class="form-control" name="s" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg">Новый поиск <i class="fas fa-search small"></i></button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

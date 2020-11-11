@@ -1,0 +1,60 @@
+{% load static %}
+{% load thumbnail %}
+
+<div class="col-md-6 mt-4 px-3">
+    <article class="rounded border shadow overflow-hidden">
+        <div class="row align-items-center">
+            <div class="col-8 py-2">
+                <h3 class="serif list-title ml-3">
+                    <a href="{{ i.get_absolute_url }}" title="Читать новость">
+                        {{ i.title }}
+                    </a>
+                </h3>
+                <time class="ml-3 small text-muted" title="Дата и время публикации">
+                    <i class="fas fa-calendar-day"></i> {{ i.update_date|date:'d.m' }}
+                    <span class="ml-2">
+                        <i class="far fa-clock"></i> {{ i.update_date|date:'G:i' }}
+                    </span>
+                </time>
+                {% if i.views > 10 %}
+                    <span class="ml-2 text-muted small" title="Количество просмотров: {{ i.views }}"><i class="far fa-eye"></i> {{ i.views }}</span>
+                {% endif %}
+                {% if i.category %}
+                    <a class="ml-2 text-primary small" href="{{ i.category.get_absolute_url }}"
+                       title="Все новости категории {{ i.category.name }}">
+                        {{ i.category }}
+                    </a>
+                {% endif %}
+            </div>
+
+            <div class="col-4">
+                <a href="{{ i.get_absolute_url }}" title="Читать новость">
+                    {% if i.image %}
+                        {% thumbnail i.image "240x180" crop="center" as img %}
+                            <img class="lazy" data-src="{{ img.url }}"
+                                 src="{% static 'assets/img/preloader.svg' %}"
+                                 alt="Фото: {{ i.title }}"
+                                 title="Фото: {{ i.title }}"
+                                 style="min-width: 100%; height: 120px; object-fit: cover;"
+                            >
+                        {% endthumbnail %}
+                    {% elif i.image_url %}
+                        {% thumbnail i.image_url "240x180" crop="center" as img %}
+                            <img class="lazy" data-src="{{ img.url }}"
+                                 src="{% static 'assets/img/preloader.svg' %}"
+                                 alt="Фото: {{ i.title }}"
+                                 title="Фото: {{ i.title }}"
+                                 style="min-width: 100%; height: 120px; object-fit: cover;"
+                            >
+                        {% endthumbnail %}
+                    {% else %}
+                        <img src="{% static 'assets/img/empty.png' %}"
+                             alt="image"
+                             title="Нет изображения"
+                             style="min-width: 100%; height: 120px; object-fit: cover;">
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+    </article>
+</div>

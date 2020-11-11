@@ -1,0 +1,37 @@
+{% load static %}
+{% load thumbnail %}
+<div class="news_section_block line-h-0">
+    <article>
+        {% if i.image %}
+            {% thumbnail i.image "600x350" crop="center" as img %}
+                <img class="news_section_block_img lazy rounded shadow"
+                     data-src="{{ img.url }}"
+                     src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ i.title }}"
+                     title="Фото: {{ i.title }}"
+                     style="height: 200px; object-fit: cover;">
+            {% endthumbnail %}
+        {% elif i.image_url %}
+            {% thumbnail i.image_url "600x350" crop="center" as img %}
+                <img class="news_section_block_img lazy rounded shadow"
+                     data-src="{{ img.url }}"
+                     src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ i.title }}"
+                     title="Фото: {{ i.title }}"
+                     style="height: 200px; object-fit: cover;">
+            {% endthumbnail %}
+        {% else %}
+            <img class="news_section_block_img rounded shadow"
+                 src="{% static 'assets/img/empty.png' %}" alt="Нет фото"
+                 title="Нет фото"
+                 style="height: 200px; object-fit: cover;">
+        {% endif %}
+        <h3 class="news_section_block_title h6 serif mb-4 ml-2 pb-1 pr-1">
+            <a class="news_section_block_title_link" href="{{ i.get_absolute_url }}" title="Читать далее...">
+                {{ i.title }}
+            </a>
+        </h3>
+        {% include 'news/includes/time.html' %}
+        {% if i.category %}
+            {% include 'news/includes/category_img_button.html' %}
+        {% endif %}
+    </article>
+</div>

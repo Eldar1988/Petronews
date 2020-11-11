@@ -1,0 +1,29 @@
+{% load static %}
+{% load thumbnail %}
+
+<div class="shadow rounded pb-4 mt-4">
+    <article>
+        <div class="">
+            <div class="">
+                <div class="">
+                <a href="{{ i.get_absolute_url }}" title="Подробнее о персоне...">
+                    {% thumbnail i.image "300x300" crop="center" as img %}
+                        <img class="shadow-sm lazy" src="{% static 'assets/img/preloader.svg' %}" data-src="{{ img.url }}"
+                             alt="Фото: {{ i.name }}" title="{{ i.name }}" style="min-width: 100%;">
+                    {% endthumbnail %}
+                </a>
+                </div>
+                <div class="pt-3 px-3">
+                    <h3 class="h5">
+                        <a href="{{ i.get_absolute_url }}" title="Подробнее о персоне...">
+                            {{ i.name }}
+                        </a>
+                    </h3>
+                    <p>{{ i.position }}</p>
+                    <p class="mt-1">{{ i.company }}</p>
+{#                    <a href="{{ i.get_absolute_url }}" class="btn btn-outline-dark btn-block serif mt-3" title="Подробнее о персоне...">Подробнее</a>#}
+                </div>
+            </div>
+        </div>
+    </article>
+</div>

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% load news_tags %}
+
+{% block title %}{{ header }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="post_navigation">
+            <nav aria-label="breadcrumb bg-light">
+                <ol class="breadcrumb rounded-0">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fas fa-home"></i></a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ header }}</li>
+                </ol>
+            </nav>
+        </div>
+
+        <nav>
+            <ul class="d-flex">
+                <li>
+                    <a href="{% url 'news' %}" class="border-right btn btn-link {% if header != 'Все новости' %}text-dark{% endif %}">Все</a>
+                </li>
+                <li>
+                    <a href="{% url 'kz_news' %}" class="border-right btn btn-link {% if header != 'Новости Казахстана' %}text-dark{% endif %}">Казахстан</a>
+                </li>
+                <li>
+                    <a href="{% url 'world_news' %}" class="btn btn-link {% if header != 'Международные новости' %}text-dark{% endif %}">Мир</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="w-100">
+            <h2 class="news_section_title mt-5">
+                <a class="news_section_title_link font-weight-bold ">{{ header }}</a>
+            </h2>
+            <div class="row mt-3">
+                <div class="col-12 col-xl-9">
+                    <div class="row">
+                        {% for i in page %}
+                            {% include 'news/includes/news_list_card.html' %}
+                        {% endfor %}
+                    </div>
+                    {#                Пагинация#}
+                    <nav aria-label="Page navigation example pt-5">
+                        <ul class="pagination justify-content-center pt-5">
+                            <li class="page-item {% if not prev_url %} disabled {% endif %}">
+                                <a class="page-link" href="{{ prev_url }}" tabindex="-1"><i
+                                        class="fas fa-angle-left"></i></a>
+                            </li>
+                            {% for n in page.paginator.page_range %}
+                                {% if page.number == n %}
+                                    <li class="page-item current bg-primary"><a
+                                            class="page-link bg-primary text-white">{{ n }}</a></li>
+                                {% elif n > page.number|add:-3 and n < page.number|add:3 %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            <li class="page-item {% if not next_url %}disabled{% endif %}">
+                                <a class="page-link" href="{{ next_url }}"><i class="fas fa-angle-right"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="all_news_main_sidebar col-12 col-xl-3">
+                    <h4 class="pt-2 font-weight-bold mt-4 border-top">Популярное</h4>
+                    {% get_popular_news 6 %}
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ person.name }} | {{ block.super }} {% endblock %}
+{% block description %}{{ description }}...{% endblock %}
+
+{% block ogtitle %}{{ person.name }} | {{ block.super }}{% endblock %}
+{% block ogurl %}{{ person.get_absolute_url }}{% endblock %}
+{% block ogimage %}{{ person.image.url }}{% endblock %}
+{% block ogdescription %}{{ description }}...{% endblock %}
+
+
+
+{% block content %}
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-sm-4 mt-3">
+                <img data-src="{{ person.image.url }}" alt="{{ person.name }}" class="lazy shadow rounded">
+            </div>
+            <div class="col-sm-8 mt-3">
+                <h2 class="h2">{{ person.name }}</h2>
+                <h3 class="mt-4">Компания: {{ person.company }}</h3>
+                <h3 class="mt-2">Должность: {{ person.position }}</h3>
+                <div class="mt-3">
+                    {% autoescape off %}{{ person.body }}{% endautoescape %}
+                </div>
+            </div>
+        </div>
+        {% include 'includes/share.html' %}
+        <div class="person">
+            <h2 class="news_section_title">
+                <a class="news_section_title_link">Смотрите также</a>
+            </h2>
+            <div class="container_person">
+                <div class="row">
+                    {% for i in persons %}
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                        {% include 'persons/includes/person_list_card.html' %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

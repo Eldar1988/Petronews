@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Контакты | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="container mt-5 pt-5">
+        <h2 class="text-center">Контакты</h2>
+        <div class="mt-5">
+            <h4>Наш адрес:</h4>
+            <p>{{ contacts.address }}</p>
+        </div>
+    <div class="mt-5">
+            <h4>Телефон:</h4>
+            <p>{{ contacts.phone }}</p>
+        </div>
+    <div class="mt-5">
+            <h4>Email:</h4>
+            <p>{{ contacts.email }}</p>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-5 mb-5">
+    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A573a06fb16978a1ac688a207ad243697a23436f865ebc63d1114dde9849cfec1&amp;source=constructor" width="100%" height="500" frameborder="0"></iframe>
+    </div>
+{% endblock %}

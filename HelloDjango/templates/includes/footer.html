@@ -1,0 +1,56 @@
+{% load main_tags %}
+{% get_socials as socialstg %}
+{% get_footer_info as footertg %}
+{% load cache %}
+
+{#{% cache 86400 footer %}#}
+<footer class="mt-5">
+    <div class="subscribe">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="subscribe_social col-12 col-md-4">
+                    <p class="subscribe_social_title">
+                        Следите за новостями в социальных сетях
+                    </p>
+                    <div class="subscribe_social_all">
+                        {% for i in socialstg %}
+                        <a class="subscribe_social_link mr-1" href="{{ i.url }}" target="_blank">
+                            {% autoescape off %}{{ i.icon }}{% endautoescape %}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="footer_top row">
+            <div class="footer_menu col-12 col-md-2">
+                <div class="row mb-3">
+                    <a class="text-white col-12" href="{% url 'home' %}">Главная</a>
+                    <a class="col-12 text-white mt-1" href="{% url 'about' %}">О проекте</a>
+                    <a class="col-12 text-white mt-1" href="{% url 'contacts' %}">Контакты</a>
+                </div>
+
+            </div>
+            <div class="footer_info col-12 col-md-7">
+                <p class="footer_info_text">
+                    {{ footertg.text_one }}
+                </p>
+            </div>
+            <div class="footer_copiryght col-12 col-md-3">
+                <p class="footer_copiryght_text">
+                    {{ footertg.text_two }}
+                </p>
+            </div>
+        </div>
+        <div class="footer_bottom row">
+            <a href="{% url 'politic' %}" class="footer_info_one col-12 col-md-3">Политика конфиденциальности</a>
+            <a class="footer_info_three col-12 col-md-6"></a>
+            <a class="footer_info_three col-12 col-md-3">{{ footertg.copyright }}</a>
+
+        </div>
+
+    </div>
+</footer>
+{#{% endcache %}#}

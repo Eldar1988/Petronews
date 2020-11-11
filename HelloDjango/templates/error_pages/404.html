@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} Ошибка 404 | {{ block.super }}{% endblock %}
+
+{% block content %}
+
+    <div class="container mt-5 pt-5 text-center">
+        <h2 class="font-weight-bold text-uppercase text-warning text-center">Ошибка 404</h2>
+        <h3 class="">Страница не найдена</h3>
+        <a href="{% url 'home' %}" class="btn btn-primary btn-lg mt-4">Перейти на главную</a>
+        <h3 class="mt-3">или</h3>
+    <form action="{% url 'search' %}" method="get" class="mt-3">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Введите поисковый запрос:</label>
+                                <input type="text" class="form-control w-50 mx-auto" name="s" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg">Поиск <i class="fas fa-search small"></i></button>
+                        </form>
+    </div>
+
+{% endblock %}

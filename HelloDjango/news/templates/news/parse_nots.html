@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Parse logs | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="container mt-5 pt-5">
+        {% if request.user.is_authenticated and request.user.is_staff %}
+            <a href="{% url 'clear_nots' %}" class="btn btn-danger">Очистить логи</a>
+            <table class="table table-dark mt-4">
+                <thead>
+                <tr>
+                    <th scope="col">Лог</th>
+                    <th scope="col">Дата и время</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in nots %}
+                <tr>
+                    <td>{{ i.not_text }}</td>
+                    <td>{{ i.pub_date|date:'G:i d.m' }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="alert alert-danger" role="alert">
+                У Вас нет прав для просмотра этой страницы
+            </div>
+        {% endif %}
+    </div>
+
+
+{% endblock %}

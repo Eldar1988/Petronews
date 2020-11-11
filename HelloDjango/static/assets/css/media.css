@@ -1,0 +1,153 @@
+@media screen and (max-width: 992px) {
+    .news_section_block_title {
+        font-size: 18px;
+    }
+
+    .hide-on-mobile {
+        display: none;
+    }
+
+    .news_section_block_desc {
+        font-size: 12px;
+    }
+
+    .modal {
+        top: 70px !important;
+        background: #131315 !important;
+    }
+
+    .news_section_block_title {
+        top: auto;
+    }
+
+    .section_action_img img {
+        width: 100%;
+    }
+
+    .section_action_bg {
+        background: linear-gradient(90deg, rgba(13, 13, 13, 13) 100%, rgba(255, 255, 255, 1) 100%);
+    }
+
+    .section_news_col_block_desc {
+        font-size: 14px;
+    }
+
+    .list-title {
+        font-size: 14px !important;
+        font-weight: 400 !important;
+    }
+
+    .subscribe_form_block_input {
+
+        max-width: 260px;
+    }
+
+    .subscribe_form_block_button {
+
+        max-width: 150px;
+    }
+
+    .main_person_block {
+        max-width: 360px !important;
+        margin-right: 16px;
+        margin: 20px auto;
+    }
+
+    .mobile_block_fixed {
+        display: flex;
+    }
+
+    footer {
+        padding-bottom: 57px;
+    }
+
+    .main_person_block:last-child {
+        margin-right: auto;
+    }
+
+    .post_container_info {
+        padding-left: 26px !important;
+    }
+
+    .post_container_content p {
+        font-size: 16px;
+    }
+
+    .post h1 {
+        padding-bottom: 20px;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 48px;
+    }
+
+    #menuToggle {
+        display: block;
+        right: 12px;
+        z-index: 1;
+        top: 12px;
+    }
+
+    .navbar_mobile_list_link {
+        color: white;
+        font-size: 14px;
+        padding-bottom: 8px;
+        display: block;
+    }
+
+    .nav-item-gray .navbar_mobile_list_link {
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #989DAA;
+    }
+
+    .nav-item-gray:first-child .navbar_mobile_list_link {
+        padding-bottom: 24px;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #989DAA;
+    }
+
+    .social-menu {
+        padding: 20px 20px 12px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid;
+        margin-top: 14px;
+    }
+
+    .nav-item-gray-first {
+        margin-top: 12px;
+        border-top: 1px solid;
+        padding-top: 20px;
+    }
+
+    .section_news_col_block {
+        margin-bottom: 16px;
+    }
+
+    .best_news_sidebar {
+        padding-top: 20px;
+    }
+
+    .best_news {
+        padding: 20px 0;
+    }
+
+    .header_menu_bottom_list_item_link_down:hover .header_menu_bottom_list_sub {
+        display: block !important;
+        position: static;
+        left: 0;
+        top: 100%;
+        z-index: 12;
+        background: #131315;
+        padding-left: 24px;
+    }
+}
+
+

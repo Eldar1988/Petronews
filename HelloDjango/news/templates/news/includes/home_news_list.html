@@ -1,0 +1,10 @@
+<article>
+    <p class="news_section_last_news pr-2">
+        <a class="news_section_last_news_link font-weight-normal" href="{{ i.get_absolute_url }}" title="Читать далее...">
+            <i class="far fa-newspaper text-muted"></i>  {{ i.title }}
+        </a>
+        <span class="news_section_last_news_date text-lowercase border-left pl-2" title="Дата публикации {{ i.pub_date|date:'d.m.Y' }} в {{ i.pub_date|date:'G:i' }}">
+            {{ i.update_date|date:'G:i' }}<br>{{ i.update_date|date:'d.m' }}
+        </span>
+    </p>
+</article>

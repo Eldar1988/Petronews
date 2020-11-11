@@ -1,0 +1,78 @@
+<nav role="navigation">
+    <div id="menuToggle">
+        <input type="checkbox"/>
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menu" class="menu_mobile">
+            <ul class="navbar-nav mr-auto mt-3">
+                <li class="navbar_mobile_list">
+                    <a class="navbar_mobile_list_link text-uppercase text-warning" href="{% url 'home' %}">
+                        <i class="fas fa-home text-warning"></i> Главная
+                    </a>
+                </li>
+                <li class="navbar_mobile_list  header_menu_bottom_list_item_link_down">
+                    <a class="navbar_mobile_list_link text-uppercase text-warning">
+                        <i class="far fa-newspaper text-warning"></i> Новости
+                    </a>
+                    <ul class="header_menu_bottom_list header_menu_bottom_list_sub">
+                        <li class="navbar_mobile_list">
+                            <a class="header_menu_bottom_list_item_link text-uppercase" href="{% url 'news' %}">
+                                <i class="fas fa-angle-right mr-1"></i> Все новости
+                            </a>
+                        </li>
+                        <li class="navbar_mobile_list mt-2">
+                            <a class="header_menu_bottom_list_item_link text-uppercase" href="{% url 'kz_news' %}">
+                                <i class="fas fa-angle-right mr-1"></i> Казахстан
+                            </a>
+                        </li>
+                        <li class="navbar_mobile_list mt-2 pb-2">
+                            <a class="header_menu_bottom_list_item_link text-uppercase" href="{% url 'world_news' %}">
+                                <i class="fas fa-angle-right mr-1"></i> Мир
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="navbar_mobile_list">
+                    <a class="navbar_mobile_list_link text-uppercase text-warning" href="{% url 'publications_list' %}">
+                        <i class="fas fa-user-edit text-warning"></i> Публикации
+                    </a>
+                </li>
+                <li class="navbar_mobile_list">
+                    <a class="navbar_mobile_list_link text-uppercase text-warning" href="{% url 'persons_list' %}">
+                        <i class="fas fa-user-tie text-warning"></i> Персоны
+                    </a>
+                </li>
+                <li class="mt-5">
+                    <a href="#" class="btn btn-warning btn-block text-uppercase hover-no-color f-size-13">Вход</a>
+                    <a href="#" class="btn btn-outline-warning mt-2 btn-block text-uppercase hover-no-color f-size-13">Регистрация</a>
+                </li>
+
+                <li class="nav-item-gray nav-item-gray-first navbar_mobile_list">
+                    <a class="navbar_mobile_list_link" href="{% url 'about' %}">О проекте</a>
+                </li>
+                <li class="nav-item-gray navbar_mobile_list">
+                    <a class="navbar_mobile_list_link" href="{% url 'contacts' %}">Контакты</a>
+                </li>
+                <li class="nav-item-gray navbar_mobile_list">
+                    <a class="navbar_mobile_list_link" href="{% url 'politic' %}">Политика
+                        конфиденциальности</a>
+                </li>
+
+            </ul>
+            <div class="social-menu">
+                <a class="social_search btn btn-outline-light btn-block" href="#" data-toggle="modal"
+                   data-target="#exampleModalmob">
+                    Поиск <i class="fas fa-search"></i>
+                </a>
+            </div>
+            <div class="social-menu">
+                {% for i in socialstg %}
+                    <a href="{{ i.url }}" target="_blank">
+                        {% autoescape off %}{{ i.icon }}{% endautoescape %}
+                    </a>
+                {% endfor %}
+            </div>
+        </ul>
+    </div>
+</nav>

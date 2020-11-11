@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Ошибка 403 | {{ block.super }}{% endblock %}
+
+{% block content %}
+
+    <div class="container mt-5 pt-5 text-center">
+        <h2 class="font-weight-bold text-uppercase text-warning text-center">Ошибка 403</h2>
+        <h3 class="">Извините, доступ невозвожен</h3>
+        <a href="{% url 'home' %}" class="btn btn-primary btn-lg mt-4">Перейти на главную</a>
+        <h3 class="mt-3">или</h3>
+    </div>
+
+{% endblock %}

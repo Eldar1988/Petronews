@@ -1,0 +1,70 @@
+ГОТОВО
+1) https://www.kpo.kz (Готово)
+2) https://www.kmg.kz (готово)
+3) https://www.nsenergybusiness.com (готово)
+4) https://www.kaztransgas.kz/index.php/ru/ (Готово)
+5) http://www.mmg.kz/page.php\ (готово)
+6) http://www.kazservice.kz/ (готово)
+7) https://www.kazenergy.com/ru/ (готово)
+8) http://www.cpc.ru/RU/Pages/default.aspx (готово)
+9) https://www.opec.org/opec_web/en/ (готово, только новости? или релизы тоже?)
+10) http://www.king.kz/news (готово)
+11) https://corporate.exxonmobil.com/News/Newsroom (готово)
+12) https://www.total.com/ (готово, вязл пресс-релизы, новости редкие)
+13) https://neftegaz.ru/ (Готово, не парсятся изображения в слайдере)
+14) http://iacng.kz/ru/ (парсится, но с необходимостью исправления)
+15) http://www.king.kz/news (готово)
+16) https://corporate.exxonmobil.com/News/Newsroom (готово)
+17) https://www.total.com/ (готово, вязл пресс-релизы, новости редкие)
+18) https://www.petroleum-economist.com/ (готово)
+19) https://www.gazprom.ru/ (ГОТОВО)
+20) http://www.ngv.ru (готово)
+21) https://oilprice.com/ (готово)
+22) https://nangs.org/news/world (готово)
+23) https://1prime.ru/oil/ (готово)
+24) https://www.ogj.com/ (готово)
+25) https://www.rigzone.com/ (готово)
+26) https://www.shell.com/ (готово)
+27) https://petrocouncil.kz/ (готово)
+28) https://aogdigital.com/ (готово)
+29) http://www.oilandgaspeople.com/ (готово)
+30) https://www.tengizchevroil.com (готово)
+31) http://www.koa.kz/ru/news (Готово)
+32) oilandgas360.com (готово)
+33) energynow.ca (готово)
+34) http://www.crudeoildaily.com/ (готово)
+35) https://pubs.spe.org/en/jpt/jpt-main-page/ (готово)
+
+
+
+
+
+
+
+ВОПРОСЫ
+https://oil-gas.kz/ru/press-tsentr/novosti
+https://www.spe.org/en/ (там много доп ресурсов)
+https://iz.ru/tag/neft (сложный попробовать позже)
+
+
+
+
+НЕ УДАЛОСЬ
+1) https://www.gov.kz/memleket/entities/energo?lang=ru- (не подходит - реакт прилождение_)
+2) https://oil.rftoday.ru (не подходит)
+3) http://www.cnpc-amg.kz/ (проблема в кодировке)
+5) https://openei.org/wiki/Gateway:Oil_and_Gas (непонятно)
+6) http://www.world-petroleum.org/ (новости ссылаются на https://www.petroleum-economist.com)
+7) https://www.oilandgasinternational.com/default.aspx (старый сайт, сделан на таблицах без классов)
+8) https://www.bp.com/ (часть с новостями сделана на JS)
+9) https://oilprice.com/Latest-Energy-News/World-News/ (дубль)
+10) https://www.ogj.com/ (повтор)
+11) https://energy.einnews.com/ (разные источники)
+12) https://www.ncoc.kz (приходит из data-bind)
+13) https://oil-gas.kz/ru/press-tsentr/novosti (нововсти в разном формате)
+14) https://www.bloomberg.com/markets/sectors/energy (платная подписка нужна)
+15) https://www.feedspot.com/ (не пойдет)
+
+
+
+

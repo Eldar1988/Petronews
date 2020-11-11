@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ info.title }} | {{ block.super }}{% endblock %}
+{% block description %}{{ description }}...{% endblock %}
+
+{% block content %}
+    <div class="container mt-5 pt-5">
+        <h2 class="text-center">{{ info.title }}</h2>
+        <div class="mt-4">
+            {% autoescape off %}{{ info.text }}{% endautoescape %}
+        </div>
+    </div>
+{% endblock %}

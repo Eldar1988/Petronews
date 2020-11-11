@@ -1,0 +1,34 @@
+﻿{% load static %}
+{% load thumbnail %}
+
+<article>
+    <div class="card text-white shadow rounded">
+        {% if i.image %}
+            {% thumbnail i.image "600x350" crop="center" as img %}
+                <img data-src="{{ img.url }}" src="{% static 'assets/img/preloader.svg' %}" class="card-img lazy"
+                     alt="Фото: {{ i.title }}" title="Фото: {{ i.title }}"
+                     style="width: 100%; height: 200px; object-fit: cover;">
+            {% endthumbnail %}
+        {% elif i.image_url %}
+            {% thumbnail i.image_url "600x350" crop="center" as img %}
+                <img data-src="{{ img.url }}" src="{% static 'assets/img/preloader.svg' %}" class="card-img lazy"
+                     alt="Фото: {{ i.title }}" title="Фото: {{ i.title }}"
+                     style="width: 100%; height: 200px; object-fit: cover;">
+            {% endthumbnail %}
+        {% else %}
+            <img src="{% static 'assets/img/preloader.svg' %}" class="card-img lazy" alt="Фото: {{ i.title }}"
+                 title="Фото: {{ i.title }}"
+                 style="width: 100%; height: 200px; object-fit: cover;">
+        {% endif %}
+        <div class="card-img-overlay pos">
+            <div class="text-right">
+                {% include 'news/includes/time.html' %}
+            </div>
+            <h5 class="card-title mt-2 h6">
+                <a href="{{ i.get_absolute_url }}" class="text-white" title="Читать далее..">
+                    {{ i.title }}
+                </a>
+            </h5>
+        </div>
+    </div>
+</article>
