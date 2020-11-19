@@ -13,8 +13,8 @@
 {% endblock %}
 {% block ogdescription %}{{ description }}...{% endblock %}
 {% block content %}
-    <div class="container-fluid">
-        {#    Хлебные крошки#}
+    <div class="post-container px-3">
+        {#    Хлебные крошки #}
         <div class="post_navigation">
             <nav aria-label="breadcrumb bg-light">
                 <ol class="breadcrumb rounded-0">
@@ -27,69 +27,85 @@
                 </ol>
             </nav>
         </div>
-        {#    Заголово новости#}
-        <div class="row mt-5 align-items-center">
-            {#            Заголовок#}
-            <div class="col-md-9">
-                <h1 class="h2">
-                    {{ post.title }}
-                </h1>
-            </div>
-            {#            Инфо#}
-            <div class="post_container_info col-md-3 mt-3 mt-md-0">
-                {#                    <p class="post_container_info_web">Tengrinews.kz</p>#}
-                <p class="post_container_info_date text-md-right"><i
-                        class="far fa-calendar-alt"></i> {{ post.pub_date|date:'d M в G:i' }}</p>
-                <p class="post_container_info_view text-md-right"><i class="fas fa-search"></i>
-                    Просмотров: {{ post.views }}
-                </p>
-                <a href="#form-app" class="post_container_info_comment text-md-right d-block"><i class="far fa-comment-dots"></i>
-                    Комментариев: {{ comments_count }}</a>
-            </div>
-        </div>
-        <hr>
-        {#        Тело новости#}
-        <div class="row">
-            {#            Картинка#}
-            <div class="col-12 col-lg-6 post-detail-image mt-4">
-                {% if post.image %}
-                    <img class="lazy rounded shadow" data-src="{{ post.image.url }}"
-                         src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ post.title }}" title="Фото: {{ post.title }}"
-                         style="width: 100%;"
-                    >
-                {% elif post.image_url %}
-                    <img class="lazy rounded shadow" data-src="{{ post.image_url }}"
-                         src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ post.title }}" title="Фото: {{ post.title }}"
-                         style="width: 100%;"
-                    >
-                {% else %}
-                    <img class="rounded shadow"
-                         src="{% static 'assets/img/empty.png' %}" alt="Нет изображения" title="Нет изображения"
-                         style="width: 100%;"
-                    >
-                {% endif %}
-                {% include 'includes/share.html' %}
-            </div>
-            {#        Текст#}
-            <div class="col-12 col-lg-6 mt-4">
-                <article class="">
-                    <div class="post_container_content shadow-inset px-3 rounded">
-                        <p class="post_container_content_par">
+
+        {#        Пост - Комментарии - Дополнительно #}
+        <div class="post-page mt-5">
+            <div class="row">
+                {#                Пост и комментарии #}
+                <div class="col-lg-8">
+                    <div class="post-detail">
+                        {#                        Заголовок поста #}
+                        <h1 class="h3 post-title">
+                            {{ post.title }}
+                        </h1>
+                        {#                    Изображение #}
+                        <div class="post-image mt-5">
+                            {% if post.image %}
+                                <img class="lazy rounded shadow" data-src="{{ post.image.url }}"
+                                     src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ post.title }}"
+                                     title="Фото: {{ post.title }}"
+                                     style="width: 100%;"
+                                >
+                            {% elif post.image_url %}
+                                <img class="lazy rounded shadow" data-src="{{ post.image_url }}"
+                                     src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ post.title }}"
+                                     title="Фото: {{ post.title }}"
+                                     style="width: 100%;"
+                                >
+                            {% else %}
+                                <img class="rounded shadow"
+                                     src="{% static 'assets/img/empty.png' %}" alt="Нет изображения"
+                                     title="Нет изображения"
+                                     style="width: 100%;"
+                                >
+                            {% endif %}
+                        </div>
+                        {#                        Мета #}
+                        <div class="post-meta mt-4">
+                            <span class="">
+                                <i class="far fa-eye"></i>
+                                {{ post.views }}
+                            </span>
+                            <a href="#form-app" class="ml-3 scroll-to">
+                                <i class="far fa-comment-dots"></i>
+                                {{ comments_count }}
+                            </a>
+                            <span class="ml-3 float-right">
+                                <i class="far fa-calendar-alt"></i>
+                                {{ post.pub_date|date:'d M в G:i' }}
+                            </span>
+                        </div>
+                        {#                        Тело поста #}
+                        <div class="post-detail mt-4 pt-4 border-top">
                             {% autoescape off %}{{ post.body }}{% endautoescape %}
-                        </p>
+                        </div>
                     </div>
-                </article>
-                {% if post.source %}
-                    <a class="pt-3 d-block text-right" target="_blank" href="{{ post.source }}">
-                        Читать источник
-                    </a>
-                {% endif %}
+                    {#                    Share #}
+                    <div class="post-share mt-3">
+                        {% include 'includes/share.html' %}
+                    </div>
+                    {#                    Комментарии #}
+                    <div class="comments-block">
+                        {% include 'news/includes/comments.html' %}
+                    </div>
+                </div>
+
             </div>
         </div>
-        {#        Комментарии#}
-        <hr>
-        {% include 'news/includes/comments.html' %}
-        <hr>
-        {% include 'news/includes/read_more.html' %}
+
     </div>
+
+    <style>
+        .post-container {
+            max-width: 1300px;
+            margin: auto;
+        }
+
+        .post-detail {
+            font-size: 16px;
+            line-height: 24px;
+            max-width: 100%;
+            overflow-x: scroll;
+        }
+    </style>
 {% endblock %}

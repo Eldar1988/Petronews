@@ -7,8 +7,9 @@ function getData(url) {
 }
 
 function addComment(name, id) {
+    console.log(name, id)
     document.getElementById("parent").value = id;
-    document.getElementById("comment").innerText = `${name}, `;
+    $("#comment").val(`${name}, `)
 }
 
 async function AjaxAddComment() {
@@ -149,7 +150,8 @@ function AjaxAddAnswer() {
 }
 
 
-const anchors = document.querySelectorAll('a[href*="#"]')
+// const anchors = document.querySelectorAll('a[href*="#"]')
+const anchors = document.querySelectorAll('.scroll-to')
 
 for (let anchor of anchors) {
     anchor.addEventListener('click', function (e) {
@@ -163,3 +165,7 @@ for (let anchor of anchors) {
         })
     })
 }
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

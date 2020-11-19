@@ -110,11 +110,6 @@ body {
     position: relative;
 }
 
-.btn-primary {
-    background: #00aaff;
-    border-color: #00aaff;
-}
-
 .carousel-item:after {
     content: "";
     position: absolute;

@@ -88,7 +88,7 @@ body a {
 
 body a:hover {
     text-decoration: none;
-    color: #00AAFF !important;
+    color: #007bff !important;
 }
 
 header {
@@ -1633,7 +1633,7 @@ header i:hover {
 
 ::-webkit-scrollbar {
     width: 8px; /* ширина для вертикального скролла */
-    height: 8px; /* высота для горизонтального скролла */
+    height: 0px; /* высота для горизонтального скролла */
     background-color: lightgrey;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, .1);
 }

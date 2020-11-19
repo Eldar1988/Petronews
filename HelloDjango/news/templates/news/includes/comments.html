@@ -1,14 +1,14 @@
 {% load thumbnail %}
 
-<div class="post_addcomment row">
+<div class="post_addcomment">
     {#Форма #}
-    <div id="form-app" class="col-12 col-lg-6 ">
-        <div class="similar_news mt-5" name="comments">
+    <div id="form-app" class="">
+        <div class="similar_news" name="comments">
             <h2 class="news_section_title">
                 <a class="news_section_title_link">Ваш комментарий</a>
             </h2>
         </div>
-        <form action="{% url 'add_review' post.id %}" method="post" class="comment-form">
+        <form action="{% url 'add_review' post.id %}" method="post" class="comment-form mt-3">
             {% csrf_token %}
             <input type="hidden" name="parent" id="parent" value="">
             {% if not request.user.is_authenticated %}
@@ -44,23 +44,23 @@
                 </div>
             </div>
         </form>
-        <div class="">
+        <div class="mt-4">
             <button class="btn btn-primary p-3 shadow" onclick="AjaxAddComment()">Оставить коментарий <i
                     class="fab fa-telegram-plane"></i>
             </button>
         </div>
     </div>
     {#    Комментарии #}
-    <div class="commets col-12 col-lg-6 " id="comments-list">
+    <div class="commets mt-5" id="comments-list">
         {% if comments.count %}
-            <div class="similar_news mt-5" name="comments">
+            <div class="similar_news" name="comments">
                 <h2 class="news_section_title">
                     <a class="news_section_title_link">Комментарии <span
                             class="badge badge-secondary small">{{ comments_count }}</span></a>
                 </h2>
             </div>
 
-            <div class="comment-wrapper shadow-inset p-3 rounded mt-3">
+            <div class="mt-4">
                 {% for i in comments %}
                     <div class="comment mt-3 border rounded shdow-sm p-2 pb-4" id="comment{{ i.id }}">
                         <p class="font-weight-bold">
@@ -71,10 +71,11 @@
                             {% else %}
                                 <i class="fas fa-user"></i>
                             {% endif %}
-                            {{ i.name }}
+                            <span>{{ i.name }} </span>
                             {% if i.parent %}
                                 <span class="font-weight-light small"> ответ для </span>
-                                <a href="#comment{{ i.parent.id }}">{{ i.parent.name }}
+                                <a href="#comment{{ i.parent.id }}" class="scroll-to">
+                                    <span class="text-muted">{{ i.parent.name }}</span>
                                     {% if i.parent.user and i.user.author.avatar %}
                                         {% thumbnail i.parent.user.author.avatar "30x30" crop="center" as img %}
                                             <img src="{{ img.url }}" alt="" class="rounded-circle shadow-sm">
@@ -83,12 +84,18 @@
                                 </a>
                             {% endif %}
                         </p>
-                        <p class="mt-2">{{ i.text }}</p>
-                        <div class="mt-2">
+                        <p class="mt-3">{{ i.text }}</p>
+                        <div class="mt-2 border-top pt-2">
                             <p class="text-muted small text-right float-right"><i
                                     class="fas fa-history"></i> {{ i.pub_date|date:'d M G:i' }}</p>
-                            <a href="#form-app" onclick="addComment('{{ i.name }}', '{{ i.id }}')"
-                               class="float-left small">Ответить <i class="fas fa-reply-all"></i></a>
+                            <a href="#form-app" onclick="addComment('{% if i.user %}{{ i.user.author.first_name }}{% if i.user.author.last_name %} {{ i.user.author.last_name }}{% endif %}{% else %}{{ i.name }}{% endif %}', '{{ i.id }}')"
+                               class="float-left small scroll-to">Ответить <i class="fas fa-reply-all"></i></a>
+                            {% if i.parent %}
+                            <span class="small serif float-left ml-3"
+                                    data-toggle="tooltip" data-placement="top" title="{{ i.parent.text }}">
+                                    Цитата <i class="far fa-comment-dots"></i>
+                                </span>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
