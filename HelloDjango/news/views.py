@@ -121,7 +121,7 @@ def get_search_results(request):
 
 def post_detail(request, slug):
     post = Post.objects.get(slug=slug)
-    posts = Post.objects.defer('body').filter(public=True).exclude(slug=slug)[:8]
+    posts = Post.objects.defer('body').filter(public=True).exclude(slug=slug)[:10]
     post.views += 1
     post.save()
     description = get_text(post.body)[:170]

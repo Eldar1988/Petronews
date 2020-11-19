@@ -39,7 +39,7 @@
                             {{ post.title }}
                         </h1>
                         {#                    Изображение #}
-                        <div class="post-image mt-5">
+                        <div class="post-image mt-4 pt-3">
                             {% if post.image %}
                                 <img class="lazy rounded shadow" data-src="{{ post.image.url }}"
                                      src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ post.title }}"
@@ -88,6 +88,9 @@
                     <div class="comments-block">
                         {% include 'news/includes/comments.html' %}
                     </div>
+                </div>
+                <div class="col-lg-4">
+                    {% include 'news/includes/read_more.html' %}
                 </div>
 
             </div>
