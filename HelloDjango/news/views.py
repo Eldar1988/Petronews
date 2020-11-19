@@ -152,7 +152,6 @@ class AddReview(View):
 
             if request.user.is_authenticated:
                 form.user_id = request.user.id
-                print(form.user_id)
 
             if request.POST.get('parent', None):
                 form.parent_id = int(request.POST.get('parent'))

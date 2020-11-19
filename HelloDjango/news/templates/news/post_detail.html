@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block title %}{{ post.title }} | {{ block.super }}{% endblock %}
 {% block description %}{{ description }}...{% endblock %}
-
 {% block ogtitle %}{{ post.title }} | {{ block.super }}{% endblock %}
 {% block ogurl %}{{ post.get_absolute_url }}{% endblock %}
 {% block ogimage %}
@@ -14,9 +12,7 @@
     {% endif %}
 {% endblock %}
 {% block ogdescription %}{{ description }}...{% endblock %}
-
 {% block content %}
-
     <div class="container-fluid">
         {#    Хлебные крошки#}
         <div class="post_navigation">
@@ -96,10 +92,4 @@
         <hr>
         {% include 'news/includes/read_more.html' %}
     </div>
-
-
-
-
-
-
 {% endblock %}

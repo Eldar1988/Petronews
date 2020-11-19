@@ -26,7 +26,10 @@
                 </div>
             {% else %}
                 <input type="hidden" name="name" required
-                       value="{{ request.user.username }}" id="name">
+                       value="{{ request.user.author.first_name }}
+                                {% if request.user.author.last_name %}
+                                    {{ request.user.author.last_name }}
+                                {% endif %}" id="name">
                 <input type="hidden" name="email" required class="form-control"
                        value="{{ request.user.email }}" id="email">
             {% endif %}
@@ -38,13 +41,11 @@
             <div id="notice" style="display: none">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong>Спасибо!</strong> Ваш комментарий опубликован.<br>
-                    <a href="#comments-list">Перейти к комментарию <i
-                            class="fas fa-long-arrow-alt-right"></i></a>
                 </div>
             </div>
         </form>
         <div class="">
-            <button class="btn btn-primary p-3" onclick="AjaxAddComment()">Оставить коментарий <i
+            <button class="btn btn-primary p-3 shadow" onclick="AjaxAddComment()">Оставить коментарий <i
                     class="fab fa-telegram-plane"></i>
             </button>
         </div>
@@ -59,11 +60,11 @@
                 </h2>
             </div>
 
-            <div class="comment-wrapper shadow-inset p-3 rounded">
+            <div class="comment-wrapper shadow-inset p-3 rounded mt-3">
                 {% for i in comments %}
                     <div class="comment mt-3 border rounded shdow-sm p-2 pb-4" id="comment{{ i.id }}">
                         <p class="font-weight-bold">
-                            {% if i.user %}
+                            {% if i.user and i.user.author.avatar %}
                                 {% thumbnail i.user.author.avatar "50x50" crop="center" as img %}
                                     <img src="{{ img.url }}" alt="" class="rounded-circle shadow-sm">
                                 {% endthumbnail %}
@@ -74,7 +75,7 @@
                             {% if i.parent %}
                                 <span class="font-weight-light small"> ответ для </span>
                                 <a href="#comment{{ i.parent.id }}">{{ i.parent.name }}
-                                    {% if i.parent.user %}
+                                    {% if i.parent.user and i.user.author.avatar %}
                                         {% thumbnail i.parent.user.author.avatar "30x30" crop="center" as img %}
                                             <img src="{{ img.url }}" alt="" class="rounded-circle shadow-sm">
                                         {% endthumbnail %}

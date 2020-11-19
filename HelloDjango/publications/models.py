@@ -34,7 +34,6 @@ class Publication(models.Model):
     title = models.CharField('Заголовок', max_length=255, db_index=True)
     image = models.ImageField('Изображение', upload_to=path_and_rename('publications/', 'image'))
     body = RichTextUploadingField('Публикация')
-    slug = models.SlugField('Slug', unique=True, help_text='Маленькими буквами, без пробелов и спецсимволов')
     public = models.BooleanField('Опубликовать', default=False)
     pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
     update = models.DateTimeField('Дата обновления', auto_now=True)
@@ -44,7 +43,7 @@ class Publication(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('publication_detail', kwargs={'slug': self.slug})
+        return reverse('publication_detail', kwargs={'pk': self.id})
 
     class Meta:
         ordering = ('-pub_date',)

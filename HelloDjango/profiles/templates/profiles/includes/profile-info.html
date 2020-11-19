@@ -1,0 +1,157 @@
+<div class="profile-info">
+    {% if profile.avatar %}
+        <img src="{{ profile.avatar.url }}" alt="avatar" class="profile-avatar shadow-sm" style="object-fit: cover; width: 200px; height: 200px;">
+    {% else %}
+        <img src="https://res.cloudinary.com/space-developers/image/upload/v1605340527/Petronews/portrait_mxdbvk.svg"
+             alt="" class="profile-avatar shadow-sm">
+    {% endif %}
+    {% if success %}
+        <button id="change-avatar" class="btn btn-warning shadow ml-n5" data-toggle="modal" data-target="#avatarModal">
+            <i class="fas fa-camera-retro" ></i>
+        </button>
+    {% endif %}
+
+
+    <h3 class="mt-3">
+        {{ profile.first_name }}
+        {% if profile.last_name %}
+            {{ profile.last_name }}
+        {% else %}
+            00{{ profile.id }}
+        {% endif %}
+
+        {% if success %}
+            <button class="btn btn-warning btn-sm ml-3 mt-n3 shadow" data-toggle="modal" data-target="#userNameModal"
+                    onclick="defaultBio('{{ profile.bio }}')"><i
+                    class="fas fa-pencil-alt"></i></button>
+        {% endif %}
+    </h3>
+
+    {% if profile.professional %}
+        <p class="mt-2">{{ profile.professional }}</p>
+    {% endif %}
+    <blockquote class="smartquote border rounded p-3 mt-4">
+        <i class="fas fa-quote-right text-muted"></i>
+        <p class="mb-0 text-muted">{{ profile.bio }}</p>
+    </blockquote>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="userNameModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-2" id="exampleModalLabel">Личные данные </h4> <span
+                    class="badge badge-secondary"><i
+                    class="fas fa-pencil-alt"></i></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <button id="q-button" type="button" class="btn btn-outline-primary btn-block px-4"
+                        onclick="ChangeName()" data-dismiss="modal" aria-label="Close">Сохранить <i
+                        class="fas fa-check"></i></button>
+                <form class="change-name-form mt-5" action="{% url 'update_user_name' profile.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label for="q-title" class="col-sm-3 col-form-label text-left">Имя:</label>
+                        <div class="col-sm-9">
+                            <input type="text" value="{{ profile.first_name }}" name="first_name" class="form-control"
+                                   id="first-name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="q-title" class="col-sm-3 col-form-label text-left">Фамилия:</label>
+                        <div class="col-sm-9">
+                            <input value="{{ profile.last_name }}" type="text" name="last_name" class="form-control"
+                                   id="last_name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="q-title" class="col-sm-3 col-form-label text-left">Профессия:</label>
+                        <div class="col-sm-9">
+                            <input value="{{ profile.professional }}" type="text" name="professional"
+                                   class="form-control" id="professional">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="q-title" class="col-sm-3 col-form-label text-left">Био:</label>
+                        <div class="col-sm-9">
+                            <textarea type="text" name="bio" class="form-control" id="bio"></textarea>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="alert alert-success py-5 text-center" id="c-alert" role="alert"
+                     style="display: none;">
+                    <b>Отлично!</b> Ваши данные изменены.
+                </div>
+                <div class="alert alert-warning py-5 text-center" id="er-notice" role="alert"
+                     style="display: none;">
+                    <b>Ошибка!</b> Попробуйте еще раз.
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button id="q-button" type="button" class="btn btn-primary px-4" onclick="ChangeName()"
+                        data-dismiss="modal" aria-label="Close">Сохранить <i class="fas fa-check"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-success">
+            <div class="modal-body text-white">
+                Ваши данные успешно сохранены.
+                <button type="button" class="btn btn-outline-light btn-block mt-4" data-dismiss="modal"
+                        aria-label="Close">Ok
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="{% url 'change_avatar' profile.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group text-center">
+                        <input type="hidden" name="user" value="{{ profile.user }}">
+                        <label for="exampleFormControlFile1" class="h6">Изменение аватара</label>
+                        <input type="file" class="form-control-file mt-5" id="exampleFormControlFile1" name="avatar" required>
+                        <button type="submit" class="btn btn-block btn-primary mt-3">Загрузить <i class="fas fa-cloud-download-alt"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="bgModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="{% url 'change_bg' profile.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group text-center">
+                        <input type="hidden" name="user" value="{{ profile.user }}">
+                        <label for="exampleFormControlFile1" class="h6">Изменение фона</label>
+                        <input type="file" class="form-control-file mt-5" id="exampleFormControlFile1" name="background" required>
+                        <button type="submit" class="btn btn-block btn-primary mt-3">Загрузить <i class="fas fa-cloud-download-alt"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 ﻿h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .btn, .sans {
     font-family: 'Noto Sans', sans-serif;
+    margin-bottom: 0;
 }
 
 * {
@@ -54,7 +55,7 @@ body {
 
 .pub-category {
     position: absolute;
-    bottom: 75px;
+    bottom: 120px;
     left: 7px;
 }
 
@@ -129,33 +130,54 @@ body {
 .z-index-10 {
     z-index: 10;
 }
+
 .post_container_content {
     position: relative;
     height: 600px;
     overflow-y: scroll;
 }
+
 .comment-wrapper {
     height: 400px;
     overflow-y: scroll;
 }
+
 .post-detail-image img {
     height: 600px;
     object-fit: cover;
+}
+
+.logout-btn {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+}
+
+.change-bg-btn {
+    position: absolute;
+    top: 40px;
+    left: 10px;
+}
+
+.pub-banner {
+    background: #eff3f4;
 }
 
 @media screen and (max-width: 1400px) {
     .carousel-inner img {
         height: 300px;
     }
+
     .post_container_content {
-    position: relative;
-    height: 450px;
-    overflow-y: scroll;
-}
-.post-detail-image img {
-    height: 450px;
-    object-fit: cover;
-}
+        position: relative;
+        height: 450px;
+        overflow-y: scroll;
+    }
+
+    .post-detail-image img {
+        height: 450px;
+        object-fit: cover;
+    }
 }
 
 @media screen and (max-width: 992px) {
@@ -163,15 +185,30 @@ body {
         font-size: 16px !important;
         font-weight: 400 !important;
     }
+
+    .logout-btn {
+        top: 10px;
+        right: 10px;
+    }
+
+    .change-bg-btn {
+        top: 10px;
+    }
 }
 
 @media screen and (max-width: 650px) {
     .carousel-inner img {
         height: 250px;
     }
+
+    .pub-banner img {
+        max-width: 200px;
+        margin-top: 30px;
+    }
+
     .post-detail-image img {
-    height: auto;
-}
+        height: auto;
+    }
 
     .list-title {
         font-size: 14px !important;

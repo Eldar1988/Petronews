@@ -1,0 +1,30 @@
+<ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+    <li class="nav-item px-4">
+        <a class="nav-link active sans" id="home-tab" data-toggle="tab" href="#home" role="tab"
+           aria-controls="home" aria-selected="true">Публикации</a>
+    </li>
+    <li class="nav-item px-4">
+        <a class="nav-link sans" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+           aria-selected="false">Вопросы</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active p-3 rounded" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="publications-profile-list">
+            {% if success %}
+                <button class="btn btn-primary shadow my-3" onclick="newPub()">Новая публикация <i
+                        class="fas fa-feather-alt"></i></button>
+            {% endif %}
+            {% include 'profiles/includes/pubs.html' %}
+        </div>
+        <div class="profile-new-pub" style="display: none;">
+            {% include 'profiles/includes/new_pub.html' %}
+        </div>
+    </div>
+    <div class="tab-pane fade p-3 rounded" id="profile" role="tabpanel" aria-labelledby="profile-tab">2</div>
+</div>
+
+
+<style>
+
+</style>

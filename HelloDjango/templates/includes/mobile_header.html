@@ -1,3 +1,5 @@
+{% load thumbnail %}
+
 <nav role="navigation">
     <div id="menuToggle">
         <input type="checkbox"/>
@@ -43,9 +45,34 @@
                         <i class="fas fa-user-tie text-warning"></i> Персоны
                     </a>
                 </li>
-                <li class="mt-5">
-                    <a href="#" class="btn btn-warning btn-block text-uppercase hover-no-color f-size-13">Вход</a>
-                    <a href="#" class="btn btn-outline-warning mt-2 btn-block text-uppercase hover-no-color f-size-13">Регистрация</a>
+            <li class="navbar_mobile_list">
+                    <a class="navbar_mobile_list_link text-uppercase text-warning" href="{% url 'questions' %}">
+                        <i class="far fa-question-circle text-warning"></i> Вопросы
+                    </a>
+                </li>
+                <li class="mt-5 nav-item-gray-first">
+                    {% if request.user.is_authenticated %}
+                    <div class="user text-white">
+                        <a href="{{ user.author.get_absolute_url }}" class="user-name text-white text-center">
+                            <h6>{{ user.author.first_name }} {% if user.author.last_name %}
+                                {{ user.author.last_name }} {% endif %}</h6>
+
+                            {% if user.author.avatar %}
+                                {% thumbnail user.author.avatar "50x50" crop="center" as img %}
+                                    <img src="{{ img.url }}" alt="" class="rounded-circle ml-3 mx-auto d-block my-3" style="object-fit: cover;">
+                                {% endthumbnail %}
+                            {% else %}
+                                <i class="fas fa-user-circle user-avatar-i d-block ml-3"></i>
+                            {% endif %}
+                        </a>
+                        <div class="user_actions">
+                            <a href="{{ user.author.get_absolute_url }}" class="btn btn-block btn-warning mt-1 text-dark">Новая запись <i class="fas fa-feather-alt text-dark"></i></a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-warning btn-block text-uppercase hover-no-color f-size-13">Вход</a>
+                    <a href="{% url 'register' %}" class="btn btn-outline-warning mt-2 btn-block text-uppercase hover-no-color f-size-13">Регистрация</a>
+                    {% endif %}
                 </li>
 
                 <li class="nav-item-gray nav-item-gray-first navbar_mobile_list">

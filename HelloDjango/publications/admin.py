@@ -9,9 +9,9 @@ admin.site.register(Category)
 
 @admin.register(Publication)
 class PublicationAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'title', 'category', 'author', 'slug', 'public', 'views', 'pub_date')
+    list_display = ('get_image', 'title', 'category', 'author', 'public', 'views', 'pub_date')
     list_display_links = ('get_image', 'title')
-    list_editable = ('category', 'slug', 'public')
+    list_editable = ('category', 'public')
     list_filter = ('category', 'author')
     save_on_top = True
     save_as = True

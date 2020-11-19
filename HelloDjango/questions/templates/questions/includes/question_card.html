@@ -1,0 +1,33 @@
+{% load static %}
+{% load thumbnail %}
+
+<article>
+    <div class="popular-question-card mt-3 shadow-sm border border-light rounded p-3">
+        <a href="{{ i.author.author.get_absolute_url }}" title="Перейти в профиль автора"
+           class="d-flex align-items-center d-block">
+            <div class="" style="min-width: 50px">
+                {% thumbnail i.author.author.avatar "100x100" crop="center" as img %}
+                    <img class="best_news_block_author_img shadow-sm lazy"
+                         data-src="{{ img.url }}"
+                         src="{% static 'assets/img/preloader.svg' %}" alt="Аватар автора">
+                {% endthumbnail %}
+            </div>
+            <div class="p-question-author">
+                <p class="sans">{{ i.author.author.first_name }}
+                    {% if i.author.author.last_name %} {{ i.author.last_name }}{% endif %}
+                </p>
+                <time class="small text-muted">{{ i.pub_date }}</time>
+            </div>
+        </a>
+        <a href="{{ i.get_absolute_url }}" class="p-q-body border-top mt-3 d-block pt-3"
+           title="Подробнее | Ответить на вопрос">
+            <p>{{ i.title }}</p>
+        </a>
+        <div class="meta mt-3 text-muted">
+            <span class="" title="Количество ответов: {{ i.answers.count }}"><i
+                    class="far fa-comment-dots"></i> {{ i.answers.count }}</span>
+            <span class="ml-3" title="Количество просмотров: {{ i.views }}"><i
+                    class="far fa-eye"></i> {{ i.views }}</span>
+        </div>
+    </div>
+</article>

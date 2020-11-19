@@ -1,6 +1,4 @@
 from django.core.paginator import Paginator
-from ..models import Post
-from publications.models import Publication
 
 
 def get_pagination(request, posts, header):

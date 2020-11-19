@@ -1,4 +1,11 @@
-﻿{% extends 'base.html' %} {% load static %} {% load thumbnail %} {% load person_tags %} {% get_persons as personstg %} {% load cache %}
+﻿{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% load person_tags %}
+{% get_persons as personstg %}
+{% load cache %}
+
+
 {% block content %}
     {# Главные новости #}
     <div class="container-fluid">
@@ -131,50 +138,8 @@
     <div class="container-fluid">
         <div class="new_section_blocks row">
             {% for i in actual_news|slice:'1:' %}
-
                 <div class="new_section_block col-12 col-md-6 col-lg-3">
                     {% include 'news/includes/actual_card.html' %}
-                    {#                    <article>#}
-                    {# {% if i.image %}#} {##}
-                    {#                        <img#}
-                    {#                                class="new_section_block_img lazy"#}
-                    {#                                data-src="{{ i.image.url }}"#}
-                    {##}
-                    {##}
-                    {#                                src="{% static 'assets/img/preloader.svg' %}"#}
-                    {#                                alt="{{ i.title }}"#}
-                    {##}
-                    {##}
-                    {#                                style="height: 200px; object-fit: cover; width: 100%"#}
-                    {#                        /> {# {% elif i.image_url %}#} {##}
-                    {#                        <img#}
-                    {#                                class="new_section_block_img lazy"#}
-                    {#                                data-src="{{ i.image_url }}"#}
-                    {##}
-                    {##}
-                    {#                                src="{% static 'assets/img/preloader.svg' %}"#}
-                    {#                                alt="{{ i.title }}"#}
-                    {##}
-                    {##}
-                    {#                                style="height: 200px; object-fit: cover; width: 100%"#}
-                    {#                        /> {# {% else %}#} {##}
-                    {#                        <img#}
-                    {#                                class="new_section_block_img"#}
-                    {#                                src="{% static 'assets/img/preloader.svg' %}"#}
-                    {##}
-                    {##}
-                    {#                                alt="{{ i.title }}"#}
-                    {#                                style="height: 200px; object-fit: cover; width: 100%"#}
-                    {#                        /> {# {% endif %}#} {##} {##}
-                    {#                        <h4 class="section_news_col_block_title">#}
-                    {#                            <a href="{{ i.get_absolute_url }}">{{ i.title }}</a> {##}
-                    {#                        </h4>#}
-                    {##}
-                    {#                        <span class="section_news_col_block_date mt-n3"#}
-                    {#                        >{{ i.pub_date|date:'d M G:i' }}</span#}
-                    {#                        > {##}
-                    {#                    </article>#}
-
                 </div>
             {% endfor %}
         </div>

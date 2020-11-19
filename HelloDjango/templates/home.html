@@ -1,35 +1,39 @@
-{% extends 'base.html' %}
-
-{% block content %}
-    <div class="container mt-5 pt-5">
-        <div class="row">
-            {% for i in posts %}
-                <div class="col-sm-4 mt-3">
-                    <!-- Card -->
-                    <div class="card h-100">
-                        <!-- Card image -->
-                        <div class="view overlay">
-                            <img class="card-img-top"
-                                 src="{{ i.image_url }}"
-                                 alt="Card image cap">
-                            <a href="#">
-                                <div class="mask rgba-white-slight"></div>
-                            </a>
-                        </div>
-                        <!-- Card content -->
-                        <div class="card-body">
-                            <!-- Title -->
-                            <h4 class="card-title">{{ i.title }}</h4>
-                            <!-- Text -->
-                            <p class="card-text"></p>
-                            <!-- Button -->
-                            <a href="{{ i.get_absolute_url }}" class="btn btn-primary">Подробнее</a>
-                        </div>
-                    </div>
-                    <!-- Card -->
-                </div>
-            {% endfor %}
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-5 pt-5">
+  <div class="row">
+    {% for i in posts %}
+    <div class="col-sm-4 mt-3">
+      <!-- Card -->
+      <div class="card h-100">
+        <!-- Card image -->
+        <div class="view overlay">
+          <img
+            class="card-img-top"
+            src="{{ i.image_url }}"
+            alt="Card image cap"
+          />
+          <a href="#">
+            <div class="mask rgba-white-slight"></div>
+          </a>
         </div>
+        <!-- Card content -->
+        {% for i in news %}
+        <div class="card-body">
+          <!-- Title -->
+          <h4 class="card-title">{{ i.title }}</h4>
+          <!-- Text -->
+          <p class="card-text">HEllo world for all</p>
+          <!-- Button -->
+          <a href="{{ i.get_absolute_url }}" class="btn btn-primary"
+            >Подробнее</a
+          >
+        </div>
+        {% endfor %}
+      </div>
+      <!-- Card -->
     </div>
+    {% endfor %}
+  </div>
+</div>
 
 {% endblock %}

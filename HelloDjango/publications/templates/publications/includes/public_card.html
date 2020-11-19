@@ -1,30 +1,39 @@
 {% load static %}
 {% load thumbnail %}
 
+
 <div class="best_news_block col-12 col-md-6 col-lg-4 mt-4">
     <article class="position-relative rounded border overflow-hidden">
         <a href="{{ i.get_absolute_url }}">
             {% thumbnail i.image "600x350" crop="center" as img %}
-            <img class="best_news_block_img lazy" data-src="{{ img.url }}"
-                 src="{% static 'assets/img/preloader.svg' %}"
-                 alt="Фото: {{ i.title }}" title="Фото: {{ i.title }}"
-                 style="height: 220px; object-fit: cover; width: 100%;">
+                <img class="best_news_block_img lazy" data-src="{{ img.url }}"
+                     src="{% static 'assets/img/preloader.svg' %}"
+                     alt="Фото: {{ i.title }}" title="Фото: {{ i.title }}"
+                     style="height: 220px; object-fit: cover; width: 100%;">
             {% endthumbnail %}
         </a>
         <div class="best_news_block_author pl-3">
-            {% thumbnail i.author.avatar "100x100" crop="center" as img %}
-                <img class="best_news_block_author_img shadow-sm lazy" data-src="{{ img.url }}"
-                     src="{% static 'assets/img/preloader.svg' %}" alt="ssss">
-            {% endthumbnail %}
-            <p class="best_news_block_author_name">{{ i.author.name }}</p>
-            <p class="best_news_block_author_date">{{ i.pub_date|date:'d M в G:i' }}</p>
+            <a href="{{ i.author.get_absolute_url }}">
+                {% thumbnail i.author.avatar "100x100" crop="center" as img %}
+                    <img class="best_news_block_author_img shadow-sm lazy" data-src="{{ img.url }}"
+                         src="{% static 'assets/img/preloader.svg' %}" alt="ssss">
+                {% endthumbnail %}
+
+                <p class="best_news_block_author_name" title="Профиль автора">
+                    {{ i.author.first_name }} {% if i.author.last_name %} {{ i.author.last_name }} {% endif %}
+                </p>
+            </a>
+            <p class="best_news_block_author_date" title="Дата публикации: {{ i.pub_date|date:'d M в G:i' }}">
+                {{ i.pub_date|date:'d M в G:i' }}
+            </p>
         </div>
-        <h3 class="h6 position-absolute publication-title p-2">
-            <a href="{{ i.get_absolute_url }}" class="text-white" title="Читать далее...">{{ i.title }}</a>
+        <h3 class="h6 p-2 pb-3">
+            <a href="{{ i.get_absolute_url }}" class="" title="Читать далее...">{{ i.title }}</a>
         </h3>
         {% if i.category %}
             <a href="{{ i.category.get_absolute_url }}"
-               class="pub-category btn btn-primary btn-sm serif" title="Все публикации категории '{{ i.category.name }}'">{{ i.category.name }}</a>
+               class="pub-category btn btn-primary btn-sm serif"
+               title="Все публикации категории '{{ i.category.name }}'">{{ i.category.name }}</a>
         {% endif %}
     </article>
 </div>

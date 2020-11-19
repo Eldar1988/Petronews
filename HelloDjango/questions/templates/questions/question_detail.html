@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% block title %}{{ question.title }} | {{ block.super }}{% endblock %}
+{% block ogtitle %}{{ question.title }} | {{ block.super }}{% endblock %}
+{% block ogurl %}{{ question.get_absolute_url }}{% endblock %}
+{% block ogimage %}
+    {% if question.author.author.avatar %}
+        {{ question.author.author.avatar.url }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+
+        {#    Хлебные крошки#}
+        <div class="post_navigation">
+            <nav aria-label="breadcrumb bg-light">
+                <ol class="breadcrumb rounded-0">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fas fa-home"></i></a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ question.title|slice:':30' }}...</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    {#    Заголово новости#}
+
+    <div class="container">
+        <article>
+            <div class="row mt-5 align-items-center">
+                {#            Заголовок#}
+                <div class="col-md-9 pb-5">
+                    <p class="small">
+                        {{ question.pub_date }}
+                    </p>
+                    <h1 class="h3 mt-2">
+                        {{ question.title }}
+                    </h1>
+                    <span class="pt-5 text-muted d-block"><i
+                            class="far fa-comment-dots"></i> Ответов: {{ question.answers.count }}</span>
+
+                    {% if question.body %}
+                        <p class="mt-5">
+                            {% autoescape off %} {{ question.body }}{% endautoescape %}
+                        </p>
+                    {% endif %}
+                    {% include 'includes/share.html' %}
+                </div>
+
+                <div class="col-md-3">
+                    <div class="d-flex flex-column text-center rounded shadow p-3">
+                        <div class="d-flex justify-content-center">
+                            {% if question.author.author.avatar %}
+                                {% thumbnail question.author.author.avatar "200x200" crop="center" as img %}
+                                    <img class="best_news_block_author_img shadow-sm"
+                                         src="{{ img.url }}" alt="Автор вопроса (фото)"
+                                         style="min-width: 150px; min-height: 150px; object-fit: cover;">
+                                {% endthumbnail %}
+                            {% else %}
+                                <i class="far fa-user-circle display-1 text-muted"></i>
+                            {% endif %}
+                        </div>
+                        <div class="author-info mt-3">
+                            <h3>{{ question.author.author.first_name }} {% if question.author.author.last_name %}
+                                {{ question.author.author.last_name }}{% endif %}</h3>
+                            {% if question.author.author.professional %}
+                                <p class="text-muted mt-2">{{ question.author.author.professional }}</p>
+                            {% endif %}
+                            <a href="{{ question.author.author.get_absolute_url }}"
+                               class="btn btn-outline-dark mt-3 shadow-sm">Перейти в профиль</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <hr>
+
+        <div class="answers mt-5">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h3>Ответы:</h3>
+                </div>
+                <div>
+                    <button class="btn btn-primary shadow px-3" data-toggle="modal" data-target="#exampleModal">Ваш
+                        ответ <i class="fas fa-pencil-alt"></i></button>
+                </div>
+            </div>
+
+            <div class="answers-cards mt-5">
+                {% for i in answers %}
+                    <div class="answer-card border-top pt-3 mt-3">
+                        <p class="text-muted d-flex align-items-center">
+                            {% if i.user %}
+                                {% if i.user.author.avatar %}
+                                    {% thumbnail i.user.author.avatar "50x50" crop="center" as img %}
+                                        <img class="best_news_block_author_img shadow-sm"
+                                             src="{{ img.url }}" alt="Автор вопроса (фото)"
+                                             style="min-width: 30px; min-height: 30px; object-fit: cover;">
+                                    {% endthumbnail %}
+                                {% else %}
+                                    <i class="far fa-user-circle display-1 text-muted"></i>
+                                {% endif %}
+                                {{ i.user.author.first_name }} {% if i.user.author.last_name %}
+                                {{ i.user.author.last_name }} {% endif %}
+                            {% else %}
+                                {{ i.name }}
+                            {% endif %}
+                        </p>
+                        <p class="mt-3 pb-2">
+                            {{ i.text }}
+                        </p>
+                        <time class="small text-muted">{{ i.pub_date }}</time>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h4 class="pt-5 font-weight-bold mt-5 border-bottom pb-3">Популярные вопросы</h4>
+        <div class="popular-questions mt-5">
+            {% for i in popular_questions %}
+                {% if i.id != question.id %}
+                    {% include 'questions/includes/question_card.html' %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title mt-2" id="exampleModalLabel">Новый ответ</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="post_addcomment">
+                        {#Форма #}
+                        <form action="{% url 'add_answer' question.id %}" method="post" class="answer-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="parent" id="parent" value="">
+                            {% if not request.user.is_authenticated %}
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="recipient-name" class="col-form-label">Ваше имя:</label>
+                                        <input type="text" name="name" required class="form-control"
+                                               value="{{ request.session.quest_name }}" id="name">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="recipient-name" class="col-form-label">Email:</label>
+                                        <input type="email" name="email" required class="form-control"
+                                               value="{{ request.session.quest_email }}" id="email">
+                                    </div>
+                                </div>
+                            {% else %}
+                                <input type="hidden" name="name" required
+                                       value="{{ request.user.author.first_name }}
+                                {% if request.user.author.last_name %}
+                                    {{ request.user.author.last_name }}
+                                {% endif %}" id="name">
+                                <input type="hidden" name="email" required class="form-control"
+                                       value="{{ request.user.email }}" id="email">
+                            {% endif %}
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Ответ:</label>
+                                <textarea name="text" rows="4" required class="form-control"
+                                          id="comment"></textarea>
+                            </div>
+                            <div id="notice" style="display: none">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>Спасибо!</strong> Ваш ответ опубликован.<br>
+                                </div>
+                            </div>
+                            <div id="d-notice" style="display: none">
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>Извините!</strong> Но такой ответ уже есть.<br>
+                                </div>
+                            </div>
+                        </form>
+                        {#    Комментарии #}
+                        <div class="commets col-12 col-lg-6 " id="comments-list">
+                        </div>
+                    </div>
+
+                    <div class="alert alert-success py-5 text-center" id="q-alert" role="alert"
+                         style="display: none;">
+                        <b>Спасибо!</b> Ваш вопрос опубликован.
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button id="q-button" type="button" class="btn btn-primary px-4" onclick="AjaxAddAnswer()">
+                        Опубликовать <i class="fas fa-check"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .modal {
+            background: rgba(0, 0, 0, .3) !important;
+        }
+
+        .post_addcomment {
+            padding: 0 !important;
+        }
+    </style>
+{% endblock %}

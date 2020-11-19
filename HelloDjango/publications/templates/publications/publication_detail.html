@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% block title %}{{ publication.title }} | {{ block.super }}{% endblock %}
+{% block description %}{{ description }}...{% endblock %}
+{% block ogtitle %}{{ publication.title }} | {{ block.super }}{% endblock %}
+{% block ogurl %}{{ publication.get_absolute_url }}{% endblock %}
+{% block ogimage %}{{ publication.image.url }}{% endblock %}
+{% block ogdescription %}{{ description }}...{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        {#    Хлебные крошки#}
+        <div class="post_navigation">
+            <nav aria-label="breadcrumb bg-light">
+                <ol class="breadcrumb rounded-0">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fas fa-home"></i></a></li>
+                    {% if publication.category %}
+                        <li class="breadcrumb-item"><a
+                                href="{{ publication.category.get_absolute_url }}">{{ publication.category.name }}</a>
+                        </li>
+                    {% endif %}
+                    <li class="breadcrumb-item active" aria-current="page">{{ publication.title|slice:':30' }}...</li>
+                </ol>
+            </nav>
+        </div>
+        {#    Заголово новости#}
+        <div class="row mt-5 align-items-center">
+            {#            Заголовок#}
+            <div class="col-md-9">
+                <h1 class="h2">
+                    {{ publication.title }}
+                </h1>
+            </div>
+            {#            Инфо#}
+            <div class="post_container_info col-md-3 mt-3 mt-md-0">
+                {#                    <p class="post_container_info_web">Tengrinews.kz</p>#}
+                <p class="post_container_info_date text-md-right"><i
+                        class="far fa-calendar-alt"></i> {{ publication.pub_date|date:'d M в G:i' }}</p>
+                <p class="post_container_info_view text-md-right"><i class="fas fa-search"></i>
+                    Просмотров: {{ publication.views }}
+                </p>
+                <a href="#form-app" class="post_container_info_comment text-md-right d-block"><i
+                        class="far fa-comment-dots"></i>
+                    Комментариев: {{ comments_count }}</a>
+            </div>
+        </div>
+        <hr>
+        {#        Тело новости#}
+        <div class="row">
+            {#            Картинка#}
+            <div class="col-12 col-lg-6 post-detail-image mt-4">
+                {% if publication.image %}
+                    <img class="lazy rounded shadow" data-src="{{ publication.image.url }}"
+                         src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ publication.title }}"
+                         title="Фото: {{ publication.title }}"
+                         style="width: 100%;"
+                    >
+                {% else %}
+                    <img class="rounded shadow"
+                         src="{% static 'assets/img/empty.png' %}" alt="Нет изображения" title="Нет изображения"
+                         style="width: 100%;"
+                    >
+                {% endif %}
+                {% include 'includes/share.html' %}
+            </div>
+            {#        Текст#}
+            <div class="col-12 col-lg-6 mt-4">
+                <article class="">
+                    <div class="post_container_content shadow-inset px-3 rounded">
+                        <p class="post_container_content_par">
+                            {% autoescape off %}{{ publication.body }}{% endautoescape %}
+                        </p>
+                    </div>
+                </article>
+
+                <a href="{{ publication.author.get_absolute_url }}">
+                <div class="pub-author mt-4 border rounded d-flex overflow-hidden">
+                    {% thumbnail publication.author.avatar "83x83" crop="center" as img %}
+                        <img class="shadow-sm lazy" data-src="{{ img.url }}"
+                             src="{% static 'assets/img/preloader.svg' %}"
+                             alt="{{ publication.author.first_name }}">
+                    {% endthumbnail %}
+                    <div class="best_news_block_author_name p-3" title="Профиль автора">
+                        <h6>Автор публикации:</h6>
+                        <a href="{{ publication.author.get_absolute_url }}">
+                            {{ publication.author.first_name }} {% if publication.author.last_name %}
+                            {{ publication.author.last_name }} {% endif %}
+                        </a>
+                    </div>
+                </div>
+                </a>
+            </div>
+        </div>
+        {#        Комментарии#}
+        <hr>
+                {% include 'publications/includes/pub_reviews.html' %}
+        <hr>
+        {% include 'publications/includes/read_more.html' %}
+    </div>
+{% endblock %}

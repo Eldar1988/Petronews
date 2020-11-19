@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ profile.first_name }}
+    {% if profile.last_name %}
+        {{ profile.last_name }}
+    {% endif %} |
+    {{ block.super }}
+{% endblock %}
+
+{% block description %}
+    {% if profile.bio %}
+        {{ profile.bio }}
+    {% else %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    {#    Фоновое изображение#}
+    <div class="profile-header position-relative"
+            {% if profile.background %}
+         style="background: url('{{ profile.background.url }}') no-repeat center center;
+                 background-size: cover;"
+            {% else %}
+         style="background: url('https://res.cloudinary.com/space-developers/image/upload/v1605255386/Petronews/160118-MAIN_hh8zbi.jpg') no-repeat center center;
+                background-size: cover;"
+            {% endif %}
+    >
+        {% if success %}
+            <a href="{% url 'logout' %}" class="logout-btn serif btn-sm btn btn-warning px-4">Выход <i
+                    class="fas fa-sign-out-alt"></i></a>
+            <button class="change-bg-btn btn btn-warning serif btn-sm px-4" data-toggle="modal" data-target="#bgModal">Изменить изображение <i
+                    class="far fa-images"></i></button>
+        {% endif %}
+    </div>
+
+    <div class="container-fluid">
+        <div class="profile-wrapper">
+            <div class="row">
+                <div class="col-lg-3 text-center">
+                    {% include 'profiles/includes/profile-info.html' %}
+                </div>
+                <div class="col-lg-9">
+                    {% include 'profiles/includes/profile-content.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <style>
+        .profile-header {
+            height: 30vh;
+            margin-top: -45px;
+            background-repeat: no-repeat;
+        }
+
+        .profile-avatar {
+            width: 200px;
+            height: 200px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            background: lightgrey;
+            margin-top: -100px;
+        }
+
+        .modal {
+            background: rgba(0, 0, 0, .3) !important;
+        }
+
+    </style>
+
+{% endblock %}
+
