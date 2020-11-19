@@ -50,3 +50,8 @@ function newPub() {
     $('.publications-profile-list').css('display', 'none')
     $('.profile-new-pub').fadeIn()
 }
+
+function backFromNewPub() {
+    $('.profile-new-pub').css('display', 'none')
+    $('.publications-profile-list').fadeIn()
+}

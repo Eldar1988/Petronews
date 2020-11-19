@@ -31,17 +31,22 @@
         {% if success %}
             <a href="{% url 'logout' %}" class="logout-btn serif btn-sm btn btn-warning px-4">Выход <i
                     class="fas fa-sign-out-alt"></i></a>
-            <button class="change-bg-btn btn btn-warning serif btn-sm px-4" data-toggle="modal" data-target="#bgModal">Изменить изображение <i
+            <button class="change-bg-btn btn btn-warning serif btn-sm px-4" data-toggle="modal" data-target="#bgModal">
+                Изменить изображение <i
                     class="far fa-images"></i></button>
         {% endif %}
     </div>
 
+    {#    Профиль | Информация и контент #}
     <div class="container-fluid">
         <div class="profile-wrapper">
             <div class="row">
+                {#                Инормация о пользователе #}
                 <div class="col-lg-3 text-center">
                     {% include 'profiles/includes/profile-info.html' %}
                 </div>
+
+                {#                Контент пользователя #}
                 <div class="col-lg-9">
                     {% include 'profiles/includes/profile-content.html' %}
                 </div>
