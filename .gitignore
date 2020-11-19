@@ -499,3 +499,6 @@ modules.xml
 # Sonarlint plugin
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,pycharm+all,webstorm,webstorm+all,django
+/HelloDjango/profiles/migrations/
+/HelloDjango/publications/migrations/
+/HelloDjango/questions/migrations/
