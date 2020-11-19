@@ -12,6 +12,7 @@ class AvatarForm(forms.ModelForm):
 
 class BgForm(forms.ModelForm):
     """ Изменение фона"""
+
     class Meta:
         model = Author
         fields = ('background',)
@@ -43,7 +44,7 @@ class PublicationForm(forms.ModelForm):
             'image': forms.FileInput(
                 attrs={
                     'id': 'image-p',
-                    'required': '',
+                    # 'required': '',
                     'class': 'form-control-file',
                     'lang': 'ru'
                 }
@@ -54,3 +55,4 @@ class PublicationForm(forms.ModelForm):
                 }
             )
         }
+

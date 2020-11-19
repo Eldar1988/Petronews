@@ -11,4 +11,5 @@ urlpatterns = [
     path('user_change_bg/<int:pk>', views.UserChangeBg.as_view(), name='change_bg'),
 
     path('add_publication/<int:pk>', views.AddPublication.as_view(), name='add_publication'),
+    path('edit_publication/<int:pk>', views.EditPublication.as_view(), name='edit_publication'),
 ]

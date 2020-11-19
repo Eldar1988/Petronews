@@ -11,6 +11,7 @@ class Author(models.Model):
     first_name = models.CharField('Имя автора', max_length=255, default='User', blank=True, null=True)
     last_name = models.CharField('Фамилия автора', max_length=255, blank=True, null=True)
     professional = models.CharField('Профессия', max_length=255, null=True, blank=True)
+    company = models.CharField('Компания', max_length=255, null=True, blank=True)
     avatar = models.ImageField('Аватар (в формате 1:1)', upload_to=path_and_rename('authors/', 'avatar'), blank=True,
                                null=True)
     background = models.ImageField('Фоновое изображение профиля', upload_to=path_and_rename('authors/', 'bg'),

@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% block title %}{{ publication.title }} | {{ block.super }}{% endblock %}
+{% block description %}{{ description }}...{% endblock %}
+{% block ogtitle %}{{ publication.title }} | {{ block.super }}{% endblock %}
+{% block ogurl %}{{ publication.get_absolute_url }}{% endblock %}
+{% block ogimage %}{{ publication.image.url }}{% endblock %}
+{% block ogdescription %}{{ description }}...{% endblock %}
+
+{% block content %}
+
+    {% if publication.author.id == request.user.author.id %}
+        <div class="post-container px-3">
+            {#    Хлебные крошки#}
+            <div class="post_navigation">
+                <nav aria-label="breadcrumb bg-light">
+                    <ol class="breadcrumb rounded-0">
+                        <li class="breadcrumb-item"><i class="fas fa-pencil-alt mr-2"></i> Редактирование публикации
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+
+            {#            Кнопка возврата#}
+            <a href="{% url 'profile' request.user.author.id %}" class="btn btn-outline-dark btn-sm px-3 mt-3">
+                <i class="fas fa-long-arrow-alt-left"></i> Назад
+            </a>
+
+            {#        Обработка ошибок #}
+            {% if form.errors %}
+                <div class="alert alert-danger mt-3 shadow-lg" role="alert">
+                    <p>
+                        {{ form.errors }}
+                    </p>
+                    <button type="button" class="btn btn-outline-dark mt-3" data-dismiss="alert" aria-label="Close">
+                        Ok
+                    </button>
+                </div>
+            {% endif %}
+
+            {#            Уведомление об успехе #}
+            {% if success %}
+                <div class="alert alert-success mt-3 shadow-lg" role="alert">
+                    <p>
+                        <b>Отлично!</b><br>
+                        Все изменения сохранены.
+                    </p>
+                    <a href="{% url 'profile' request.user.author.id %}" class="btn btn-sm btn-outline-dark mt-3">
+                        Перейти в профиль
+                    </a>
+                    <button type="button" class="btn btn-outline-dark btn-sm mt-3" data-dismiss="alert" aria-label="Close">
+                       Продолжить редактирование
+                    </button>
+                </div>
+            {% endif %}
+
+            <div class="post-page mt-5">
+                <form action="{% url 'edit_publication' publication.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        {#                Пост и комментарии #}
+                        <div class="col-lg-6">
+                            <div class="post-detail">
+
+                                <input type="hidden" id="title-value" value="{{ publication.title }}">
+                                <div class="form-group p-1">
+                                    <p>Заголовок:</p>
+                                    {{ form.title }}
+                                </div>
+                                <div class="form-group p-1">
+                                    <p>Категория:</p>
+                                    {{ form.category }}
+                                </div>
+                                <div class="form-group p-1">
+                                    <p>Публикация:</p>
+                                    {{ form.body }}
+                                    {{ form.media }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            {#                    Изображение #}
+                            <div class="post-image mt-4">
+                                {% if publication.image %}
+                                    <img class="lazy rounded shadow" data-src="{{ publication.image.url }}"
+                                         src="{% static 'assets/img/preloader.svg' %}"
+                                         alt="Фото: {{ publication.title }}"
+                                         title="Фото: {{ publication.title }}"
+                                         style="width: 100%;"
+                                    >
+                                {% else %}
+                                    <img class="rounded shadow"
+                                         src="{% static 'assets/img/empty.png' %}" alt="Нет изображения"
+                                         title="Нет изображения"
+                                         style="width: 100%;"
+                                    >
+                                {% endif %}
+                            </div>
+                            <div class="edit-image border rounded p-3 my-3">
+                                <p class="pb-2 ">Изменить изображение записи:</p>
+                                {{ form.image }}
+                            </div>
+                            <button type="submit" class="btn btn-outline-primary btn-block">Сохранить <i
+                                    class="far fa-save"></i></button>
+                            <a href="{% url 'profile' request.user.author.id %}"
+                               class="btn btn-outline-dark btn-block px-3 mt-3">
+                                Отменить <i class="fas fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-danger m-4" role="alert">
+            <p>
+                Извините! Но у Вас нет для просмотра данной страницы.
+            </p>
+            <a href="{% url 'home' %}" class="btn btn-outline-dark mt-3">Перейти на главную страницу</a>
+        </div>
+
+    {% endif %}
+    <style>
+        .post-container {
+            max-width: 1300px;
+            margin: auto;
+        }
+
+        .post-detail {
+            font-size: 16px;
+            line-height: 24px;
+            max-width: 100%;
+            overflow-x: scroll;
+        }
+    </style>
+
+
+{% endblock %}

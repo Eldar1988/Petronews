@@ -4,6 +4,7 @@ function ChangeName() {
     let first_name = $("#first-name").val();
     let last_name = $("#last_name").val();
     let professional = $("#professional").val();
+    let company = $("#company").val();
     let bio = $("#bio").val();
 
     if (first_name.length < 1) {
@@ -20,6 +21,7 @@ function ChangeName() {
     data.first_name = first_name;
     data.last_name = last_name;
     data.professional = professional;
+    data.company = company;
     data.bio = bio;
     $.ajax({
         url: post_url,

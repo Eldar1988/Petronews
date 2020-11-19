@@ -68,6 +68,7 @@ class UserNameUpdate(View):
         profile.first_name = request.POST.get('first_name')
         profile.last_name = request.POST.get('last_name')
         profile.professional = request.POST.get('professional')
+        profile.company = request.POST.get('company')
         profile.bio = request.POST.get('bio')
         profile.save()
 
@@ -110,3 +111,38 @@ class AddPublication(View):
             form.author_id = pk
             form.save()
             return redirect('profile', pk)
+
+
+class EditPublication(View):
+    """Редактирование пуликации"""
+    def get(self, request, pk):
+        publication = Publication.objects.get(id=pk)
+        form = PublicationForm(initial={
+            'title': publication.title,
+            'category': publication.category,
+            'body': publication.body,
+            'image': publication.image.url
+        })
+
+        return render(request, 'profiles/pub_edit_mode.html', {
+            'publication': publication,
+            'form': form
+        })
+
+    def post(self, request, pk):
+        publication = Publication.objects.get(id=pk)
+        form = PublicationForm(request.POST, request.FILES, instance=publication)
+
+        if form.is_valid():
+            form.save()
+
+            return render(request, 'profiles/pub_edit_mode.html', {
+                'publication': publication,
+                'form': form,
+                'success': True
+            })
+
+        return render(request, 'profiles/pub_edit_mode.html', {
+            'publication': publication,
+            'form': form
+        })

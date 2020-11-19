@@ -1,13 +1,14 @@
 <div class="profile-info">
     {% if profile.avatar %}
-        <img src="{{ profile.avatar.url }}" alt="avatar" class="profile-avatar shadow-sm" style="object-fit: cover; width: 200px; height: 200px;">
+        <img src="{{ profile.avatar.url }}" alt="avatar" class="profile-avatar shadow-sm"
+             style="object-fit: cover; width: 200px; height: 200px;">
     {% else %}
         <img src="https://res.cloudinary.com/space-developers/image/upload/v1605340527/Petronews/portrait_mxdbvk.svg"
              alt="" class="profile-avatar shadow-sm">
     {% endif %}
     {% if success %}
         <button id="change-avatar" class="btn btn-warning shadow ml-n5" data-toggle="modal" data-target="#avatarModal">
-            <i class="fas fa-camera-retro" ></i>
+            <i class="fas fa-camera-retro"></i>
         </button>
     {% endif %}
 
@@ -21,20 +22,23 @@
         {% endif %}
     </h3>
 
+    {% if profile.company %}
+        <p class="mt-2">{{ profile.company }}</p>
+    {% endif %}
     {% if profile.professional %}
-        <p class="mt-2">{{ profile.professional }}</p>
+        <p class="mt-2 text-muted">{{ profile.professional }}</p>
     {% endif %}
     <blockquote class="smartquote border rounded p-3 mt-4">
         <i class="fas fa-quote-right text-muted"></i>
         <p class="mb-0 text-muted">{{ profile.bio }}</p>
     </blockquote>
 
-{% if success %}
-            <button class="btn btn-outline-dark serif btn-block mt-4 mb-5" data-toggle="modal" data-target="#userNameModal"
-                    onclick="defaultBio('{{ profile.bio }}')">
+    {% if success %}
+        <button class="btn btn-outline-dark serif btn-block mt-4 mb-5" data-toggle="modal" data-target="#userNameModal"
+                onclick="defaultBio('{{ profile.bio }}')">
             Редактировать личную информацию
-                <i class="fas fa-pencil-alt"></i></button>
-        {% endif %}
+            <i class="fas fa-pencil-alt"></i></button>
+    {% endif %}
 </div>
 
 
@@ -59,21 +63,29 @@
                     <div class="form-group row">
                         <label for="q-title" class="col-sm-3 col-form-label text-left">Имя:</label>
                         <div class="col-sm-9">
-                            <input type="text" value="{{ profile.first_name }}" name="first_name" class="form-control"
+                            <input type="text" value="{% if profile.first_name %}{{ profile.first_name }}{% endif %}" name="first_name" class="form-control"
                                    id="first-name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="q-title" class="col-sm-3 col-form-label text-left">Фамилия:</label>
                         <div class="col-sm-9">
-                            <input value="{{ profile.last_name }}" type="text" name="last_name" class="form-control"
+                            <input value="{% if profile.last_name %}{{ profile.last_name }}{% endif %}" type="text" name="last_name" class="form-control"
                                    id="last_name">
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="q-title" class="col-sm-3 col-form-label text-left">Компания:</label>
+                        <div class="col-sm-9">
+                            <input value="{% if profile.company %}{{ profile.company }}{% endif %}" type="text" name="company"
+                                   class="form-control" id="company">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="q-title" class="col-sm-3 col-form-label text-left">Профессия:</label>
                         <div class="col-sm-9">
-                            <input value="{{ profile.professional }}" type="text" name="professional"
+                            <input value="{% if profile.professional %}{{ profile.professional }}{% endif %}" type="text" name="professional"
                                    class="form-control" id="professional">
                         </div>
                     </div>
@@ -108,10 +120,10 @@
 
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content bg-success">
-            <div class="modal-body text-white">
+        <div class="modal-content">
+            <div class="modal-body">
                 Ваши данные успешно сохранены.
-                <button type="button" class="btn btn-outline-light btn-block mt-4" data-dismiss="modal"
+                <button type="button" class="btn btn-outline-primary btn-block mt-4" data-dismiss="modal"
                         aria-label="Close">Ok
                 </button>
             </div>
@@ -129,8 +141,10 @@
                     <div class="form-group text-center">
                         <input type="hidden" name="user" value="{{ profile.user }}">
                         <label for="exampleFormControlFile1" class="h6">Изменение аватара</label>
-                        <input type="file" class="form-control-file mt-5" id="exampleFormControlFile1" name="avatar" required>
-                        <button type="submit" class="btn btn-block btn-primary mt-3">Загрузить <i class="fas fa-cloud-download-alt"></i></button>
+                        <input type="file" class="form-control-file mt-5" id="exampleFormControlFile1" name="avatar"
+                               required>
+                        <button type="submit" class="btn btn-block btn-primary mt-3">Загрузить <i
+                                class="fas fa-cloud-download-alt"></i></button>
                     </div>
                 </form>
             </div>
@@ -148,8 +162,10 @@
                     <div class="form-group text-center">
                         <input type="hidden" name="user" value="{{ profile.user }}">
                         <label for="exampleFormControlFile1" class="h6">Изменение фона</label>
-                        <input type="file" class="form-control-file mt-5" id="exampleFormControlFile1" name="background" required>
-                        <button type="submit" class="btn btn-block btn-primary mt-3">Загрузить <i class="fas fa-cloud-download-alt"></i></button>
+                        <input type="file" class="form-control-file mt-5" id="exampleFormControlFile1" name="background"
+                               required>
+                        <button type="submit" class="btn btn-block btn-primary mt-3">Загрузить <i
+                                class="fas fa-cloud-download-alt"></i></button>
                     </div>
                 </form>
             </div>
