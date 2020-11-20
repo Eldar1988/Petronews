@@ -1,0 +1,47 @@
+{% load static %}
+{% load thumbnail %}
+
+<article class="question-list-card mt-3 p-2 border rounded">
+    <a href="{{ i.get_absolute_url }}" class="d-block"
+       title="Перейти к вопросу на сайте">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex">
+                <span class="mr-2 text-muted"><i class="fas fa-question"></i></span>
+                <div class="border-left d-flex align-items-center pl-2">
+                    <div>
+                        <h3 class="h6">{{ i.title }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-right text-muted" style="min-width: 50px">
+                <span class="" style="min-width: 40px"
+                      data-toggle="tooltip" data-placement="top"
+                      title="Количество ответов: {{ i.answers.count }}">
+                    <i class="far fa-comment-dots"></i>
+                    {{ i.answers.count }}
+                </span>
+                <br>
+                <span class="" style="min-width: 40px"
+                      data-toggle="tooltip" data-placement="top"
+                      title="Количество просмотров: {{ i.views }}">
+                    <i class="far fa-eye"></i>
+                    {{ i.views }}
+                </span>
+            </div>
+
+        </div>
+    </a>
+    <div>
+        {% if success %}
+            <button data-target="{% url 'profile' profile.id %}"
+                    class="btn btn-danger btn-sm serif"
+                    title="Удалить вопрос"
+                    id="del-pub"
+                    onclick="delQuestion('{{ i.id }}')"
+            >
+                <i class="fas fa-trash-alt"></i> Удалить {{ i.id }}
+            </button>
+        {% endif %}
+    </div>
+</article>

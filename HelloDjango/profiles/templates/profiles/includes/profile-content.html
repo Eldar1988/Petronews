@@ -42,7 +42,18 @@
             {% include 'profiles/includes/new_pub.html' %}
         </div>
     </div>
-    <div class="tab-pane fade p-3 rounded" id="profile" role="tabpanel" aria-labelledby="profile-tab">2</div>
+    <div class="tab-pane fade p-3 rounded" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        {#        Проверка прав #}
+        {% if success %}
+            <button class="btn btn-primary shadow my-3">Новый вопрос <i
+                    class="fas fa-feather-alt"></i></button>
+        {% endif %}
+        <div class="profile-questions">
+            {% for i in questions %}
+            {% include 'profiles/includes/questions.html' %}
+            {% endfor %}
+        </div>
+    </div>
 </div>
 
 

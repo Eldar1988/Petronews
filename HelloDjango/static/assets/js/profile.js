@@ -15,7 +15,7 @@ function ChangeName() {
         $("#last_name").addClass('is-invalid')
         return
     }
-    
+
     let data = {};
     data["csrfmiddlewaretoken"] = csrf_token;
     data.first_name = first_name;
@@ -30,7 +30,7 @@ function ChangeName() {
         success: () => {
             // alert('Ваши личные данные успешно изменены.')
             $('#successModal').modal('show')
-                
+
             $.ajax({
                 type: "GET",
                 success: (data) => {
@@ -45,15 +45,50 @@ function ChangeName() {
 }
 
 function defaultBio(bio) {
-    $('#bio').val(`${bio}`)
+    $('#bio').val(`${bio}`);
 }
 
 function newPub() {
-    $('.publications-profile-list').css('display', 'none')
-    $('.profile-new-pub').fadeIn()
+    $('.publications-profile-list').css('display', 'none');
+    $('.profile-new-pub').fadeIn();
 }
 
 function backFromNewPub() {
-    $('.profile-new-pub').css('display', 'none')
-    $('.publications-profile-list').fadeIn()
+    $('.profile-new-pub').css('display', 'none');
+    $('.publications-profile-list').fadeIn();
 }
+
+function delPublication(id) {
+    let get_url = `/user/delete_publications/${id}`;
+    let reload_url = $('#del-pub').attr('data-target')
+    let confirmDelete = confirm("Подтвердите удаление публикации");
+
+    if (confirmDelete) {
+        $.ajax({
+            type: "GET",
+            url: get_url,
+            success: () => {
+                $("#home").load(`${reload_url} #home >*`);
+            }
+        })
+    }
+}
+
+
+function delQuestion(id) {
+    let get_url = `/user/delete_question/${id}`;
+    let reload_url = $('#del-question').attr('data-target')
+    let confirmDelete = confirm("Подтвердите удаление вопроса");
+
+    if (confirmDelete) {
+        $.ajax({
+            type: "GET",
+            url: get_url,
+            success: () => {
+                $("#profile").load(`${reload_url} #profile >*`);
+            }
+        })
+    }
+}
+
+

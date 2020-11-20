@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from publications.models import Publication
+from questions.models import Question
 
 from .models import Author
 from .forms import AvatarForm, BgForm, PublicationForm
@@ -45,6 +46,7 @@ class ProfileView(View):
     def get(self, request, pk):
         profile = Author.objects.get(id=pk)
         publications = Publication.objects.filter(author_id=pk)
+        questions = Question.objects.filter(author_id=profile.user.id)
         success = False
         form = PublicationForm()
         if not request.user.is_anonymous and request.user.author.id == pk:
@@ -54,6 +56,7 @@ class ProfileView(View):
             'success': success,
             'publications': publications,
             'form': form,
+            'questions': questions
         })
 
 
@@ -110,7 +113,7 @@ class AddPublication(View):
             form = form.save(commit=False)
             form.author_id = pk
             form.save()
-            return redirect('profile', pk)
+        return redirect('profile', pk)
 
 
 class EditPublication(View):
@@ -146,3 +149,27 @@ class EditPublication(View):
             'publication': publication,
             'form': form
         })
+
+
+class DeletePublication(View):
+    """Удаление публикации"""
+    def get(self, request, pk):
+        publication = Publication.objects.get(id=pk)
+        if not request.user.is_anonymous and request.user.author.id == publication.author_id:
+            publication.delete()
+
+            return HttpResponse('success')
+
+        return HttpResponse('false')
+
+
+class DeleteQuestion(View):
+    """Удаление публикации"""
+    def get(self, request, pk):
+        question = Question.objects.get(id=pk)
+        if not request.user.is_anonymous and request.user.id == question.author_id:
+            question.delete()
+
+            return HttpResponse('success')
+
+        return HttpResponse('false')

@@ -10,7 +10,7 @@
 
 {% block content %}
 
-    {% if publication.author.id == request.user.author.id %}
+    {% if publication.author.id and publication.author.id == request.user.author.id %}
         <div class="post-container px-3">
             {#    Хлебные крошки#}
             <div class="post_navigation">

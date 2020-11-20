@@ -12,4 +12,6 @@ urlpatterns = [
 
     path('add_publication/<int:pk>', views.AddPublication.as_view(), name='add_publication'),
     path('edit_publication/<int:pk>', views.EditPublication.as_view(), name='edit_publication'),
+    path('delete_publications/<int:pk>', views.DeletePublication.as_view(), name='delete_publication'),
+    path('delete_question/<int:pk>', views.DeleteQuestion.as_view(), name='delete_question'),
 ]
