@@ -35,7 +35,9 @@
                         class="fas fa-feather-alt"></i></button>
             {% endif %}
             {#            Список публикаций автора #}
-            {% include 'profiles/includes/pubs.html' %}
+            <div id="profile-publications">
+                {% include 'profiles/includes/pubs.html' %}
+            </div>
         </div>
         {#            Новая публикация #}
         <div class="profile-new-pub" style="display: none;">
@@ -45,17 +47,61 @@
     <div class="tab-pane fade p-3 rounded" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         {#        Проверка прав #}
         {% if success %}
-            <button class="btn btn-primary shadow my-3">Новый вопрос <i
-                    class="fas fa-feather-alt"></i></button>
+            <button class="btn btn-primary shadow my-3" data-toggle="modal" data-target="#exampleModal">
+                Новый вопрос <i class="fas fa-feather-alt"></i>
+            </button>
         {% endif %}
-        <div class="profile-questions">
+        <div id="profile-questions">
             {% for i in questions %}
-            {% include 'profiles/includes/questions.html' %}
+                {% include 'profiles/includes/questions.html' %}
             {% endfor %}
         </div>
     </div>
 </div>
 
+
+{# Новый вопрос #}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-2" id="exampleModalLabel">Новый вопрос</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="add-question-form" action="{% url 'add_question' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label for="q-title" class="col-sm-2 col-form-label">Вопрос:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="title" class="form-control" id="q-title">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Детали:</label>
+                        <div class="col-sm-10">
+                                    <textarea class="form-control small" name="body" id="q-body" rows="3"
+                                              placeholder="Подробности уточняющие вопрос (необязательно)"></textarea>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="alert alert-success py-5 text-center" id="q-alert" role="alert"
+                     style="display: none;">
+                    <b>Спасибо!</b> Ваш вопрос опубликован.
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button id="q-button" type="button" class="btn btn-primary px-4" onclick="addQuestion()">Задать
+                    вопрос <i class="fas fa-check"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <style>
 

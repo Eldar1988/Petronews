@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+
+{% block content %}
+    <div class="container mt-5 pt-5">
+        {% if request.user.is_authenticated and request.user.is_staff %}
+            <div class="post-tg-cards">
+                {% for i in page %}
+                    <div class="tg-card border rounded p-1 mt-3 d-flex align-items-center">
+                        <div>
+                            {% if i.image %}
+                                {% thumbnail i.image "240x180" crop="center" as img %}
+                                    <img class="lazy rounded" data-src="{{ img.url }}"
+                                         src="{% static 'assets/img/preloader.svg' %}"
+                                         alt="Фото: {{ i.title }}"
+                                         title="Фото: {{ i.title }}"
+                                         style="min-width: 100%; height: 120px; object-fit: cover;"
+                                    >
+                                {% endthumbnail %}
+                            {% elif i.image_url %}
+                                {% thumbnail i.image_url "240x180" crop="center" as img %}
+                                    <img class="lazy rounded" data-src="{{ img.url }}"
+                                         src="{% static 'assets/img/preloader.svg' %}"
+                                         alt="Фото: {{ i.title }}"
+                                         title="Фото: {{ i.title }}"
+                                         style="min-width: 100%; height: 120px; object-fit: cover;"
+                                    >
+                                {% endthumbnail %}
+                            {% else %}
+                                <img src="{% static 'assets/img/empty.png' %}"
+                                     alt="image"
+                                     class="rounded"
+                                     title="Нет изображения"
+                                     style="min-width: 100%; height: 120px; object-fit: cover;">
+                            {% endif %}
+                        </div>
+                        <div class="ml-3">
+                            <h6><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></h6>
+                            <form action="{% url 'telegram' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="url" value="{{ i.get_absolute_url }}">
+                                <input type="hidden" name="id" value="{{ i.id }}">
+                                <button type="submit" class="btn btn-primary mt-3 px-4"><i
+                                        class="fab fa-telegram-plane"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <nav aria-label="Page navigation example pt-5">
+                <ul class="pagination justify-content-center pt-5">
+                    <li class="page-item {% if not prev_url %} disabled {% endif %}">
+                        <a class="page-link" href="{{ prev_url }}" tabindex="-1"><i
+                                class="fas fa-angle-left"></i></a>
+                    </li>
+                    {% for n in page.paginator.page_range %}
+                        {% if page.number == n %}
+                            <li class="page-item current bg-primary"><a
+                                    class="page-link bg-primary text-white">{{ n }}</a></li>
+                        {% elif n > page.number|add:-3 and n < page.number|add:3 %}
+                            <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    <li class="page-item {% if not next_url %}disabled{% endif %}">
+                        <a class="page-link" href="{{ next_url }}"><i class="fas fa-angle-right"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        {% else %}
+            <div class="alert alert-danger" role="alert">
+                У Вас нет прав для просмотра этой страницы.
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}

@@ -33,53 +33,55 @@
             <div class="row">
                 {#                Пост и комментарии #}
                 <div class="col-lg-8">
-                    <div class="post-detail">
-                        {#                        Заголовок поста #}
-                        <h1 class="h3 post-title">
-                            {{ post.title }}
-                        </h1>
-                        {#                    Изображение #}
-                        <div class="post-image mt-4 pt-3">
-                            {% if post.image %}
-                                <img class="lazy rounded shadow" data-src="{{ post.image.url }}"
-                                     src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ post.title }}"
-                                     title="Фото: {{ post.title }}"
-                                     style="width: 100%;"
-                                >
-                            {% elif post.image_url %}
-                                <img class="lazy rounded shadow" data-src="{{ post.image_url }}"
-                                     src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ post.title }}"
-                                     title="Фото: {{ post.title }}"
-                                     style="width: 100%;"
-                                >
-                            {% else %}
-                                <img class="rounded shadow"
-                                     src="{% static 'assets/img/empty.png' %}" alt="Нет изображения"
-                                     title="Нет изображения"
-                                     style="width: 100%;"
-                                >
-                            {% endif %}
-                        </div>
-                        {#                        Мета #}
-                        <div class="post-meta mt-4">
+                    <article>
+                        <div class="post-detail">
+                            {#                        Заголовок поста #}
+                            <h1 class="h3 post-title">
+                                {{ post.title }}
+                            </h1>
+                            {#                    Изображение #}
+                            <div class="post-image mt-4 pt-3">
+                                {% if post.image %}
+                                    <img class="lazy rounded shadow" data-src="{{ post.image.url }}"
+                                         src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ post.title }}"
+                                         title="Фото: {{ post.title }}"
+                                         style="width: 100%;"
+                                    >
+                                {% elif post.image_url %}
+                                    <img class="lazy rounded shadow" data-src="{{ post.image_url }}"
+                                         src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ post.title }}"
+                                         title="Фото: {{ post.title }}"
+                                         style="width: 100%;"
+                                    >
+                                {% else %}
+                                    <img class="rounded shadow"
+                                         src="{% static 'assets/img/empty.png' %}" alt="Нет изображения"
+                                         title="Нет изображения"
+                                         style="width: 100%;"
+                                    >
+                                {% endif %}
+                            </div>
+                            {#                        Мета #}
+                            <div class="post-meta mt-4">
                             <span class="">
                                 <i class="far fa-eye"></i>
                                 {{ post.views }}
                             </span>
-                            <a href="#form-app" class="ml-3 scroll-to">
-                                <i class="far fa-comment-dots"></i>
-                                {{ comments_count }}
-                            </a>
-                            <span class="ml-3 float-right">
+                                <a href="#form-app" class="ml-3 scroll-to">
+                                    <i class="far fa-comment-dots"></i>
+                                    {{ comments_count }}
+                                </a>
+                                <span class="ml-3 float-right">
                                 <i class="far fa-calendar-alt"></i>
                                 {{ post.pub_date|date:'d M в G:i' }}
                             </span>
+                            </div>
+                            {#                        Тело поста #}
+                            <div class="post-detail mt-4 pt-4 border-top">
+                                {% autoescape off %}{{ post.body }}{% endautoescape %}
+                            </div>
                         </div>
-                        {#                        Тело поста #}
-                        <div class="post-detail mt-4 pt-4 border-top">
-                            {% autoescape off %}{{ post.body }}{% endautoescape %}
-                        </div>
-                    </div>
+                    </article>
                     {#                    Share #}
                     <div class="post-share mt-3">
                         {% include 'includes/share.html' %}

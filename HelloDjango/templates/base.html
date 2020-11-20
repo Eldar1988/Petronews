@@ -44,6 +44,10 @@
 {% include 'includes/search.html' %}
 
 {% if request.user.is_authenticated and request.user.is_staff %}
+    <a href="{% url 'telegram' %}">
+        <button class="btn btn-success fixed-bottom rounded shadow" style="bottom: 180px; left: 5px;">Telegram
+        </button>
+    </a>
     <a href="#" onclick="getData('{% url 'parse' %}')" id="parser">
         <button class="btn btn-primary fixed-bottom rounded shadow" style="bottom: 80px; left: 5px;">Start Parse
         </button>

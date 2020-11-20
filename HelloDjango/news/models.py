@@ -45,6 +45,7 @@ class Post(models.Model):
     pub_date = models.DateTimeField('Опубликовано', auto_now_add=True)
     update_date = models.DateTimeField('Обновлено', auto_now=True)
     slug = models.SlugField('Slug', unique=True, null=True, blank=True)
+    telegram_send = models.BooleanField('Опубликовано в телеграме', default=False)
 
     def __str__(self):
         return self.title

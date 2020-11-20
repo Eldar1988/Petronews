@@ -1,6 +1,12 @@
-from django.shortcuts import render
-from news.functions.get_text import get_text
+from django.shortcuts import render, redirect
+from django.views.generic.base import View
+from questions.functions.q_paginator import get_pagination
+
 from .models import About, Politic, Contacts
+from news.models import Post
+from news.functions.get_text import get_text
+
+from .tgbot import send_post
 
 
 def about_view(request):
@@ -23,3 +29,20 @@ def contacts_view(request):
     return render(request, 'main/contacts.html', {'contacts': contacts})
 
 
+class TgBotView(View):
+    """Телеграм бот"""
+
+    def get(self, request):
+        posts = Post.objects.filter(public=True, telegram_send=False)
+        context = get_pagination(request, posts)
+        return render(request, 'main/bot_page.html', context)
+
+    def post(self, request):
+        post = Post.objects.get(id=request.POST.get('id'))
+        post_url = request.POST.get('url')
+        post_url = f'https://petronews.kz/{post_url}'
+        try:
+            send_post(post, post_url)
+        except:
+            return redirect('telegram')
+        return redirect('telegram')

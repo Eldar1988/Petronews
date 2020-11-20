@@ -68,7 +68,7 @@ function delPublication(id) {
             type: "GET",
             url: get_url,
             success: () => {
-                $("#home").load(`${reload_url} #home >*`);
+                $("#profile-publications").load(`${reload_url} #profile-publications >*`);
             }
         })
     }
@@ -85,7 +85,7 @@ function delQuestion(id) {
             type: "GET",
             url: get_url,
             success: () => {
-                $("#profile").load(`${reload_url} #profile >*`);
+                $("#profile-questions").load(`${reload_url} #profile-questions >*`);
             }
         })
     }

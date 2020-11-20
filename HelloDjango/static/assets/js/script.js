@@ -74,7 +74,7 @@ async function addQuestion() {
     data["csrfmiddlewaretoken"] = csrf_token;
     data.title = title;
     data.body = body;
-
+    let reload_url = $('#del-question').attr('data-target')
     $.ajax({
         url: post_url,
         type: "POST",
@@ -83,6 +83,8 @@ async function addQuestion() {
             $('.add-question-form').css('display', 'none');
             $('#q-button').css('display', 'none');
             $('#q-alert').fadeIn();
+
+            $("#profile-questions").load(`${reload_url} #profile-questions >*`);
 
             $.ajax({
                 type: "GET",

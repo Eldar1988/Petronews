@@ -13,7 +13,7 @@
             {# Новости Казахстана #}
             <div class="news_section col-12 col-md-6">
                 <h2 class="news_section_title news_section_title_link h3">
-                    <span class="news_section_title_link">Топ 5: новости Казахстана</span>
+                    <span class="news_section_title_link">Новости Казахстана</span>
                 </h2>
                 {% include 'news/includes/main_news_slider.html' %}
 
@@ -22,8 +22,7 @@
                         {% include 'news/includes/home_main_two_news.html' %} {% endfor %}
                 </div>
                 <hr/>
-                <div class="news_section_last mt-5">
-                    <h4 class="mt-4">Свежие новости: Казахстан</h4>
+                <div class="news_section_last mt-3">
                     <div class="list_scroll_news mt-4 shadow-inset pl-2 pt-2 rounded">
                         {% for i in kz_news %} {% include 'news/includes/home_news_list.html' %} {% endfor %}
                     </div>
@@ -41,7 +40,7 @@
             <div class="news_section col-12 col-md-6">
                 <h2 class="news_section_title h3">
         <span class="news_section_title_link"
-        >Топ 5: международные новости</span
+        >Международные новости</span
         >
                 </h2>
                 {% include 'news/includes/main_world_news_slider.html' %}
@@ -52,8 +51,7 @@
                     {% endfor %}
                 </div>
                 <hr/>
-                <div class="news_section_last mt-5">
-                    <h4 class="mt-4">Свежие новости: мир</h4>
+                <div class="news_section_last mt-3">
                     <div class="list_scroll_news mt-4 shadow-inset pl-3 pt-2 rounded">
                         {% for i in world_news %} {% include 'news/includes/home_news_list.html' %} {% endfor %}
                     </div>
@@ -82,19 +80,13 @@
                             <div class="section_action_info col-12 col-md-6">
                                 <span class="section_action_info_pin">Актуальное</span>
                                 <h2 class="mt-4">
-                                    <a
-                                            class="section_action_info_title_link"
-                                            href="{{ i.get_absolute_url }}"
-                                            title="Читать далее..."
-                                    >
+                                    <a class="section_action_info_title_link" href="{{ i.get_absolute_url }}" title="Читать далее...">
                                         {{ i.title }}
                                     </a>
                                 </h2>
-                                <a
-                                        class="section_action_info_read btn btn-outline-light px-4 mt-5"
-                                        href="{{ i.get_absolute_url }}"
-                                >Читать далее <i class="fas fa-angle-double-right"></i
-                                ></a>
+                                <a class="section_action_info_read btn btn-outline-light px-4 mt-5 mb-3" href="{{ i.get_absolute_url }}">
+                                    Читать далее <i class="fas fa-angle-double-right"></i>
+                                </a>
                             </div>
                             <div class="section_action_img col-12 col-md-6">
                                 {% if i.image %} {% thumbnail i.image "600x350" crop="center" as img %}
@@ -126,7 +118,6 @@
                                     />
                                 {% endif %}
                             </div>
-
                         {% endfor %}
                     </div>
                 </article>
