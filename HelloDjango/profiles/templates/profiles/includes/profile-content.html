@@ -47,21 +47,38 @@
     <div class="tab-pane fade p-3 rounded" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         {#        Проверка прав #}
         {% if success %}
-            <button class="btn btn-primary shadow my-3" data-toggle="modal" data-target="#exampleModal">
+            <button class="btn btn-primary shadow my-3" data-toggle="modal" data-target="#exampleModal55">
                 Новый вопрос <i class="fas fa-feather-alt"></i>
             </button>
         {% endif %}
-        <div id="profile-questions">
+        <div id="profile-questions" data-target="{% url 'profile' profile.id %}">
+            {% if not questions.count %}
+                <div class="no-pub-counter mt-4 d-flex justify-content-center flex-column">
+                    <div class="text-center">
+                        <img src="https://res.cloudinary.com/space-developers/image/upload/v1605906053/Petronews/emojione-v1_oil-drum_yclk55.svg"
+                             alt="">
+                        {% if success %}
+                            <h5 class="mt-2">Ваши вопросы</h5>
+                            <p class="mt-2 text-muted">
+                                Вы еще не задавали вопросов
+                            </p>
+                        {% else %}
+                            <h5 class="mt-2">Пока ни одного вопроса</h5>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
             {% for i in questions %}
                 {% include 'profiles/includes/questions.html' %}
             {% endfor %}
+            {# Новый вопрос #}
+
         </div>
     </div>
 </div>
 
 
-{# Новый вопрос #}
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal55" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -103,6 +120,18 @@
     </div>
 </div>
 
+<div class="modal fade" id="questionSuccessModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                Ваш вопрос опубликован!
+                <button type="button" class="btn btn-outline-primary btn-block mt-4" data-dismiss="modal"
+                        aria-label="Close">Ok
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <style>
 
 </style>

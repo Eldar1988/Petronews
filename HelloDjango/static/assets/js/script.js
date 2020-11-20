@@ -60,7 +60,6 @@ async function AjaxAddComment() {
 
 
 async function addQuestion() {
-    console.log('r')
     let csrf_token = $('.add-question-form [name="csrfmiddlewaretoken"]').val();
     let post_url = $(".add-question-form").attr("action");
     let title = $('#q-title').val();
@@ -74,18 +73,19 @@ async function addQuestion() {
     data["csrfmiddlewaretoken"] = csrf_token;
     data.title = title;
     data.body = body;
-    let reload_url = $('#del-question').attr('data-target')
+    let reload_url = $('#profile-questions').attr('data-target')
     $.ajax({
         url: post_url,
         type: "POST",
         data: data,
         success: () => {
-            $('.add-question-form').css('display', 'none');
-            $('#q-button').css('display', 'none');
-            $('#q-alert').fadeIn();
-
+            $('#questionSuccessModal').modal('show');
+            $('#questionSuccessModal2').modal('show');
+            $('#exampleModal55').modal('hide');
+            $('#exampleModal56').modal('hide');
+            $('#q-title').val('');
+            $('#q-body').val('');
             $("#profile-questions").load(`${reload_url} #profile-questions >*`);
-
             $.ajax({
                 type: "GET",
                 success: (data) => {

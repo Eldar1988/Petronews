@@ -28,10 +28,12 @@
     {% if profile.professional %}
         <p class="mt-2 text-muted">{{ profile.professional }}</p>
     {% endif %}
-    <blockquote class="smartquote border rounded p-3 mt-4">
-        <i class="fas fa-quote-right text-muted"></i>
-        <p class="mb-0 text-muted">{{ profile.bio }}</p>
-    </blockquote>
+    {% if profile.bio %}
+        <blockquote class="smartquote border rounded p-3 mt-4">
+            <i class="fas fa-quote-right text-muted"></i>
+            <p class="mb-0 text-muted">{{ profile.bio }}</p>
+        </blockquote>
+    {% endif %}
 
     {% if success %}
         <button class="btn btn-outline-dark serif btn-block mt-4 mb-5" data-toggle="modal" data-target="#userNameModal"
@@ -63,21 +65,24 @@
                     <div class="form-group row">
                         <label for="q-title" class="col-sm-3 col-form-label text-left">Имя:</label>
                         <div class="col-sm-9">
-                            <input type="text" value="{% if profile.first_name %}{{ profile.first_name }}{% endif %}" name="first_name" class="form-control"
+                            <input type="text" value="{% if profile.first_name %}{{ profile.first_name }}{% endif %}"
+                                   name="first_name" class="form-control"
                                    id="first-name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="q-title" class="col-sm-3 col-form-label text-left">Фамилия:</label>
                         <div class="col-sm-9">
-                            <input value="{% if profile.last_name %}{{ profile.last_name }}{% endif %}" type="text" name="last_name" class="form-control"
+                            <input value="{% if profile.last_name %}{{ profile.last_name }}{% endif %}" type="text"
+                                   name="last_name" class="form-control"
                                    id="last_name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="q-title" class="col-sm-3 col-form-label text-left">Компания:</label>
                         <div class="col-sm-9">
-                            <input value="{% if profile.company %}{{ profile.company }}{% endif %}" type="text" name="company"
+                            <input value="{% if profile.company %}{{ profile.company }}{% endif %}" type="text"
+                                   name="company"
                                    class="form-control" id="company">
                         </div>
                     </div>
@@ -85,7 +90,8 @@
                     <div class="form-group row">
                         <label for="q-title" class="col-sm-3 col-form-label text-left">Профессия:</label>
                         <div class="col-sm-9">
-                            <input value="{% if profile.professional %}{{ profile.professional }}{% endif %}" type="text" name="professional"
+                            <input value="{% if profile.professional %}{{ profile.professional }}{% endif %}"
+                                   type="text" name="professional"
                                    class="form-control" id="professional">
                         </div>
                     </div>

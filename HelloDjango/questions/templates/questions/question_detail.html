@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load thumbnail %}
-{% block title %}{{ question.title }} | {{ block.super }}{% endblock %}
+{% block title %}Вопрос: {{ question.title }} | {{ block.super }}{% endblock %}
 {% block ogtitle %}{{ question.title }} | {{ block.super }}{% endblock %}
 {% block ogurl %}{{ question.get_absolute_url }}{% endblock %}
 {% block ogimage %}
@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <div class="d-flex flex-column text-center rounded shadow p-3">
+                    <div class="d-flex flex-column text-center rounded shadow-sm p-3">
                         <div class="d-flex justify-content-center">
                             {% if question.author.author.avatar %}
                                 {% thumbnail question.author.author.avatar "200x200" crop="center" as img %}

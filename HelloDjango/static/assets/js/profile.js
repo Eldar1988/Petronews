@@ -45,7 +45,10 @@ function ChangeName() {
 }
 
 function defaultBio(bio) {
-    $('#bio').val(`${bio}`);
+    console.log(bio)
+    if (bio != 'None') {
+        $('#bio').val(`${bio}`);
+    }
 }
 
 function newPub() {
@@ -92,3 +95,32 @@ function delQuestion(id) {
 }
 
 
+function publicInTg(id, tgUrl) {
+    let csrf_token = $('.tg-form [name="csrfmiddlewaretoken"]').val();
+    let post_url = $(".tg-form").attr("action");
+
+    let data = {};
+    data["csrfmiddlewaretoken"] = csrf_token;
+    data.id = id;
+    data.tg_url = tgUrl;
+
+    console.log(id, tgUrl);
+
+    $.ajax({
+        url: post_url,
+        type: "POST",
+        data: data,
+        success: () => {
+              alert('Опубликовано в Telegram')
+            $.ajax({
+                type: "GET",
+                success: (data) => {
+                    $('.post-tg-cards').empty();
+                    $('.post-tg-cards').append(
+                        $(data).find('.post-tg-cards').html()
+                    );
+                }
+            })
+        }
+    });
+}

@@ -1,23 +1,41 @@
 {% load static %}
 {% load thumbnail %}
 
-
+{% if not publications.count %}
+    <div class="no-pub-counter mt-4 d-flex justify-content-center flex-column">
+        <div class="text-center">
+            <img src="https://res.cloudinary.com/space-developers/image/upload/v1605906053/Petronews/emojione-v1_oil-drum_yclk55.svg"
+                 alt="">
+            {% if success %}
+                <h5 class="mt-2">Ваши публикации</h5>
+                <p class="mt-2 text-muted">
+                    У вас еще нет ни одной публикации. <br>Начните публиковать рассказы и обсуждайте их с другими
+                </p>
+            {% else %}
+                <h5 class="mt-2">Пока ни одной публикации</h5>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
 {% for i in publications %}
     <article class="mt-3 rounded border p-2">
         <div class="profile-pub-card d-flex align-items-center">
             <div class="">
                 <a href="{{ i.get_absolute_url }}" title="Перейти к публикации на сайте">
                     {% thumbnail i.image '200x200' crop="center" as img %}
-                    <img src="{{ img.url }}"
-                         alt="{{ i.title }} (фото)" class="rounded"
-                         style="height:100px; width: 150px; min-width: 50px; object-fit: cover">
+                        <img src="{{ img.url }}"
+                             alt="{{ i.title }} (фото)" class="rounded"
+                             style="height:100px; width: 150px; min-width: 50px; object-fit: cover">
                     {% endthumbnail %}
                 </a>
             </div>
             <div class="px-2">
                 <div class="meta small text-muted">
-                    <span data-toggle="tooltip" data-placement="top" title="Количество просмотров: {{ i.views }}"><i class="far fa-eye"></i> {{ i.views }}</span>
-                    <span class="ml-4" data-toggle="tooltip" data-placement="top" title="Количество комментариев: {{ i.reviews.count }}"><i class="far fa-comment-dots"></i> {{ i.reviews.count }}</span>
+                    <span data-toggle="tooltip" data-placement="top" title="Количество просмотров: {{ i.views }}"><i
+                            class="far fa-eye"></i> {{ i.views }}</span>
+                    <span class="ml-4" data-toggle="tooltip" data-placement="top"
+                          title="Количество комментариев: {{ i.reviews.count }}"><i
+                            class="far fa-comment-dots"></i> {{ i.reviews.count }}</span>
                 </div>
                 <h3 class="h6 mt-2">
                     <a href="{{ i.get_absolute_url }}" title="Перейти к публикации на сайте">
@@ -29,22 +47,22 @@
             </div>
         </div>
         {% if success %}
-                    <div class="btns mt-1">
-                        <a href="{% url 'edit_publication' i.id %}" class="btn btn-outline-dark btn-sm serif"
-                             data-toggle="tooltip" data-placement="top" title="Редактировать публикацию"
-                            style="width: 150px;"
-                        >
-                            <i class="fas fa-pencil-alt"></i> Редактировать
-                        </a>
-                        <button data-target="{% url 'profile' profile.id %}"
-                                class="btn btn-danger btn-sm serif ml-2"
-                                title="Удалить публикацию"
-                                id="del-pub"
-                                onclick="delPublication('{{ i.id }}')"
-                        >
-                            <i class="fas fa-trash-alt"></i> Удалить
-                        </button>
-                    </div>
-                {% endif %}
+            <div class="btns mt-1">
+                <a href="{% url 'edit_publication' i.id %}" class="btn btn-outline-dark btn-sm serif"
+                   data-toggle="tooltip" data-placement="top" title="Редактировать публикацию"
+                   style="width: 150px;"
+                >
+                    <i class="fas fa-pencil-alt"></i> Редактировать
+                </a>
+                <button data-target="{% url 'profile' profile.id %}"
+                        class="btn btn-danger btn-sm serif ml-2"
+                        title="Удалить публикацию"
+                        id="del-pub"
+                        onclick="delPublication('{{ i.id }}')"
+                >
+                    <i class="fas fa-trash-alt"></i> Удалить
+                </button>
+            </div>
+        {% endif %}
     </article>
 {% endfor %}

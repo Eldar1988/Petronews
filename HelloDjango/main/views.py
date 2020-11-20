@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from questions.functions.q_paginator import get_pagination
@@ -39,10 +40,15 @@ class TgBotView(View):
 
     def post(self, request):
         post = Post.objects.get(id=request.POST.get('id'))
-        post_url = request.POST.get('url')
-        post_url = f'https://petronews.kz/{post_url}'
+        post_url = request.POST.get('tg_url')
+        post_url = f'https://petronews.kz{post_url}'
+
+        print(post.id, post_url)
         try:
             send_post(post, post_url)
+            post.telegram_send = True
+            post.save()
+            return HttpResponse('success')
         except:
-            return redirect('telegram')
-        return redirect('telegram')
+            status = False
+        return HttpResponse('false')
