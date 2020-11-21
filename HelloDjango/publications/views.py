@@ -24,11 +24,13 @@ def publications_list_view(request):
 def publication_category_detail_view(request, slug):
     """Детали публикации"""
     publications = Publication.objects.select_related('category').filter(category__slug=slug, public=True).defer('body',
-                                                                                                  'update_date',
                                                                                                   'views')
+    discussed_publications = Publication.objects.defer(
+        'body', 'views').filter(public=True).annotate(cnt=Count('reviews')).order_by('-cnt')[:5]
     header = Category.objects.get(slug=slug)
     header = header.name
     context = get_pagination(request, publications, header)
+    context['discussed_publications'] = discussed_publications
     return render(request, 'publications/publications_list.html', context)
 
 

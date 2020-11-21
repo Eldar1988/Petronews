@@ -11,6 +11,7 @@ from persons.models import Person
 from .forms import ReviewForm
 from .functions.get_text import get_text
 from publications.models import Publication
+from questions.models import Question
 
 
 def home_view(request):
@@ -111,11 +112,13 @@ def get_search_results(request):
     search_request = request.GET.get('s')
     news = Post.objects.select_related('category').filter(title__icontains=search_request).defer('body', 'views')
     pubs = Publication.objects.select_related('category').filter(title__icontains=search_request).defer('body', 'views')
+    questions = Question.objects.filter(title__icontains=search_request)
     header = f'Результаты поиска по запросу: "{search_request}"'
     return render(request, 'news/search_results.html', {
         'news': news,
         'header': header,
-        'pubs': pubs
+        'pubs': pubs,
+        'questions': questions
     })
 
 
@@ -202,3 +205,4 @@ def clear_nots(request):
             i.delete()
 
     return redirect('nots')
+

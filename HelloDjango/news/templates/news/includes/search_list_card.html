@@ -1,0 +1,27 @@
+<article class="rounded border shadow overflow-hidden">
+    <div class="row align-items-center">
+        <div class="p-3">
+            <h3 class="serif list-title ml-3">
+                <a href="{{ i.get_absolute_url }}" title="Читать новость">
+                    {{ i.title }}
+                </a>
+            </h3>
+            <time class="ml-3 small text-muted" title="Дата и время публикации">
+                <i class="fas fa-calendar-day"></i> {{ i.pub_date|date:'d.m' }}
+                <span class="ml-2">
+                        <i class="far fa-clock"></i> {{ i.pub_date|date:'G:i' }}
+                    </span>
+            </time>
+            {% if i.views > 10 %}
+                <span class="ml-2 text-muted small" title="Количество просмотров: {{ i.views }}"><i
+                        class="far fa-eye"></i> {{ i.views }}</span>
+            {% endif %}
+            {% if i.category %}
+                <a class="ml-3 text-primary small" href="{{ i.category.get_absolute_url }}"
+                   title="Все новости категории {{ i.category.name }}">
+                    {{ i.category }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</article>

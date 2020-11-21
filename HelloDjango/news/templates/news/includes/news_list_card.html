@@ -20,7 +20,7 @@
                     <span class="ml-2 text-muted small" title="Количество просмотров: {{ i.views }}"><i class="far fa-eye"></i> {{ i.views }}</span>
                 {% endif %}
                 {% if i.category %}
-                    <a class="ml-3 text-primary small" href="{{ i.category.get_absolute_url }}"
+                    <a class="ml-2 text-primary small" href="{{ i.category.get_absolute_url }}"
                        title="Все новости категории {{ i.category.name }}">
                         {{ i.category }}
                     </a>

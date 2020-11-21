@@ -1446,11 +1446,9 @@ main {
     max-width: 100% !important;
 }
 
-.modal_search form {
+.modal_search .modal-body {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     max-width: 800px;
     margin: auto;
 }
