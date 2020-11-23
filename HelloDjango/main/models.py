@@ -81,19 +81,19 @@ class About(models.Model):
         verbose_name = 'Инофрмация о проекте'
         verbose_name_plural = 'Инофрмация о проекте'
 
-
-class TgBot(models.Model):
-    """Телеграм бот"""
-    url = models.CharField(max_length=255)
-    chat_id = models.CharField(max_length=30)
-    token = models.CharField(max_length=200, null=True)
-    text_len = models.PositiveSmallIntegerField('Длина текста', null=True, blank=True, default=30)
-
-
-
-    def __str__(self):
-        return self.chat_id
-
-    class Meta:
-        verbose_name = 'Телеграм бот'
-        verbose_name_plural = 'Телеграм боты'
+#
+# class TgBot(models.Model):
+#     """Телеграм бот"""
+#     url = models.CharField(max_length=255)
+#     chat_id = models.CharField(max_length=30)
+#     token = models.CharField(max_length=200, null=True)
+#     text_len = models.PositiveSmallIntegerField('Длина текста', null=True, blank=True, default=30)
+#
+#
+#
+#     def __str__(self):
+#         return self.chat_id
+#
+#     class Meta:
+#         verbose_name = 'Телеграм бот'
+#         verbose_name_plural = 'Телеграм боты'
