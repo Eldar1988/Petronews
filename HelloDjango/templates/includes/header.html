@@ -10,21 +10,28 @@
     <div class="container-fluid">
         <div class="header_container ow p-md-2">
 
-            <div class="header_logo col-md-2">
+            <div class="header_logo col-md-3 col-xl-3">
                 <a class="header_logo_link" href="{% url 'home' %}">
                     <img class="header_logo_img_anim" src="{% static 'assets/img/logo 2.png' %}" alt="logo">
                     <img class="header_logo_img" src="{% static 'assets/img/1-logo.png' %}" alt="logo">
                 </a>
                 <a href="{% url 'home' %}" class="logo-text">
                     <span class="yellow logo-kz text-uppercase">Kazakhstan</span><br>
-                    <h2 class="logo-title text-white">PETRONEWS</h2>
-                    <span class="logo-small-txt text-white">Oil&Gas</span>
+                    <h2 class="logo-title text-white serif">Oil&Gaz</h2>
+{#                    <span class="logo-small-txt text-white">Oil&Gas</span>#}
                 </a>
             </div>
 
             {% include 'includes/mobile_header.html' %}
 
-            <div class="col-xl-8 col-md-7 header_submenu d-none d-lg-block">
+            <div class="col-xl-7 col-md-6 header_submenu d-none d-lg-block position-relative">
+                <div class="header-imgs position-absolute">
+                    <img src="{% static 'assets/img/header/1.svg' %}" alt="atrs" >
+                    <img src="{% static 'assets/img/header/2.svg' %}" alt="atrs" style="width: 80px; margin-left: 10px; position: absolute; bottom: -5px">
+                    <img src="{% static 'assets/img/header/3.svg' %}" alt="atrs">
+                    <img src="{% static 'assets/img/header/4.svg' %}" alt="atrs" style="width: 90px; margin-left: 10px; position: absolute; bottom: -1px; left: 230px" >
+                    <img src="{% static 'assets/img/header/5.svg' %}" alt="atrs" style="width: 40px; margin-left: 10px; position: absolute; bottom: 15px; left: 180px" >
+                </div>
                 <div class="row header_menu_top justify-content-end">
                     <div class="">
                         <div class="header_submenu_top">
@@ -142,6 +149,10 @@
 <style>
     .user-avatar-i {
         font-size: 23px;
+    }
+    .header-imgs {
+        opacity: .5;
+        bottom: -8px;
     }
 </style>
 {#{% endcache %}#}

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ post.title }} | {{ block.super }}{% endblock %}
+{% block description %}{{ description }}...{% endblock %}
+{% block ogtitle %}{{ post.title }} | {{ block.super }}{% endblock %}
+{% block ogurl %}{{ post.get_absolute_url }}{% endblock %}
+{% block ogimage %}
+    {% if post.image %}
+        {{ post.image.url }}
+    {% elif post.image_url %}
+        {{ post.image_url }}
+    {% endif %}
+{% endblock %}
+{% block ogdescription %}{{ description }}...{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        {#    Хлебные крошки#}
+        <div class="post_navigation">
+            <nav aria-label="breadcrumb bg-light">
+                <ol class="breadcrumb rounded-0">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fas fa-home"></i></a></li>
+                    {% if post.category %}
+                        <li class="breadcrumb-item"><a
+                                href="{{ post.category.get_absolute_url }}">{{ post.category.name }}</a></li>
+                    {% endif %}
+                    <li class="breadcrumb-item active" aria-current="page">{{ post.title|slice:':30' }}...</li>
+                </ol>
+            </nav>
+        </div>
+        {#    Заголово новости#}
+        <div class="row mt-5 align-items-center">
+            {#            Заголовок#}
+            <div class="col-md-9">
+                <h1 class="h2">
+                    {{ post.title }}
+                </h1>
+            </div>
+            {#            Инфо#}
+            <div class="post_container_info col-md-3 mt-3 mt-md-0">
+                {#                    <p class="post_container_info_web">Tengrinews.kz</p>#}
+                <p class="post_container_info_date text-md-right"><i
+                        class="far fa-calendar-alt"></i> {{ post.pub_date|date:'d M в G:i' }}</p>
+                <p class="post_container_info_view text-md-right"><i class="fas fa-search"></i>
+                    Просмотров: {{ post.views }}
+                </p>
+                <a href="#form-app" class="post_container_info_comment text-md-right d-block"><i class="far fa-comment-dots"></i>
+                    Комментариев: {{ comments_count }}</a>
+            </div>
+        </div>
+        <hr>
+        {#        Тело новости#}
+        <div class="row">
+            {#            Картинка#}
+            <div class="col-12 col-lg-6 post-detail-image mt-4">
+                {% if post.image %}
+                    <img class="lazy rounded shadow" data-src="{{ post.image.url }}"
+                         src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ post.title }}" title="Фото: {{ post.title }}"
+                         style="width: 100%;"
+                    >
+                {% elif post.image_url %}
+                    <img class="lazy rounded shadow" data-src="{{ post.image_url }}"
+                         src="{% static 'assets/img/preloader.svg' %}" alt="Фото: {{ post.title }}" title="Фото: {{ post.title }}"
+                         style="width: 100%;"
+                    >
+                {% else %}
+                    <img class="rounded shadow"
+                         src="{% static 'assets/img/empty.png' %}" alt="Нет изображения" title="Нет изображения"
+                         style="width: 100%;"
+                    >
+                {% endif %}
+                {% include 'includes/share.html' %}
+            </div>
+            {#        Текст#}
+            <div class="col-12 col-lg-6 mt-4">
+                <article class="">
+                    <div class="post_container_content shadow-inset px-3 rounded">
+                        <p class="post_container_content_par">
+                            {% autoescape off %}{{ post.body }}{% endautoescape %}
+                        </p>
+                    </div>
+                </article>
+                {% if post.source %}
+                    <a class="pt-3 d-block text-right" target="_blank" href="{{ post.source }}">
+                        Читать источник
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        {#        Комментарии#}
+        <hr>
+        {% include 'news/includes/comments.html' %}
+        <hr>
+        {% include 'news/includes/read_more.html' %}
+    </div>
+{% endblock %}

@@ -50,23 +50,23 @@
                         <i class="far fa-question-circle text-warning"></i> Вопросы
                     </a>
                 </li>
-                <li class="mt-5 nav-item-gray-first">
+                <li class="mt-2 nav-item-gray-first">
                     {% if request.user.is_authenticated %}
                     <div class="user text-white">
                         <a href="{{ user.author.get_absolute_url }}" class="user-name text-white text-center">
-                            <h6>{{ user.author.first_name }} {% if user.author.last_name %}
+                            <h6 class="serif">{{ user.author.first_name }} {% if user.author.last_name %}
                                 {{ user.author.last_name }} {% endif %}</h6>
 
                             {% if user.author.avatar %}
                                 {% thumbnail user.author.avatar "50x50" crop="center" as img %}
-                                    <img src="{{ img.url }}" alt="" class="rounded-circle ml-3 mx-auto d-block my-3" style="object-fit: cover;">
+                                    <img src="{{ img.url }}" alt="" class="rounded-circle ml-3 mx-auto d-block my-1" style="object-fit: cover;">
                                 {% endthumbnail %}
                             {% else %}
                                 <i class="fas fa-user-circle user-avatar-i d-block ml-3"></i>
                             {% endif %}
                         </a>
                         <div class="user_actions">
-                            <a href="{{ user.author.get_absolute_url }}" class="btn btn-block btn-warning mt-1 text-dark">Новая запись <i class="fas fa-feather-alt text-dark"></i></a>
+                            <a href="{{ user.author.get_absolute_url }}" class="btn btn-sm btn-block btn-warning mt-1 text-dark">Новая запись <i class="fas fa-feather-alt text-dark"></i></a>
                         </div>
                     </div>
                     {% else %}
