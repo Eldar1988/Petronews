@@ -69,7 +69,7 @@
                             </span>
                                 <a href="#form-app" class="ml-3 scroll-to">
                                     <i class="far fa-comment-dots"></i>
-                                    {{ comments_count }}
+                                    {{ post.reviews.count }}
                                 </a>
                                 <span class="ml-3 float-right">
                                 <i class="far fa-calendar-alt"></i>
@@ -94,10 +94,8 @@
                 <div class="col-lg-4">
                     {% include 'news/includes/read_more.html' %}
                 </div>
-
             </div>
         </div>
-
     </div>
 
     <style>

@@ -97,3 +97,10 @@ class About(models.Model):
 #     class Meta:
 #         verbose_name = 'Телеграм бот'
 #         verbose_name_plural = 'Телеграм боты'
+
+
+class Course(models.Model):
+    """курсы валют"""
+    usd = models.CharField('Курс доллара', null=True, blank=True, max_length=10)
+    eur = models.CharField('Курс евро', null=True, blank=True, max_length=10)
+    rub = models.CharField('Курс рубля', null=True, blank=True, max_length=10)

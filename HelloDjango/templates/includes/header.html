@@ -8,29 +8,33 @@
 {#{% cache 604800 header %}#}
 <header>
     <div class="container-fluid">
-        <div class="header_container ow p-md-2">
+        <div class="header_container ow px-md-2">
 
-            <div class="header_logo col-md-3 col-xl-3">
+            <div class="header_logo col-md-6 col-xl-3 d-flex align-items-center">
                 <a class="header_logo_link" href="{% url 'home' %}">
                     <img class="header_logo_img_anim" src="{% static 'assets/img/logo 2.png' %}" alt="logo">
                     <img class="header_logo_img" src="{% static 'assets/img/1-logo.png' %}" alt="logo">
                 </a>
                 <a href="{% url 'home' %}" class="logo-text">
-                    <span class="yellow logo-kz text-uppercase">Kazakhstan</span><br>
-                    <h2 class="logo-title text-white serif">Oil&Gaz</h2>
-{#                    <span class="logo-small-txt text-white">Oil&Gas</span>#}
+                    <img src="https://res.cloudinary.com/space-developers/image/upload/v1606146491/Petronews/logo_jt1dpt.png"
+                         alt="Logo" class="" style="max-height: 45px; max-width: 90%;">
+                    {#                    <span class="yellow logo-kz text-uppercase">Kazakhstan</span><br>#}
+                    {#                    <h2 class="logo-title text-white serif">Oil&Gaz</h2>#}
+                    {#                    <span class="logo-small-txt text-white">Oil&Gas</span>#}
                 </a>
             </div>
 
             {% include 'includes/mobile_header.html' %}
 
-            <div class="col-xl-7 col-md-6 header_submenu d-none d-lg-block position-relative">
-                <div class="header-imgs position-absolute">
-                    <img src="{% static 'assets/img/header/1.svg' %}" alt="atrs" >
-                    <img src="{% static 'assets/img/header/2.svg' %}" alt="atrs" style="width: 80px; margin-left: 10px; position: absolute; bottom: -5px">
-                    <img src="{% static 'assets/img/header/3.svg' %}" alt="atrs">
-                    <img src="{% static 'assets/img/header/4.svg' %}" alt="atrs" style="width: 90px; margin-left: 10px; position: absolute; bottom: -1px; left: 230px" >
-                    <img src="{% static 'assets/img/header/5.svg' %}" alt="atrs" style="width: 40px; margin-left: 10px; position: absolute; bottom: 15px; left: 180px" >
+            <div class="col-xl-7 col-md-6 header_submenu d-none d-lg-block position-relative" style="z-index: 0">
+                <div class="header-imgs position-absolute ml-n5" style="opacity: 1; bottom: 0">
+                    <img src="https://res.cloudinary.com/space-developers/image/upload/v1606151697/Petronews/eog-header-img_usvza1.png"
+                         alt="">
+                    {#                    <img src="{% static 'assets/img/header/1.svg' %}" alt="atrs" style="margin-left: -80px; width: 200px;">#}
+                    {#                    <img src="{% static 'assets/img/header/2.svg' %}" alt="atrs" style="width: 80px; margin-left: 20px; position: absolute; bottom: -2px">#}
+                    {#                    <img src="{% static 'assets/img/header/3.svg' %}" alt="atrs" style="width: 20px; bottom: 10px; position: absolute">#}
+                    {#                    <img src="{% static 'assets/img/header/4.svg' %}" alt="atrs" style="width: 60px; margin-left: 10px; position: absolute; bottom: 8px; left: 210px" >#}
+                    {#                    <img src="{% static 'assets/img/header/5.svg' %}" alt="atrs" style="width: 50px; margin-left: 10px; position: absolute; bottom: 0px; left: 140px" >#}
                 </div>
                 <div class="row header_menu_top justify-content-end">
                     <div class="">
@@ -58,7 +62,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="header_menu_bottom mt-n2">
+                <div class="header_menu_bottom mt-n2 position-relative" style="z-index: 25">
                     <ul class="header_menu_bottom_list row">
                         <li class="header_menu_bottom_list_item">
                             <a class="header_menu_bottom_list_item_link text-uppercase text-warning"
@@ -66,29 +70,34 @@
                                 <i class="fas fa-home text-warning"></i> Главная
                             </a>
                         </li>
-                        <li class="header_menu_bottom_list_item  header_menu_bottom_list_item_link_down">
-                            <a class="header_menu_bottom_list_item_link text-uppercase text-warning">
+                        <li class="dropdown">
+                            <a href="#" role="button" class="text-uppercase text-warning dropdown-toggle"
+                               id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false">
                                 <i class="far fa-newspaper text-warning"></i> Новости
                             </a>
-                            <ul class="header_menu_bottom_list header_menu_bottom_list_sub p-3 shadow rounded">
-                                <li class="header_menu_bottom_list_item mt-1">
-                                    <a class="header_menu_bottom_list_item_link text-uppercase" href="{% url 'news' %}">
-                                        <i class="fas fa-angle-right mr-1"></i> Все новости
-                                    </a>
-                                </li>
-                                <li class="header_menu_bottom_list_item mt-1">
-                                    <a class="header_menu_bottom_list_item_link text-uppercase"
-                                       href="{% url 'kz_news' %}">
-                                        <i class="fas fa-angle-right mr-1"></i> Казахстан
-                                    </a>
-                                </li>
-                                <li class="header_menu_bottom_list_item mt-1">
-                                    <a class="header_menu_bottom_list_item_link text-uppercase"
-                                       href="{% url 'world_news' %}">
-                                        <i class="fas fa-angle-right mr-1"></i> Мир
-                                    </a>
-                                </li>
-                            </ul>
+                            <div class="dropdown-menu " aria-labelledby="dropdownMenuLink" style="background: #131315; width: 185px;">
+                                <ul class="p-3 shadow rounded bg-dark" >
+                                    <li class="header_menu_bottom_list_item mt-1">
+                                        <a class="header_menu_bottom_list_item_link text-uppercase"
+                                           href="{% url 'news' %}">
+                                            <i class="fas fa-angle-right mr-1"></i> Все новости
+                                        </a>
+                                    </li>
+                                    <li class="header_menu_bottom_list_item mt-1">
+                                        <a class="header_menu_bottom_list_item_link text-uppercase"
+                                           href="{% url 'kz_news' %}">
+                                            <i class="fas fa-angle-right mr-1"></i> Казахстан
+                                        </a>
+                                    </li>
+                                    <li class="header_menu_bottom_list_item mt-1">
+                                        <a class="header_menu_bottom_list_item_link text-uppercase"
+                                           href="{% url 'world_news' %}">
+                                            <i class="fas fa-angle-right mr-1"></i> Мир
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li class="header_menu_bottom_list_item">
                             <a class="header_menu_bottom_list_item_link text-warning text-uppercase"
@@ -116,7 +125,8 @@
             <div class="col-xl-2 col-md-3 hide-on-mobile px-xl-3">
                 {% if request.user.is_authenticated %}
                     <div class="user text-white">
-                        <a href="{{ user.author.get_absolute_url }}" class="user-name text-white text-right d-flex justify-content-end align-items-center">
+                        <a href="{{ user.author.get_absolute_url }}"
+                           class="user-name text-white text-right d-flex justify-content-end align-items-center">
                             <h6>{{ user.author.first_name }} {% if user.author.last_name %}
                                 {{ user.author.last_name }} {% endif %}</h6>
 
@@ -129,7 +139,9 @@
                             {% endif %}
                         </a>
                         <div class="user_actions">
-                            <a href="{{ user.author.get_absolute_url }}" class="btn btn-block btn-warning mt-1 text-dark serif">Новая запись <i class="fas fa-feather-alt text-dark"></i></a>
+                            <a href="{{ user.author.get_absolute_url }}"
+                               class="btn btn-block btn-warning mt-1 text-dark serif">Новая запись <i
+                                    class="fas fa-feather-alt text-dark"></i></a>
                         </div>
                     </div>
                 {% else %}
@@ -150,6 +162,7 @@
     .user-avatar-i {
         font-size: 23px;
     }
+
     .header-imgs {
         opacity: .5;
         bottom: -8px;

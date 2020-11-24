@@ -28,8 +28,8 @@ img {
 }
 
 .logo-text {
-    margin-left: 70px;
-    margin-top: 10px;
+    margin-left: 60px;
+    margin-top: 20px;
     display: block;
     font-family: 'Noto Sans', sans-serif;
 }
@@ -434,7 +434,7 @@ main {
 }
 
 .news_section {
-    padding: 40px 0 64px;
+    padding: 20px 0 64px;
 }
 
 .news_section_block_title, .news_section_block_desc, .news_section_block_date {
@@ -1628,7 +1628,7 @@ header i:hover {
 
 ::-webkit-scrollbar {
     width: 5px; /* ширина для вертикального скролла */
-    height: 0px; /* высота для горизонтального скролла */
+    height: 5px; /* высота для горизонтального скролла */
     background-color: lightgrey;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, .1);
 }

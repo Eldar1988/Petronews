@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from questions.functions.q_paginator import get_pagination
 
-from .models import About, Politic, Contacts
+from .models import About, Politic, Contacts, Course
 from news.models import Post
 from news.functions.get_text import get_text
 
@@ -52,3 +52,14 @@ class TgBotView(View):
         except:
             status = False
         return HttpResponse('false')
+
+
+def set_course(request, usd, eur, rub):
+    """Обновление курсов"""
+    model = Course.objects.last()
+    model.usd = round(float(usd), 2)
+    model.eur = round(float(eur), 2)
+    model.rub = round(float(rub), 2)
+    model.save()
+
+    return HttpResponse('success')

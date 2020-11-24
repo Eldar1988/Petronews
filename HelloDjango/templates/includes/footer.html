@@ -2,10 +2,51 @@
 {% get_socials as socialstg %}
 {% get_footer_info as footertg %}
 {% load cache %}
+<div class="p-container mt-5">
+    <div class="market">
+        <h3 class="text-center pb-2 pt-2 mb-3 border-top border-bottom">Рынок</h3>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-4">
+                <div id="oi5517098" class="rounded overflow-hidden shadow-lg"
+                     style="width:300px; height:300px;">
+                    <a href="http://www.profinance.ru/chart/brent/" rel="nofollow" onclick="return false" class="bg-dark text-white p-1 pt-2" title="Нефть brent" target="_blank"
+                    >Нефть Brent</a></div>
+                <script type="text/javascript" charset="cp1251"
+                        src="https://informers.forexpf.ru/php/graphics.php?sym=CL_Brent&vsz=300&hsz=300&fxid=oi5517098&sz=60&tic=3&typ=2"></script>
+            </div>
 
+            <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-4">
+                <div id="oi9762599" class="rounded overflow-hidden shadow-lg"
+                     style="width:300px; height:300px;">
+                    <a href="http://www.profinance.ru/chart/lightsweet/" rel="nofollow" onclick="return false" class="bg-dark text-white p-1 pt-2" title="Нефть light sweet"
+                    >Нефть light sweet</a></div>
+                <script type="text/javascript" charset="cp1251"
+                        src="https://informers.forexpf.ru/php/graphics.php?sym=LIGHT_COMMOD&vsz=300&hsz=300&fxid=oi9762599&sz=60&tic=3&typ=2"></script>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-4">
+                <div id="pm9078871" class="rounded overflow-hidden shadow-lg"
+                     style="width:300px; height:300px;">
+                    <a href="http://www.profinance.ru/chart/gold/" rel="nofollow" onclick="return false" class="bg-dark text-white p-1 pt-2" title="Золото" target="_blank"
+                    >Золото</a></div>
+                <script type="text/javascript" charset="cp1251"
+                        src="https://informers.forexpf.ru/php/graphics.php?sym=XAUUSDOCOMPx&vsz=300&hsz=300&fxid=pm9078871&sz=60&tic=3&typ=2"></script>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-4">
+                <div id="pm8349066" class="rounded overflow-hidden shadow-lg"
+                     style="width:300px; height:300px;">
+                    <a href="http://www.profinance.ru/chart/silver/" rel="nofollow" onclick="return false" class="bg-dark text-white p-1 pt-2" title="Серебро" target="_blank"
+                    >Серебро</a></div>
+                <script type="text/javascript" charset="cp1251"
+                        src="https://informers.forexpf.ru/php/graphics.php?sym=XAGUSDOCOMPx&vsz=300&hsz=300&fxid=pm8349066&sz=60&tic=3&typ=2"></script>
+            </div>
+        </div>
+    </div>
+</div>
 {#{% cache 86400 footer %}#}
 <footer class="mt-5">
-    <div class="subscribe">
+    <div class="subscribe mt-5">
         <div class="container">
             <div class="row justify-content-between">
                 <div class="subscribe_social col-12 col-md-4">
@@ -14,9 +55,9 @@
                     </p>
                     <div class="subscribe_social_all">
                         {% for i in socialstg %}
-                        <a class="subscribe_social_link mr-1" href="{{ i.url }}" target="_blank">
-                            {% autoescape off %}{{ i.icon }}{% endautoescape %}
-                        </a>
+                            <a class="subscribe_social_link mr-1" href="{{ i.url }}" target="_blank">
+                                {% autoescape off %}{{ i.icon }}{% endautoescape %}
+                            </a>
                         {% endfor %}
                     </div>
                 </div>
@@ -31,7 +72,6 @@
                     <a class="col-12 text-white mt-1" href="{% url 'about' %}">О проекте</a>
                     <a class="col-12 text-white mt-1" href="{% url 'contacts' %}">Контакты</a>
                 </div>
-
             </div>
             <div class="footer_info col-12 col-md-7">
                 <p class="footer_info_text">
@@ -48,9 +88,14 @@
             <a href="{% url 'politic' %}" class="footer_info_one col-12 col-md-3">Политика конфиденциальности</a>
             <a class="footer_info_three col-12 col-md-6"></a>
             <a class="footer_info_three col-12 col-md-3">{{ footertg.copyright }}</a>
-
         </div>
-
     </div>
 </footer>
+
+<style>
+    .news-lent a {
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+</style>
 {#{% endcache %}#}

@@ -53,8 +53,8 @@ def home_view(request):
         'body', 'views'
     ).filter(public=True).annotate(cnt=Count('reviews')).order_by('-cnt')[:6]
     # 5 самых обсуждаемых новостей
-    comments = Post.objects.defer('body', 'views', 'source', 'main_source', 'update_date'
-                                     ).filter(public=True).annotate(cnt=Count('reviews')).order_by('-cnt')[:7]
+    comments = Post.objects.prefetch_related('reviews').defer('body', 'views', 'source', 'main_source', 'update_date'
+                                     ).filter(public=True).annotate(cnt=Count('reviews')).order_by('-cnt')[:8]
     return render(request, 'news/home.html', {
         'kz_main_news': kz_main_news,
         'world_main_news': world_main_news,
@@ -123,19 +123,17 @@ def get_search_results(request):
 
 
 def post_detail(request, slug):
-    post = Post.objects.get(slug=slug)
-    posts = Post.objects.defer('body').filter(public=True).exclude(slug=slug)[:10]
+    post = Post.objects.select_related('category').get(slug=slug)
+    posts = Post.objects.select_related('category').defer('body').filter(public=True).exclude(slug=slug)[:10]
     post.views += 1
     post.save()
     description = get_text(post.body)[:170]
-    comments = Review.objects.filter(post_id=post.id)
-    comments_count = comments.count()
+    comments = Review.objects.select_related('user', 'parent').filter(post_id=post.id)
     return render(request, 'news/post_detail.html', {
         'post': post,
         'comments': comments,
         'posts': posts,
         'description': description,
-        'comments_count': comments_count
     })
 
 

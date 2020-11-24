@@ -8,7 +8,7 @@
 
 {% block content %}
     {# Главные новости #}
-    <div class="container-fluid">
+    <div class="p-container">
         <div class="row">
             {# Новости Казахстана #}
             <div class="news_section col-12 col-md-6">
@@ -28,7 +28,7 @@
                     </div>
                     <p class="news_section_last_all text-center">
                         <a
-                                class="btn btn-outline-dark mt-3 shadow serif"
+                                class="btn btn-outline-dark mt-3 serif"
                                 href="{% url 'kz_news' %}"
                         >
                             Все новости Казахстана <i class="fas fa-angle-double-right"></i>
@@ -57,7 +57,7 @@
                     </div>
                     <p class="news_section_last_all text-center">
                         <a
-                                class="btn btn-outline-dark mt-3 shadow serif"
+                                class="btn btn-outline-dark mt-3 serif"
                                 href="{% url 'world_news' %}"
                         >
                             Все международные новости <i class="fas fa-angle-double-right"></i>
@@ -70,13 +70,12 @@
     </div>
 
     {# Актуальная новость 1 #}
-    <div class="container mt-5 pt-5">
+    <div class="p-container mt-5 pt-5">
         <div class="section_action row">
             <div class="section_action_bg col-12 col-md-12">
                 <article>
                     <div class="row justify-content-between">
                         {% for i in actual_news|slice:':1' %}
-
                             <div class="section_action_info col-12 col-md-6">
                                 <span class="section_action_info_pin">Актуальное</span>
                                 <h2 class="mt-4">
@@ -126,7 +125,7 @@
     </div>
 
     {# Актуальные новости #}
-    <div class="container-fluid">
+    <div class="p-container">
         <div class="new_section_blocks row">
             {% for i in actual_news|slice:'1:' %}
                 <div class="new_section_block col-12 col-md-6 col-lg-3">
@@ -137,7 +136,7 @@
     </div>
     {# #} {# Персоны #} {# {% cache 7200 persons %}#}
     <div class="main_person mt-5">
-        <div class="container-fluid">
+        <div class="p-container">
             <h2 class="title_border_center">Персоны</h2>
             <div class="row persons pb-5 pl-4 pr-4">
                 {% for i in persons %} {% include 'persons/includes/person_card.html' %}
@@ -151,7 +150,7 @@
         </div>
     </div>
     {# {% endcache %}#} {# #} {# Публикации#}
-    <div class="container-fluid">
+    <div class="p-container">
         <div class="row">
             <div class="best_news col-12 col-lg-9">
                 <h2 class="news_section_title mt-5 mt-sm-1">
@@ -163,7 +162,7 @@
                     {% for i in publications %} {% include 'publications/includes/public_card.html' %} {% endfor %}
                 </div>
                 <p class="news_section_last_all text-center">
-                    <a class="btn btn-outline-dark mt-3 shadow serif" href="{% url 'publications_list' %}">
+                    <a class="btn btn-outline-dark mt-3 serif" href="{% url 'publications_list' %}">
                         Все публикации <i class="fas fa-angle-double-right"></i>
                     </a>
                 </p>

@@ -1,6 +1,11 @@
 ﻿<time class="time text-white small position-relative z-index-10 mb-2"
       title="Дата публикации {{ i.pub_date|date:'d.m.Y' }} в {{ i.pub_date|date:'G:i' }}"
 >
-    <i class="fas fa-history"></i>
-    {{ i.update_date|date:'d M G:i' }}
+    <span class="position-relative w-100 d-block" style="z-index: 100; bottom: 1px; left: 1px">
+        <span class="mr-5 pr-3">
+        <i class="fas fa-history"></i>
+        {{ i.update_date|date:'d M G:i' }}
+            </span>
+        <span class="position-absolute" style="right: 10px;"><i class="far fa-eye"></i> {{ i.views }}</span>
+    </span>
 </time>

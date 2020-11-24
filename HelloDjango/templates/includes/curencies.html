@@ -1,0 +1,18 @@
+{% load main_tags %}
+{% get_course as coursetg  %}
+
+<div class="d-flex p-container border-bottom pb-3 pb-md-1 sans small justify-content-end" style="margin-top: 70px; background: rgba(0,0,0,0)">
+{#    <a href="{% url 'set_course' {{  }} %}" id="course_url" style="display: none;"></a>#}
+    <p class="mr-3 data-toggle="tooltip" data-placement="bottom" title="Крус доллара к тенге">
+        <img src="https://res.cloudinary.com/space-developers/image/upload/v1606182544/Petronews/united-states-of-america_tmvfxt.svg" alt="usd" style="width: 20px; margin-top: -2px">
+        <i class="fas fa-dollar-sign"></i> - <span id="usd_kzt">{{ coursetg.usd }}</span>
+    </p>
+    <p class="mr-3" data-toggle="tooltip" data-placement="bottom" title="Крус евро к тенге">
+        <img src="https://res.cloudinary.com/space-developers/image/upload/v1606182795/Petronews/european-union_k2lbiq.svg" alt="eur" style="width: 20px; margin-top: -2px">
+        <i class="fas fa-euro-sign"></i> - <span id="eur-kzt">{{ coursetg.eur }}</span>
+    </p>
+    <p data-toggle="tooltip" data-placement="bottom" title="Крус рубля к тенге">
+        <img src="https://res.cloudinary.com/space-developers/image/upload/v1606182715/Petronews/russia_jytfkz.svg" alt="rub" style="width: 20px; margin-top: -2px">
+        <i class="fas fa-ruble-sign"></i> - <span id="rub-kzt">{{ coursetg.rub }}</span>
+    </p>
+</div>

@@ -1,5 +1,5 @@
 from django import template
-from ..models import Social, MainInfo, Footer
+from ..models import Social, MainInfo, Footer, Course
 
 register = template.Library()
 
@@ -20,3 +20,9 @@ def get_socials():
 def get_footer_info():
     footer = Footer.objects.last()
     return footer
+
+
+@register.simple_tag()
+def get_course():
+    course = Course.objects.last()
+    return course

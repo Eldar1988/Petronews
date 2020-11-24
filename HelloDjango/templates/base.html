@@ -31,14 +31,16 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 </head>
 <body>
-
 {% include 'includes/header.html' %}
-<main class="mt-5 pt-5">
+
+{% include 'includes/curencies.html' %}
+<main class="mt-5">
     <div id="page" style="opacity: 0; transition: 1s opacity, .7s margin-top; margin-top: -3%;">
         {% block content %}
         {% endblock %}
     </div>
 </main>
+
 {% include 'includes/footer.html' %}
 {% include 'includes/bottom_menu.html' %}
 {% include 'includes/search.html' %}
@@ -63,11 +65,12 @@
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 <!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+{#<script type="text/javascript" src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>#}
 <script type="text/javascript" src="{% static 'assets/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'assets/js/script.js' %}"></script>
 <script src="{% static 'assets/js/lazy.js' %}"></script>
 <script src="{% static 'assets/js/profile.js' %}"></script>
+<script src="{% static 'assets/js/market.js' %}"></script>
 <script>
     $(document).ready(function () {
         $("#page").css("opacity", "1").css("margin-top", "0");
