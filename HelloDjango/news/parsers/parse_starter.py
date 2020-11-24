@@ -47,10 +47,12 @@ def parse_starter():
             start_parse_mmg()
         except:
             notification('mmg.kz', 'Startapp error')
-        try:
-            start_parse_king()
-        except:
-            notification('king.kz', 'Startapp error')
+        notification('1', 'готово')
+        # try:
+        #     start_parse_king()
+        # except:
+        #     notification('king.kz', 'Startapp error')
+        # notification('2', 'готово')
         try:
             start_parse_neftegaz()
         except:
@@ -67,6 +69,7 @@ def parse_starter():
             start_parse_kaztransgaz()
         except:
             notification('kaztransgas.kz', 'Startapp error')
+        notification('3', 'готово')
         try:
             start_parse_kazservice()
         except:
@@ -168,7 +171,6 @@ def parse_starter():
             start_parse_jpt()
         except:
             notification('https://pubs.spe.org/en/jpt/jpt-main-page', 'Startapp error')
-
 
         end = int(time() - start)
         notification('Парсинг законился. ', f'Время выполнения {end} сек.')
