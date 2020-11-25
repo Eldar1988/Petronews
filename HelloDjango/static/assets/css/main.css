@@ -166,7 +166,15 @@ body {
 }
 
 .currencies {
-    margin-top: 65px;
+    margin-top: 63px;
+}
+
+.hide-on-d {
+    display: none;
+}
+
+.hide-on-m {
+    display: block;
 }
 
 @media screen and (max-width: 1400px) {
@@ -204,15 +212,25 @@ body {
     .currencies {
         margin-top: 55px;
     }
+
     .h3, h3 {
-    font-size: 1.55rem;
-}
+        font-size: 1.55rem;
+    }
 }
 
 @media screen and (max-width: 650px) {
+    .hide-on-d {
+        display: block;
+    }
+
+    .hide-on-m {
+        display: none;
+    }
+
     .carousel-inner img {
         height: 250px;
     }
+
     .currencies {
         margin-top: 45px;
     }

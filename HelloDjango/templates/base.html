@@ -46,6 +46,10 @@
 {% include 'includes/search.html' %}
 
 {% if request.user.is_authenticated and request.user.is_staff %}
+    <a href="{% url 'clear_posts' %}">
+        <button class="btn btn-danger fixed-bottom rounded shadow" style="bottom: 230px; left: 5px;">Очистить БД
+        </button>
+    </a>
     <a href="{% url 'telegram' %}">
         <button class="btn btn-success fixed-bottom rounded shadow" style="bottom: 180px; left: 5px;">Telegram
         </button>

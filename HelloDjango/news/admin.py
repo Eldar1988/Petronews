@@ -25,7 +25,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     list_display = ('parse_title', 'main_source', 'category', 'get_image', 'kz_news', 'world_news', 'main_news', 'is_actual', 'public', 'pub_date')
     list_editable = ('category', 'kz_news', 'world_news', 'main_news', 'is_actual', 'public')
-    list_filter = ('public', 'category', 'kz_news', 'world_news', 'main_news', 'is_actual', 'main_source')
+    list_filter = ('public', 'category', 'kz_news', 'world_news', 'main_news', 'is_actual', 'main_source', 'pub_date')
     search_fields = ('parse_title', 'title')
     list_per_page = 20
     save_on_top = True

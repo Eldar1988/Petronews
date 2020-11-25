@@ -3,7 +3,10 @@ import telebot
 from telebot import types
 
 bot = telebot.TeleBot('1432154713:AAFgJXGBPXc_ly3cX53GkdzW88JhhM_6t2Q')
-chat_id = '-1001393981437'
+# test
+# chat_id = '-1001393981437'
+# channel
+chat_id = '-1001356024383'
 
 
 def send_post(post, post_url):

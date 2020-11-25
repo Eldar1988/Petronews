@@ -20,4 +20,6 @@ urlpatterns = [
     path('get_kz_list_news/<int:count>', apiviews.HomeKzListNewsView.as_view()),
     path('get_world_main_news/', apiviews.HomeWorldMainNewsView.as_view()),
     path('get_world_list_news/<int:count>', apiviews.HomeWorldListNewsView.as_view()),
+
+    path('clear_posts/', views.clear_not_public_posts, name='clear_posts'),
 ]

@@ -2,6 +2,7 @@ from django.db.models import Count
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
+from .notificator import notification
 
 
 from .functions.paginator import get_pagination
@@ -204,3 +205,14 @@ def clear_nots(request):
 
     return redirect('nots')
 
+
+def clear_not_public_posts(request):
+    """Удаление лишних постов из базы"""
+    posts = Post.objects.filter(public=False)
+    counter = 0
+    for i in posts:
+        i.delete()
+        counter = counter + 1
+
+    notification(f'Удалено {counter} записей', '')
+    return redirect('nots')

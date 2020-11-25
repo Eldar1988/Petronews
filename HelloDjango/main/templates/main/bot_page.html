@@ -2,12 +2,10 @@
 {% load static %}
 {% load thumbnail %}
 
-
 {% block content %}
     <div class="container mt-5 pt-5">
         {% if request.user.is_authenticated and request.user.is_staff %}
             <div class="post-tg-cards">
-
                 <div class="row">
                     {% for i in page %}
                         <div class="col-md-6">
@@ -42,23 +40,19 @@
                                                 class="fab fa-telegram-plane"></i></button>
                                     </div>
                                     <div class="col-4">
-                                        <a href="/post/cenovus_buys_husky_in_a_costcutting_deal" title="Читать новость">
+                                        <a href="{{ i.get_absolute_url }}" title="Читать новость">
                                             {% if i.image %}
-                                                {% thumbnail i.image "240x180" crop="center" as img %}
-                                                    <img class=" rounded" src="{{ img.url }}"
+                                                    <img class=" rounded" src="{% static 'assets/img/empty.png' %}"
                                                          alt="Фото: {{ i.title }}"
                                                          title="Фото: {{ i.title }}"
                                                          style="min-width: 100%; height: 120px; object-fit: cover;"
                                                     >
-                                                {% endthumbnail %}
                                             {% elif i.image_url %}
-                                                {% thumbnail i.image_url "240x180" crop="center" as img %}
-                                                    <img class="rounded" src="{{ img.url }}"
+                                                    <img class="rounded" src="{{ i.image_url }}"
                                                          alt="Фото: {{ i.title }}"
                                                          title="Фото: {{ i.title }}"
                                                          style="min-width: 100%; height: 120px; object-fit: cover;"
                                                     >
-                                                {% endthumbnail %}
                                             {% else %}
                                                 <img src="{% static 'assets/img/empty.png' %}"
                                                      alt="image"
@@ -93,7 +87,6 @@
                     </li>
                 </ul>
             </nav>
-
             <form action="{% url 'telegram' %}" method="post" class="tg-form">
                 {% csrf_token %}
             </form>
@@ -102,6 +95,5 @@
                 У Вас нет прав для просмотра этой страницы.
             </div>
         {% endif %}
-
     </div>
 {% endblock %}

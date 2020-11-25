@@ -3,18 +3,18 @@
 {% block title %}Контакты | {{ block.super }}{% endblock %}
 
 {% block content %}
-    <div class="container mt-5 pt-5">
+    <div class="container mt-5">
         <h2 class="text-center">Контакты</h2>
         <div class="mt-5">
-            <h4>Наш адрес:</h4>
+            <h6>Наш адрес:</h6>
             <p>{{ contacts.address }}</p>
         </div>
-    <div class="mt-5">
-            <h4>Телефон:</h4>
+    <div class="mt-4">
+            <h6>Телефон:</h6>
             <p>{{ contacts.phone }}</p>
         </div>
-    <div class="mt-5">
-            <h4>Email:</h4>
+    <div class="mt-4">
+            <h6>Email:</h6>
             <p>{{ contacts.email }}</p>
         </div>
     </div>

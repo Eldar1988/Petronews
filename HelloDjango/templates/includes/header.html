@@ -11,18 +11,14 @@
 <header>
     <div class="container-fluid">
         <div class="header_container ow px-md-2">
-
             <div class="header_logo col-md-6 col-xl-3 d-flex align-items-center">
                 <a class="header_logo_link" href="{% url 'home' %}">
                     <img class="header_logo_img_anim" src="{% static 'assets/img/logo 2.png' %}" alt="logo">
                     <img class="header_logo_img" src="{% static 'assets/img/1-logo.png' %}" alt="logo">
                 </a>
                 <a href="{% url 'home' %}" class="logo-text">
-                    <img src="https://res.cloudinary.com/space-developers/image/upload/v1606245470/Petronews/logo_mcdide.png"
+                    <img src="https://res.cloudinary.com/space-developers/image/upload/v1606294868/Petronews/logo_oclegy.png"
                          alt="Logo" class="" style="max-height: 45px; max-width: 90%;">
-                    {#                    <span class="yellow logo-kz text-uppercase">Kazakhstan</span><br>#}
-                    {#                    <h2 class="logo-title text-white serif">Oil&Gaz</h2>#}
-                    {#                    <span class="logo-small-txt text-white">Oil&Gas</span>#}
                 </a>
             </div>
 
@@ -31,24 +27,18 @@
             <div class="col-xl-7 col-md-6 header_submenu d-none d-lg-block position-relative" style="z-index: 0">
                 <div class="header-imgs position-absolute ml-n5" style="opacity: 1; bottom: 0">
                     <img src="https://res.cloudinary.com/space-developers/image/upload/v1606151697/Petronews/eog-header-img_usvza1.png"
-                         alt="">
-                    {#                    <img src="{% static 'assets/img/header/1.svg' %}" alt="atrs" style="margin-left: -80px; width: 200px;">#}
-                    {#                    <img src="{% static 'assets/img/header/2.svg' %}" alt="atrs" style="width: 80px; margin-left: 20px; position: absolute; bottom: -2px">#}
-                    {#                    <img src="{% static 'assets/img/header/3.svg' %}" alt="atrs" style="width: 20px; bottom: 10px; position: absolute">#}
-                    {#                    <img src="{% static 'assets/img/header/4.svg' %}" alt="atrs" style="width: 60px; margin-left: 10px; position: absolute; bottom: 8px; left: 210px" >#}
-                    {#                    <img src="{% static 'assets/img/header/5.svg' %}" alt="atrs" style="width: 50px; margin-left: 10px; position: absolute; bottom: 0px; left: 140px" >#}
+                         alt="header-background">
                 </div>
                 <div class="row header_menu_top justify-content-end">
                     <div class="">
-
-                        <div class="header_submenu_top">
+                        <div class="header_submenu_top sans">
                             <ul class="header_submenu_top_list">
                                 <li class="header_submenu_top_list_item">
-                                    <a class="header_submenu_top_list_item_link border-right letter-space"
+                                    <a class="header_submenu_top_list_item_link border-right"
                                        href="{% url 'about' %}">О проекте</a>
                                 </li>
                                 <li class="header_submenu_top_list_item">
-                                    <a class="header_submenu_top_list_item_link border-right letter-space"
+                                    <a class="header_submenu_top_list_item_link border-right"
                                        href="{% url 'contacts' %}">Контакты</a>
                                 </li>
                             </ul>
@@ -66,7 +56,7 @@
                     </div>
                 </div>
                 <div class="header_menu_bottom mt-n2 position-relative" style="z-index: 25">
-                    <ul class="header_menu_bottom_list row">
+                    <ul class="header_menu_bottom_list row sans">
                         <li class="header_menu_bottom_list_item">
                             <a class="header_menu_bottom_list_item_link text-uppercase text-warning"
                                href="{% url 'home' %}">
@@ -125,7 +115,6 @@
                 </div>
             </div>
 
-
             <div class="col-xl-2 col-md-3 hide-on-mobile px-xl-3">
                 {% if request.user.is_authenticated %}
                     <div class="user text-white">
@@ -156,10 +145,7 @@
                 {% endif %}
             </div>
         </div>
-
-
     </div>
-
 </header>
 
 <style>
