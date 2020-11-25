@@ -4,44 +4,95 @@
 {% load cache %}
 <div class="p-container mt-5">
     <div class="market">
-        <h3 class="text-center pb-2 pt-2 mb-3 border-top border-bottom">Рынок</h3>
-        <div class="row">
-            <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-4">
-                <div id="oi5517098" class="rounded overflow-hidden shadow-lg"
-                     style="width:300px; height:300px;">
-                    <a href="http://www.profinance.ru/chart/brent/" rel="nofollow" onclick="return false" class="bg-dark text-white p-1 pt-2" title="Нефть brent" target="_blank"
-                    >Нефть Brent</a></div>
-                <script type="text/javascript" charset="cp1251"
-                        src="https://informers.forexpf.ru/php/graphics.php?sym=CL_Brent&vsz=300&hsz=300&fxid=oi5517098&sz=60&tic=3&typ=2"></script>
-            </div>
+        <h3 class="text-center p2-4 pt-3 mb-3 border-top">Рынок</h3>
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container shadow">
+  <div id="tradingview_2cc70"></div>
+  <div class="tradingview-widget-copyright"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <script type="text/javascript">
+  new TradingView.MediumWidget(
+  {
+  "symbols": [
+    [
+      "BRENT",
+      "TVC:UKOIL|1M"
+    ],
+    [
+      "WTI",
+      "TVC:USOIL|1M"
+    ],
+    [
+      "GAS",
+      "CURRENCYCOM:NATURALGAS|1M"
+    ],
+    [
+      "GOLD",
+      "CURRENCYCOM:GOLD|1M"
+    ],
+    [
+      "SILVER",
+      "CURRENCYCOM:SILVER|1M"
+    ],
+    [
+      "KZT/USD",
+      "FX_IDC:KZTUSD|1M"
+    ],
+    [
+      "KZT/EUR",
+      "FX_IDC:KZTEUR|1M"
+    ],
+    [
+      "US30",
+      "CURRENCYCOM:US30|1M"
+    ],
+    [
+      "SP500",
+      "FOREXCOM:SPXUSD|1M"
+    ],
+    [
+      "NASDAQ",
+      "CURRENCYCOM:US100|1M"
+    ],
+    [
+      "DAX",
+      "CURRENCYCOM:DE30|1M"
+    ],
+    [
+      "FR40",
+      "WHSELFINVEST:FRANCE40CFD|1M"
+    ],
+    [
+      "FTSE100",
+      "CURRENCYCOM:UK100|1M"
+    ],
+    [
+      "РТС",
+      "MOEX:RTSI|1M"
+    ],
+    [
+      "ММВБ",
+      "MOEX:IMOEX|1M"
+    ]
+  ],
+  "chartOnly": false,
+  "width": "100%",
+  "height": "400",
+  "locale": "ru",
+  "colorTheme": "light",
+  "gridLineColor": "#F0F3FA",
+  "trendLineColor": "#2196F3",
+  "fontColor": "#787B86",
+  "underLineColor": "#E3F2FD",
+  "isTransparent": false,
+  "autosize": false,
+  "container_id": "tradingview_2cc70"
+}
+  );
+  </script>
+</div>
+<!-- TradingView Widget END -->
 
-            <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-4">
-                <div id="oi9762599" class="rounded overflow-hidden shadow-lg"
-                     style="width:300px; height:300px;">
-                    <a href="http://www.profinance.ru/chart/lightsweet/" rel="nofollow" onclick="return false" class="bg-dark text-white p-1 pt-2" title="Нефть light sweet"
-                    >Нефть light sweet</a></div>
-                <script type="text/javascript" charset="cp1251"
-                        src="https://informers.forexpf.ru/php/graphics.php?sym=LIGHT_COMMOD&vsz=300&hsz=300&fxid=oi9762599&sz=60&tic=3&typ=2"></script>
-            </div>
-
-            <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-4">
-                <div id="pm9078871" class="rounded overflow-hidden shadow-lg"
-                     style="width:300px; height:300px;">
-                    <a href="http://www.profinance.ru/chart/gold/" rel="nofollow" onclick="return false" class="bg-dark text-white p-1 pt-2" title="Золото" target="_blank"
-                    >Золото</a></div>
-                <script type="text/javascript" charset="cp1251"
-                        src="https://informers.forexpf.ru/php/graphics.php?sym=XAUUSDOCOMPx&vsz=300&hsz=300&fxid=pm9078871&sz=60&tic=3&typ=2"></script>
-            </div>
-
-            <div class="col-lg-3 col-md-6 d-flex justify-content-center mt-4">
-                <div id="pm8349066" class="rounded overflow-hidden shadow-lg"
-                     style="width:300px; height:300px;">
-                    <a href="http://www.profinance.ru/chart/silver/" rel="nofollow" onclick="return false" class="bg-dark text-white p-1 pt-2" title="Серебро" target="_blank"
-                    >Серебро</a></div>
-                <script type="text/javascript" charset="cp1251"
-                        src="https://informers.forexpf.ru/php/graphics.php?sym=XAGUSDOCOMPx&vsz=300&hsz=300&fxid=pm8349066&sz=60&tic=3&typ=2"></script>
-            </div>
-        </div>
     </div>
 </div>
 {#{% cache 86400 footer %}#}

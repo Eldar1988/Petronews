@@ -13,20 +13,6 @@
 {% block content %}
 
     <div class="p-container">
-
-        {#    Хлебные крошки#}
-        <div class="post_navigation">
-            <nav aria-label="breadcrumb bg-light">
-                <ol class="breadcrumb rounded-0">
-                    <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fas fa-home"></i></a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ question.title|slice:':30' }}...</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-    {#    Заголово новости#}
-
-    <div class="p-container">
         <article>
             <div class="row mt-5">
                 {#            Заголовок#}
@@ -47,7 +33,6 @@
                     {% endif %}
                     {% include 'includes/share.html' %}
                 </div>
-
                 <div class="col-md-3">
                     <div class="d-flex flex-column text-center rounded shadow-sm p-3">
                         <div class="d-flex justify-content-center">
@@ -74,9 +59,7 @@
                 </div>
             </div>
         </article>
-
         <hr>
-
         <div class="answers mt-5">
             <div class="d-flex justify-content-between">
                 <div>
@@ -87,7 +70,6 @@
                         ответ <i class="fas fa-pencil-alt"></i></button>
                 </div>
             </div>
-
             <div class="answers-cards mt-5">
                 {% for i in answers %}
                     <div class="answer-card border-top pt-3 mt-3">
@@ -116,7 +98,6 @@
                 {% endfor %}
             </div>
         </div>
-
         <h4 class="pt-5 font-weight-bold mt-5 border-bottom pb-3">Популярные вопросы</h4>
         <div class="popular-questions mt-5">
             {% for i in popular_questions %}
@@ -126,7 +107,6 @@
             {% endfor %}
         </div>
     </div>
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -190,7 +170,6 @@
                          style="display: none;">
                         <b>Спасибо!</b> Ваш вопрос опубликован.
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>

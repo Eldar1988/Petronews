@@ -10,22 +10,6 @@
 
 {% block content %}
     <div class="post-container px-3">
-        {#    Хлебные крошки#}
-        <div class="post_navigation">
-            <nav aria-label="breadcrumb bg-light">
-                <ol class="breadcrumb rounded-0">
-                    <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fas fa-home"></i></a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'publications_list' %}">Публикации</a></li>
-                    {% if publication.category %}
-                        <li class="breadcrumb-item"><a
-                                href="{{ publication.category.get_absolute_url }}">{{ publication.category.name }}</a>
-                        </li>
-                    {% endif %}
-                    <li class="breadcrumb-item active" aria-current="page">{{ publication.title|slice:':30' }}...</li>
-                </ol>
-            </nav>
-        </div>
-
         <div class="post-page mt-5">
             <div class="row">
                 {#                Пост и комментарии #}

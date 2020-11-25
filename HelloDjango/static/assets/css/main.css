@@ -50,6 +50,7 @@ body {
 
 .person-card {
     min-width: 300px;
+    width: 300px;
 }
 
 .publication-title {
@@ -164,6 +165,10 @@ body {
     background: #eff3f4;
 }
 
+.currencies {
+    margin-top: 65px;
+}
+
 @media screen and (max-width: 1400px) {
     .carousel-inner img {
         height: 300px;
@@ -195,11 +200,21 @@ body {
     .change-bg-btn {
         top: 10px;
     }
+
+    .currencies {
+        margin-top: 55px;
+    }
+    .h3, h3 {
+    font-size: 1.55rem;
+}
 }
 
 @media screen and (max-width: 650px) {
     .carousel-inner img {
         height: 250px;
+    }
+    .currencies {
+        margin-top: 45px;
     }
 
     .pub-banner img {

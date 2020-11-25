@@ -1,18 +1,59 @@
 {% load main_tags %}
-{% get_course as coursetg  %}
+{% get_course as coursetg %}
 
-<div class="d-flex p-container border-bottom pb-3 pb-md-1 sans small justify-content-end" style="margin-top: 70px; background: rgba(0,0,0,0)">
-{#    <a href="{% url 'set_course' {{  }} %}" id="course_url" style="display: none;"></a>#}
-    <p class="mr-3 data-toggle="tooltip" data-placement="bottom" title="Крус доллара к тенге">
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container currencies">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+  {
+  "symbols": [
+    {
+      "description": "НЕФТЬ BRENT",
+      "proName": "TVC:UKOIL"
+    },
+    {
+      "description": "НЕФТЬ WTI",
+      "proName": "TVC:USOIL"
+    },
+    {
+      "description": "ГАЗ",
+      "proName": "NYMEX:NG1!"
+    },
+    {
+      "description": "Золото",
+      "proName": "CURRENCYCOM:GOLD"
+    },
+    {
+      "description": "Серебро",
+      "proName": " COMEX:SI1!"
+    }
+  ],
+  "showSymbolLogo": true,
+  "colorTheme": "light",
+  "isTransparent": false,
+  "largeChartUrl": "https://petronews.kz",
+  "displayMode": "regular",
+  "locale": "ru"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+
+<div class="d-flex pb-1 border-bottom pb-md-1 sans small justify-content-between mt-n4 px-2" style="background: rgba(0,0,0,0)">
+    <a href="{% url 'home' %}"><i class="fas fa-home"></i></a>
+    <div class="d-flex">
+    <p class="mr-3" data-toggle="tooltip" data-placement="bottom" title="Курс доллара к тенге">
         <img src="https://res.cloudinary.com/space-developers/image/upload/v1606182544/Petronews/united-states-of-america_tmvfxt.svg" alt="usd" style="width: 20px; margin-top: -2px">
         <i class="fas fa-dollar-sign"></i> - <span id="usd_kzt">{{ coursetg.usd }}</span>
     </p>
-    <p class="mr-3" data-toggle="tooltip" data-placement="bottom" title="Крус евро к тенге">
+    <p class="mr-3" data-toggle="tooltip" data-placement="bottom" title="Курс евро к тенге">
         <img src="https://res.cloudinary.com/space-developers/image/upload/v1606182795/Petronews/european-union_k2lbiq.svg" alt="eur" style="width: 20px; margin-top: -2px">
         <i class="fas fa-euro-sign"></i> - <span id="eur-kzt">{{ coursetg.eur }}</span>
     </p>
-    <p data-toggle="tooltip" data-placement="bottom" title="Крус рубля к тенге">
+    <p data-toggle="tooltip" data-placement="bottom" title="Курс рубля к тенге">
         <img src="https://res.cloudinary.com/space-developers/image/upload/v1606182715/Petronews/russia_jytfkz.svg" alt="rub" style="width: 20px; margin-top: -2px">
         <i class="fas fa-ruble-sign"></i> - <span id="rub-kzt">{{ coursetg.rub }}</span>
     </p>
+        </div>
 </div>

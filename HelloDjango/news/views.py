@@ -35,12 +35,12 @@ def home_view(request):
     kz_news = Post.objects.defer(
         'body', 'source', 'main_source', 'update_date', 'image', 'image_url'
     ).filter(
-        kz_news=True, main_news=False, public=True)[:25]
+        kz_news=True, public=True)[:30]
     # Межднародные новости 7
     world_news = Post.objects.defer(
         'body', 'source', 'main_source', 'update_date', 'image', 'image_url'
     ).filter(
-        world_news=True, main_news=False, public=True)[:25]
+        world_news=True, public=True)[:30]
     # Актуальные новости
     actual_news = Post.objects.defer('body', 'views', 'source', 'main_source', 'update_date'
                                      ).filter(is_actual=True, public=True)[:9]

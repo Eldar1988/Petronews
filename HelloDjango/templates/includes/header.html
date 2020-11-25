@@ -3,6 +3,8 @@
 {% get_socials as socialstg %}
 {% load cache %}
 {% load thumbnail %}
+{% load main_tags %}
+{% get_course as coursetg %}
 
 {#Неделя#}
 {#{% cache 604800 header %}#}
@@ -16,7 +18,7 @@
                     <img class="header_logo_img" src="{% static 'assets/img/1-logo.png' %}" alt="logo">
                 </a>
                 <a href="{% url 'home' %}" class="logo-text">
-                    <img src="https://res.cloudinary.com/space-developers/image/upload/v1606146491/Petronews/logo_jt1dpt.png"
+                    <img src="https://res.cloudinary.com/space-developers/image/upload/v1606245470/Petronews/logo_mcdide.png"
                          alt="Logo" class="" style="max-height: 45px; max-width: 90%;">
                     {#                    <span class="yellow logo-kz text-uppercase">Kazakhstan</span><br>#}
                     {#                    <h2 class="logo-title text-white serif">Oil&Gaz</h2>#}
@@ -38,6 +40,7 @@
                 </div>
                 <div class="row header_menu_top justify-content-end">
                     <div class="">
+
                         <div class="header_submenu_top">
                             <ul class="header_submenu_top_list">
                                 <li class="header_submenu_top_list_item">
@@ -76,8 +79,9 @@
                                aria-expanded="false">
                                 <i class="far fa-newspaper text-warning"></i> Новости
                             </a>
-                            <div class="dropdown-menu " aria-labelledby="dropdownMenuLink" style="background: #131315; width: 185px;">
-                                <ul class="p-3 shadow rounded bg-dark" >
+                            <div class="dropdown-menu " aria-labelledby="dropdownMenuLink"
+                                 style="background: #131315; width: 185px;">
+                                <ul class="p-3 shadow rounded bg-dark">
                                     <li class="header_menu_bottom_list_item mt-1">
                                         <a class="header_menu_bottom_list_item_link text-uppercase"
                                            href="{% url 'news' %}">
