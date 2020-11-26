@@ -18,6 +18,6 @@ def send_post(post, post_url):
     body = get_text(post.body)
 
     print(post_url)
-    caption = f'*{title}* \n\n {body[:500]}...'
+    caption = f'*{title}* \n\n {body[:850]}...'
     bot.send_photo(chat_id, post.image_url, caption=caption, reply_markup=keyboard, parse_mode='Markdown')
 
